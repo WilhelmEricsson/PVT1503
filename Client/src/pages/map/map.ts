@@ -35,12 +35,30 @@ export class MapPage {
     }
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
-    var marker = new google.maps.Marker({
-        position: latLng, map: this.map, title: "Test Marker"
-    })
- 
-    
+    this.placePins();
+  }
 
+  placePins() {
+    let markerPosition;
+    markerPosition = new google.maps.LatLng(59.3293, 18.0686);
+    new google.maps.Marker({
+      position: markerPosition, map: this.map, icon: "assets/imgs/pins/bluepin.png"
+    })
+
+    markerPosition = new google.maps.LatLng(59.326599, 18.066159);
+    new google.maps.Marker({
+      position: markerPosition, map: this.map, icon: "assets/imgs/pins/purplepin.png"
+    })
+
+    markerPosition = new google.maps.LatLng(59.326730, 18.070922);
+    new google.maps.Marker({
+      position: markerPosition, map: this.map, icon: "assets/imgs/pins/redpin.png"
+    })
+
+    markerPosition = new google.maps.LatLng(59.329204, 18.065987);
+    new google.maps.Marker({
+      position: markerPosition, map: this.map, icon: "assets/imgs/pins/greenpin.png"
+    })
   }
 
 }
