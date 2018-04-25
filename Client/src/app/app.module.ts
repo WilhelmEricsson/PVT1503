@@ -6,16 +6,20 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { QuestionViewPage } from '../pages/question-view/question-view';
+import { MapPage } from '../pages/map/map';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { NewGamePage } from '../pages/new-game/new-game';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    QuestionViewPage
+    QuestionViewPage,
+    MapPage,
+    NewGamePage
   ],
   imports: [
     BrowserModule,
@@ -26,7 +30,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     ListPage,
-    QuestionViewPage
+    QuestionViewPage,
+    MapPage,
+    NewGamePage
   ],
   providers: [
     StatusBar,

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, Alert, AlertController} from 'ionic-angular';
+import { MapPage } from '../map/map';
+import { NewGamePage } from '../new-game/new-game';
 
 
 @Component({
@@ -12,7 +14,13 @@ export class HomePage {
     
     
   }
-  
 
-  
+  NewGameController() {
+    this.navCtrl.push(NewGamePage)
+  }
+
+  MapController() {
+    this.navCtrl.push(MapPage);
+  }
+
 }
