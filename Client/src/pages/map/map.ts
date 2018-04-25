@@ -39,9 +39,19 @@ export class MapPage {
   }
 
   placePins() {
-    new google.maps.Marker({
+    var marker = new google.maps.Marker({
       position: (new google.maps.LatLng(59.3293, 18.0686)), map: this.map, icon: "assets/imgs/pins/bluepin.png"
     })
+    
+    marker.addListener('click', function() {
+        var pathBetween = new google.maps.Polyline({
+        path: [(new google.maps.LatLng(59.327637, 18.068339)), (new google.maps.LatLng(59.3293, 18.0686))],
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
+      pathBetween.setMap(this.map);
+    });
 
     new google.maps.Marker({
       position: (new google.maps.LatLng(59.326599, 18.066159)), map: this.map, icon: "assets/imgs/pins/purplepin.png"
@@ -50,7 +60,7 @@ export class MapPage {
     new google.maps.Marker({
       position: (new google.maps.LatLng(59.326730, 18.070922)), map: this.map, icon: "assets/imgs/pins/redpin.png"
     })
-    
+
     new google.maps.Marker({
       position: (new google.maps.LatLng(59.329204, 18.065987)), map: this.map, icon: "assets/imgs/pins/greenpin.png"
     })
