@@ -69,8 +69,8 @@
 	</pluginRepositories>
 	<distributionManagement>
 	 <repository>
-		<id>pvtxx.repo</id>
-		<name>PVTXX repo</name>
+		<id>pvt03.repo</id>
+		<name>PVT03 repo</name>
 		<url>https://github.com/WilhelmEricsson/PVT1503.git</url>
 	 </repository>
 	</distributionManagement>
