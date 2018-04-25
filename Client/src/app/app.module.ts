@@ -10,6 +10,7 @@ import { MapPage } from '../pages/map/map';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { NewGamePage } from '../pages/new-game/new-game';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     ListPage,
     QuestionViewPage,
-    MapPage
+    MapPage,
+    NewGamePage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     ListPage,
     QuestionViewPage,
-    MapPage
+    MapPage,
+    NewGamePage
   ],
   providers: [
     StatusBar,
