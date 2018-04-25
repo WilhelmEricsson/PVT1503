@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Alert, AlertController} from 'ionic-angular';
+import { NavController} from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { NewGamePage } from '../new-game/new-game';
 
