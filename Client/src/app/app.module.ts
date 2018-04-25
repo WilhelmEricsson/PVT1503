@@ -4,7 +4,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { QuestionViewPage } from '../pages/question-view/question-view';
 import { MapPage } from '../pages/map/map';
 
@@ -16,7 +15,6 @@ import { NewGamePage } from '../pages/new-game/new-game';
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     QuestionViewPage,
     MapPage,
     NewGamePage
@@ -29,7 +27,6 @@ import { NewGamePage } from '../pages/new-game/new-game';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     QuestionViewPage,
     MapPage,
     NewGamePage
