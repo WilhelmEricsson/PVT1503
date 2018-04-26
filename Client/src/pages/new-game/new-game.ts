@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AddFriendsPage } from '../add-friends/add-friends';
 import { PlayFriendsPage } from '../play-friends/play-friends';
 
 /**
