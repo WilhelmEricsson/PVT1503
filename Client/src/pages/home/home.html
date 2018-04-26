@@ -13,9 +13,20 @@
 <ion-content padding>
   
   <img src="assets/imgs/lampa.jpg" (click)="NewGameController()">
-  <button ion-button round large item-start color="yellow"(click)="MapController()">Map</button>
   
   
+  <div class="wrapper2">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-button round large item-start color="yellow"(click)="MapController()" full=true>Map</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button round large item-start color="yellow" full=true>History</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
  
 
 
