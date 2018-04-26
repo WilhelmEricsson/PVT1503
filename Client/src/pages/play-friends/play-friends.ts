@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AddFriendsPage } from '../add-friends/add-friends';
-import { PlayFriendsPage } from '../play-friends/play-friends';
 
 /**
- * Generated class for the NewGamePage page.
+ * Generated class for the PlayFriendsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -12,19 +11,20 @@ import { PlayFriendsPage } from '../play-friends/play-friends';
 
 @IonicPage()
 @Component({
-  selector: 'page-new-game',
-  templateUrl: 'new-game.html',
+  selector: 'page-play-friends',
+  templateUrl: 'play-friends.html',
 })
-export class NewGamePage {
+export class PlayFriendsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NewGamePage');
+    console.log('ionViewDidLoad PlayFriendsPage');
   }
-  PlayFriendController(){
-    this.navCtrl.push(PlayFriendsPage)
+  AddFriendsController(){
+    this.navCtrl.push(AddFriendsPage)
   }
+
 
 }
