@@ -12,6 +12,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { NewGamePage } from '../pages/new-game/new-game';
 import { LoginPage } from '../pages/login/login';
 import { AddFriendsPage } from '../pages/add-friends/add-friends';
+import { PlayFriendsPage } from '../pages/play-friends/play-friends';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AddFriendsPage } from '../pages/add-friends/add-friends';
     MapPage,
     NewGamePage,
     LoginPage,
-    AddFriendsPage
+    AddFriendsPage,
+    PlayFriendsPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { AddFriendsPage } from '../pages/add-friends/add-friends';
     MapPage,
     NewGamePage,
     LoginPage,
-    AddFriendsPage
+    AddFriendsPage,
+    PlayFriendsPage
   ],
   providers: [
     StatusBar,

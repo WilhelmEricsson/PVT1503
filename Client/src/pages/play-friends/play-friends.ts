@@ -26,4 +26,5 @@ export class PlayFriendsPage {
     this.navCtrl.push(AddFriendsPage)
   }
 
+
 }
