@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { CreateAccountPage } from '../create-account/create-account';
 
 /**
  * Generated class for the LoginPage page.
@@ -25,6 +26,10 @@ export class LoginPage {
 
   FacebookLogInController() {
     this.navCtrl.setRoot(HomePage);
+  }
+
+  CreateAccountController() {
+    this.navCtrl.push(CreateAccountPage);
   }
 
 }

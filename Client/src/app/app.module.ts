@@ -13,6 +13,7 @@ import { NewGamePage } from '../pages/new-game/new-game';
 import { LoginPage } from '../pages/login/login';
 import { AddFriendsPage } from '../pages/add-friends/add-friends';
 import { PlayFriendsPage } from '../pages/play-friends/play-friends';
+import { CreateAccountPage } from '../pages/create-account/create-account';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PlayFriendsPage } from '../pages/play-friends/play-friends';
     NewGamePage,
     LoginPage,
     AddFriendsPage,
-    PlayFriendsPage
+    PlayFriendsPage,
+    CreateAccountPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,8 @@ import { PlayFriendsPage } from '../pages/play-friends/play-friends';
     NewGamePage,
     LoginPage,
     AddFriendsPage,
-    PlayFriendsPage
+    PlayFriendsPage,
+    CreateAccountPage
   ],
   providers: [
     StatusBar,
