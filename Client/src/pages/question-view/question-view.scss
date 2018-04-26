@@ -36,4 +36,7 @@ page-question-view {
    font-size:14px;
    font-weight:700;
    }
+   .no-scroll .scroll-content{
+    overflow-y: hidden;
+}
 }
