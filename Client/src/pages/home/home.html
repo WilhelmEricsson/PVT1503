@@ -10,11 +10,16 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="no-scroll">
-  
-  <img src="assets/imgs/lampa.jpg" (click)="NewGameController()">
+<ion-content padding>
   
     <ion-grid>
+      <ion-row>
+        <ion-col>
+            <div class="lamp" text-center>
+                <img src="assets/imgs/lampa.jpg" (click)="NewGameController()">
+              </div>
+        </ion-col>
+      </ion-row>
       <ion-row>
         <ion-col>
           <button ion-button round large item-start color="yellow"(click)="MapController()" full=true>Map</button>
