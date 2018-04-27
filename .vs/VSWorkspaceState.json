@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Client",
+    "\\Client\\src",
+    "\\Client\\src\\pages",
+    "\\Client\\src\\pages\\home",
+    "\\Client\\src\\pages\\question-view"
+  ],
+  "SelectedNode": "\\Client\\src\\pages\\home\\home.ts",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,15 +1,33 @@
+
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+  
+
     <ion-title>Stockholm Light Quiz </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <img src="assets/imgs/lampa.jpg" (click)="NewGameController()">
-  <button ion-button color="primary" (click)="MapController()">Map</button>
-
+<ion-content padding class="no-scroll">
+  
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+            <div class="lamp" text-center>
+                <img src="assets/imgs/lampa.jpg" (click)="NewGameController()">
+              </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button ion-button round large item-start color="yellow"(click)="MapController()" full=true>Map</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button round large item-start color="yellow" full=true>History</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
 </ion-content>

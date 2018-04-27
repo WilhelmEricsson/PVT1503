@@ -1,0 +1,16 @@
+page-login {
+    .Email{
+        margin-bottom: 100px
+    }
+    .wrapper1{
+        position: relative;
+        top:10px;
+        text-align: center;
+    }
+    ion-content {
+        background-image: url('../assets/imgs/login.jpg');
+    }
+    .no-scroll .scroll-content{
+        overflow-y: hidden;
+   }
+}

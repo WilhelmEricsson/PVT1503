@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { PlayFriendsPage } from '../play-friends/play-friends';
 
 /**
- * Generated class for the NewGamePage page.
+ * Generated class for the EmailSignInPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,19 +10,16 @@ import { PlayFriendsPage } from '../play-friends/play-friends';
 
 @IonicPage()
 @Component({
-  selector: 'page-new-game',
-  templateUrl: 'new-game.html',
+  selector: 'page-email-sign-in',
+  templateUrl: 'email-sign-in.html',
 })
-export class NewGamePage {
+export class EmailSignInPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NewGamePage');
-  }
-  PlayFriendController(){
-    this.navCtrl.push(PlayFriendsPage)
+    console.log('ionViewDidLoad EmailSignInPage');
   }
 
 }

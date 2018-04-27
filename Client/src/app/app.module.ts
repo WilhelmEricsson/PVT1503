@@ -10,6 +10,11 @@ import { MapPage } from '../pages/map/map';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NewGamePage } from '../pages/new-game/new-game';
+import { LoginPage } from '../pages/login/login';
+import { AddFriendsPage } from '../pages/add-friends/add-friends';
+import { PlayFriendsPage } from '../pages/play-friends/play-friends';
+import { CreateAccountPage } from '../pages/create-account/create-account';
+import { EmailSignInPage } from '../pages/email-sign-in/email-sign-in';
 
 @NgModule({
   declarations: [
@@ -17,7 +22,12 @@ import { NewGamePage } from '../pages/new-game/new-game';
     HomePage,
     QuestionViewPage,
     MapPage,
-    NewGamePage
+    NewGamePage,
+    LoginPage,
+    AddFriendsPage,
+    PlayFriendsPage,
+    CreateAccountPage,
+    EmailSignInPage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +39,12 @@ import { NewGamePage } from '../pages/new-game/new-game';
     HomePage,
     QuestionViewPage,
     MapPage,
-    NewGamePage
+    NewGamePage,
+    LoginPage,
+    AddFriendsPage,
+    PlayFriendsPage,
+    CreateAccountPage,
+    EmailSignInPage
   ],
   providers: [
     StatusBar,
