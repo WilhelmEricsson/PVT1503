@@ -14,6 +14,7 @@ import { LoginPage } from '../pages/login/login';
 import { AddFriendsPage } from '../pages/add-friends/add-friends';
 import { PlayFriendsPage } from '../pages/play-friends/play-friends';
 import { CreateAccountPage } from '../pages/create-account/create-account';
+import { EmailSignInPage } from '../pages/email-sign-in/email-sign-in';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CreateAccountPage } from '../pages/create-account/create-account';
     LoginPage,
     AddFriendsPage,
     PlayFriendsPage,
-    CreateAccountPage
+    CreateAccountPage,
+    EmailSignInPage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,8 @@ import { CreateAccountPage } from '../pages/create-account/create-account';
     LoginPage,
     AddFriendsPage,
     PlayFriendsPage,
-    CreateAccountPage
+    CreateAccountPage,
+    EmailSignInPage
   ],
   providers: [
     StatusBar,
