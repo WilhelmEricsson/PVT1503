@@ -15,11 +15,8 @@ import { AddFriendsPage } from '../pages/add-friends/add-friends';
 import { PlayFriendsPage } from '../pages/play-friends/play-friends';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { EmailSignInPage } from '../pages/email-sign-in/email-sign-in';
-<<<<<<< HEAD
 import { NotificationsPage } from '../pages/notifications/notifications';
-=======
 import { MyProfilePage } from '../pages/my-profile/my-profile';
->>>>>>> 0f72b31160af3767c3fb6d6485edc745987b0a0c
 
 @NgModule({
   declarations: [
@@ -33,11 +30,8 @@ import { MyProfilePage } from '../pages/my-profile/my-profile';
     PlayFriendsPage,
     CreateAccountPage,
     EmailSignInPage,
-<<<<<<< HEAD
-    NotificationsPage
-=======
-    MyProfilePage
->>>>>>> 0f72b31160af3767c3fb6d6485edc745987b0a0c
+    NotificationsPage,
+    MyProfilePage,
   ],
   imports: [
     BrowserModule,
@@ -54,13 +48,10 @@ import { MyProfilePage } from '../pages/my-profile/my-profile';
     AddFriendsPage,
     PlayFriendsPage,
     CreateAccountPage,
-<<<<<<< HEAD
     EmailSignInPage, 
-    NotificationsPage
-=======
+    NotificationsPage,
     EmailSignInPage,
-    MyProfilePage
->>>>>>> 0f72b31160af3767c3fb6d6485edc745987b0a0c
+    MyProfilePage,
   ],
   providers: [
     StatusBar,

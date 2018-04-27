@@ -6,12 +6,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { QuestionViewPage } from '../pages/question-view/question-view';
 import { LoginPage } from '../pages/login/login';
-<<<<<<< HEAD
 import { NotificationsPage } from '../pages/notifications/notifications';
-=======
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 
->>>>>>> 0f72b31160af3767c3fb6d6485edc745987b0a0c
 
 @Component({
   templateUrl: 'app.html'
@@ -30,12 +27,8 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Question View', component: QuestionViewPage },
-<<<<<<< HEAD
-      { title: 'Notifications', component: NotificationsPage }
-      
-=======
-      { title: 'My profile', component: MyProfilePage }
->>>>>>> 0f72b31160af3767c3fb6d6485edc745987b0a0c
+      { title: 'Notifications', component: NotificationsPage },
+      { title: 'My profile', component: MyProfilePage },
     ];
 
   }
