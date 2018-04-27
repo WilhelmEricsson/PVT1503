@@ -4,6 +4,9 @@ public class Question {
 	private int id;
 	private String category; // ska kanske vara en egen klass
 	private String question;
+
+
+
 	private String[] alternatives;
 	
 	//--------------------Constructor-------------------------
@@ -26,6 +29,21 @@ public class Question {
 	}
 	public String[] getAlternatives(){
 		return alternatives;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+
+	public void setAlternatives(String[] alternatives) {
+		this.alternatives = alternatives;
 	}
 	
 }
