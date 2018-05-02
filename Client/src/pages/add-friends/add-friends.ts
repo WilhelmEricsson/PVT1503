@@ -42,12 +42,12 @@ export class AddFriendsPage {
     ];
   }
 
-  getFriendSearch($event){
+  getFriendSearch(ev){
     //Reset items/Friends back to all of the items/friends
     this.initializeFriend();
 
     //Set value to the value of the "fr" target
-    var value = $event.target.value;
+    var value = ev.target.value;
 
     //If the value is an empty string, dont filter the friends
     if (value && value.trim() != ''){
