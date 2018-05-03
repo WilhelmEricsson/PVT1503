@@ -11,18 +11,21 @@ public class Question {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	private String category; // ska kanske vara en egen klass
+
+	private String category;
 	private String question;
 	private String[] alternatives;
 	
 	//--------------------Constructor-------------------------
-	public Question(  String question,String category, String[] alternatives){
+	public  Question(){
 
+	}
+	public Question(  String question,String category, String[] alternatives){
+		super();
 		this.question = question;
         this.category = category;
 		this.alternatives = alternatives;
-	}public Question(){
-    }
+	}
 	//--------------------Methods-----------------------------
 	
 	public String getGategory(){
@@ -31,13 +34,13 @@ public class Question {
 	public String getQuestion(){
 		return question;
 	}
-	public int getId(){
+	public Integer getId(){
 		return id;
 	}
 	public String[] getAlternatives(){
 		return alternatives;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
