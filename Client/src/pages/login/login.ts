@@ -50,6 +50,12 @@ users: any;
       }
     })
     .catch(e => console.log('Error logging into Facebook', e));
+
+    if (this.isLoggedIn) {
+      this.navCtrl.push(HomePage);
+    } else {
+        console.log("Couldnät log in");
+    }
   }
 
   getUserDetail(userid) {
