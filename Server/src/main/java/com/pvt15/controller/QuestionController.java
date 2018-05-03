@@ -1,18 +1,15 @@
 package com.pvt15.controller;
 
 import com.pvt15.entity.Question;
-import com.pvt15.service.QuestionService;
+import com.pvt15.dao.QuestionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/questions")
 public class QuestionController {
     @Autowired
-    private QuestionService questionService;
+    private QuestionDAO questionDAO;
 
     //--------------------Constructor-------------------------
     public QuestionController() {
@@ -20,14 +17,21 @@ public class QuestionController {
 
     //--------------------Methods----------------------------
 
-    @RequestMapping("/test")
-    public String test(){
-        return "TEST!";
+    @PostMapping(path="/add")
+    public @ResponseBody String addNewQuestion (@RequestParam String question
+            , @RequestParam String category, @RequestParam String[] alternatives) {
+
+        Question newQuestion = new Question(question, category, alternatives);
+        System.out.println(newQuestion.getId());
+        questionDAO.save(newQuestion);
+
+        return "Saved";
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Question getQuestionById(@PathVariable("id") int id){
-        return questionService.getQuestionById(id);
+    @GetMapping(path="/all")
+    public @ResponseBody Iterable<Question> getAllUsers() {
+        // This returns a JSON or XML with the users
+        return questionDAO.findAll();
     }
 
 

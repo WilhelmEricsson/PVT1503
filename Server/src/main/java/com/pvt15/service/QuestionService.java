@@ -15,9 +15,7 @@ public class QuestionService {
 
     }
 
-    public Question getQuestionById(int i) {
-        return questionDAO.getQuestionById(i);
-    }
+
     //--------------------Methods----------------------------
 
 }

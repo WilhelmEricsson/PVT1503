@@ -1,21 +1,28 @@
 package com.pvt15.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
+@Entity
 public class Question {
-	private int id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer id;
 	private String category; // ska kanske vara en egen klass
 	private String question;
-
-
-
 	private String[] alternatives;
 	
 	//--------------------Constructor-------------------------
-	public Question(int id, String category, String question, String[] alternatives){
-		this.id = id;
-		this.category = category;
+	public Question(  String question,String category, String[] alternatives){
+
 		this.question = question;
+        this.category = category;
 		this.alternatives = alternatives;
-	}
+	}public Question(){
+    }
 	//--------------------Methods-----------------------------
 	
 	public String getGategory(){
