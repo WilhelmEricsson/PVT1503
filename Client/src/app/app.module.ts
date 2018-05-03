@@ -17,6 +17,7 @@ import { CreateAccountPage } from '../pages/create-account/create-account';
 import { EmailSignInPage } from '../pages/email-sign-in/email-sign-in';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { MyProfilePage } from '../pages/my-profile/my-profile';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Facebook
   ]
 })
 export class AppModule {}

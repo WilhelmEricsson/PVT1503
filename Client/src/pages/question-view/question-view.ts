@@ -15,6 +15,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class QuestionViewPage {
 
+  question: String = "test fråga";
+  alternatives: Array<String> = ["alt1", "alt2", "alt3", "alt4"];
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
