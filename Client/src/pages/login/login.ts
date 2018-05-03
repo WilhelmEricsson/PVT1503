@@ -20,19 +20,9 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 export class LoginPage {
 
   isLoggedIn:boolean = false;
-users: any;
+  users: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private fb: Facebook) {
-    fb.getLoginStatus()
-    .then(res => {
-      console.log(res.status);
-      if(res.status === "connect") {
-        this.isLoggedIn = true;
-      } else {
-        this.isLoggedIn = false;
-      }
-    })
-    .catch(e => console.log(e));
   }
 
   ionViewDidLoad() {
@@ -45,17 +35,12 @@ users: any;
       if(res.status === "connected") {
         this.isLoggedIn = true;
         this.getUserDetail(res.authResponse.userID);
+        this.navCtrl.setRoot(HomePage);
       } else {
         this.isLoggedIn = false;
       }
     })
     .catch(e => console.log('Error logging into Facebook', e));
-
-    if (this.isLoggedIn) {
-      this.navCtrl.push(HomePage);
-    } else {
-        console.log("Couldnät log in");
-    }
   }
 
   getUserDetail(userid) {
