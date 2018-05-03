@@ -17,18 +17,18 @@ public class QuestionController {
 
     //--------------------Methods----------------------------
 
-    @PostMapping(path="/add")
-    public @ResponseBody String addNewQuestion (@RequestParam String question
+    @PostMapping("/add")
+    public @ResponseBody String addNewQuestion ( @RequestParam String question
             , @RequestParam String category, @RequestParam String[] alternatives) {
 
-        Question newQuestion = new Question(question, category, alternatives);
-        System.out.println(newQuestion.getId());
+        Question newQuestion = new Question(question,category,alternatives);
+
         questionDAO.save(newQuestion);
 
         return "Saved";
     }
 
-    @GetMapping(path="/all")
+    @GetMapping("/all")
     public @ResponseBody Iterable<Question> getAllUsers() {
         // This returns a JSON or XML with the users
         return questionDAO.findAll();

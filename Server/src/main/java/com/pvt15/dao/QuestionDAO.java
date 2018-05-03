@@ -17,5 +17,4 @@ public interface QuestionDAO extends CrudRepository<Question, Integer>{
 
 
 
-
 }
