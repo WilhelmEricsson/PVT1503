@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the AchievementPage page.
+ * Generated class for the AchievmentPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,16 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-achievement',
-  templateUrl: 'achievement.html',
+  selector: 'page-achievment',
+  templateUrl: 'achievment.html',
 })
-export class AchievementPage {
+export class AchievmentPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AchievementPage');
+    console.log('ionViewDidLoad AchievmentPage');
   }
 
 }
