@@ -9,8 +9,9 @@
       <sourceFolder url="file://$MODULE_DIR$/Server/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/Client/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Client/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="maven-wrapper" level="project" />
   </component>
