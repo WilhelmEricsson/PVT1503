@@ -16,16 +16,17 @@
       <ion-row>
         <ion-col>
             <div class="lamp" text-center>
-                <img src="assets/imgs/lampa.jpg" (click)="NewGameController()">
+               <!-- <img src="assets/imgs/lampa.jpg" (click)="NewGameController()">-->
+               <img src="assets/imgs/lampa.jpg" (click)="MapController()">
               </div>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <button ion-button round large item-start color="yellow"(click)="MapController()" full=true>Map</button>
+          <button ion-button round large item-start color="yellow"(click)="AchievmentController()" full=true>Achievment</button>
         </ion-col>
         <ion-col>
-          <button ion-button round large item-start color="yellow" full=true>History</button>
+          <button ion-button round large item-start color="yellow" full=true (click)= "DailyRoutesController()">Daily Routes</button>
         </ion-col>
       </ion-row>
     </ion-grid>
