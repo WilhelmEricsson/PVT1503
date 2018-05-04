@@ -18,7 +18,7 @@ import { EmailSignInPage } from '../pages/email-sign-in/email-sign-in';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
-import { AchievmentPage} from '../pages/achievment/achievment';
+import { AchievementPage} from '../pages/achievement/achievement';
 import { DailyRoutesPage} from '../pages/daily-routes/daily-routes';
 
 @NgModule({
@@ -35,7 +35,7 @@ import { DailyRoutesPage} from '../pages/daily-routes/daily-routes';
     EmailSignInPage,
     NotificationsPage,
     MyProfilePage,
-    AchievmentPage,
+    AchievementPage,
     DailyRoutesPage,
   ],
   imports: [
@@ -57,7 +57,7 @@ import { DailyRoutesPage} from '../pages/daily-routes/daily-routes';
     NotificationsPage,
     EmailSignInPage,
     MyProfilePage,
-    AchievmentPage,
+    AchievementPage,
     DailyRoutesPage,
   ],
   providers: [

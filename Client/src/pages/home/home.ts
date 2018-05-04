@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { NewGamePage } from '../new-game/new-game';
-import {AchievmentPage} from '../achievment/achievment';
+import {AchievementPage} from '../achievement/achievement';
 import {DailyRoutesPage}from '../daily-routes/daily-routes';
 
 
@@ -16,8 +16,8 @@ export class HomePage {
     
     
   }
-  AchievmentController(){
-    this.navCtrl.push(AchievmentPage)
+  AchievementController(){
+    this.navCtrl.push(AchievementPage)
   }
 
   DailyRoutesController(){
