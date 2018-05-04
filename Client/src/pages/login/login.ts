@@ -58,6 +58,10 @@ export class LoginPage {
     this.navCtrl.push(CreateAccountPage);
   }
 
+  BypassSignIn() {
+    this.navCtrl.setRoot(HomePage);
+  }
+
   EmailSignInController() {
     this.navCtrl.push(EmailSignInPage);
   }
