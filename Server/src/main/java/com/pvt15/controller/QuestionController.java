@@ -1,7 +1,7 @@
 package com.pvt15.controller;
 
 import com.pvt15.entity.Question;
-import com.pvt15.dao.QuestionDAO;
+import com.pvt15.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/questions")
 public class QuestionController {
     @Autowired
-    private QuestionDAO questionDAO;
+    private QuestionRepository questionRepository;
 
     //--------------------Constructor-------------------------
     public QuestionController() {
@@ -23,7 +23,7 @@ public class QuestionController {
 
         Question newQuestion = new Question(question,category,alternatives);
 
-        questionDAO.save(newQuestion);
+        questionRepository.save(newQuestion);
 
         return "Saved";
     }
@@ -31,7 +31,7 @@ public class QuestionController {
     @GetMapping("/all")
     public @ResponseBody Iterable<Question> getAllUsers() {
         // This returns a JSON or XML with the users
-        return questionDAO.findAll();
+        return questionRepository.findAll();
     }
 
 

@@ -1,4 +1,4 @@
-package com.pvt15.dao;
+package com.pvt15.repository;
 
 
 import com.pvt15.entity.Question;
@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface QuestionDAO extends CrudRepository<Question, Integer>{
+public interface QuestionRepository extends CrudRepository<Question, Integer>{
 
 
 	
