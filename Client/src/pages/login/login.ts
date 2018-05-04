@@ -30,7 +30,7 @@ export class LoginPage {
   }
 
   FacebookLogInController() {
-    this.fb.login(['public_profile', 'user_friends', 'email', 'password'])
+    this.fb.login(['public_profile', 'user_friends', 'email'])
     .then(res => {
       if(res.status === "connected") {
         this.isLoggedIn = true;
@@ -46,7 +46,7 @@ export class LoginPage {
   getUserDetail(userid) {
     this.fb.api("/"+userid+"/?fields=id,email,name,picture,gender",["public_profile"])
       .then(res => {
-        console.log(res);
+        console.log(res.name);
         this.users = res;
       })
       .catch(e => {

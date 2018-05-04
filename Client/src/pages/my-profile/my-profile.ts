@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Facebook } from '@ionic-native/facebook';
 
 /**
  * Generated class for the MyProfilePage page.
@@ -15,11 +16,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class MyProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private fb: Facebook) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyProfilePage');
+    this.testGetFacebookData()
+  }
+
+  testGetFacebookData() {
+    this.fb.getLoginStatus().then(res => {
+      if (res.status === "connected") {
+        this.fb.api("/"+res.authResponse.userID+"/?fields=id,email,name,picture,gender",["public_profile"])
+        .then(res => {
+          let test: HTMLTextAreaElement = (<HTMLTextAreaElement>document.getElementById("fbname"));
+          test.value = res.name;
+        })
+      }
+    })
   }
 
 }
