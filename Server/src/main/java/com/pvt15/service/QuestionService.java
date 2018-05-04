@@ -1,14 +1,13 @@
 package com.pvt15.service;
 
-import com.pvt15.dao.QuestionDAO;
-import com.pvt15.entity.Question;
+import com.pvt15.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class QuestionService {
     @Autowired
-    private QuestionDAO questionDAO;
+    private QuestionRepository questionRepository;
 
     //--------------------Constructor-------------------------
     public QuestionService() {
