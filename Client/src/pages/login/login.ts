@@ -30,7 +30,7 @@ export class LoginPage {
   }
 
   FacebookLogInController() {
-    this.fb.login(['public_profile', 'user_friends', 'email', 'password'])
+    this.fb.login(['public_profile', 'user_friends', 'email'])
     .then(res => {
       if(res.status === "connected") {
         this.isLoggedIn = true;
