@@ -22,6 +22,7 @@ export class MyProfilePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyProfilePage');
+    this.testGetFacebookData()
   }
 
   testGetFacebookData() {
