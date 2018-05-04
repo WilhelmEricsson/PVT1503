@@ -1,4 +1,7 @@
 package com.pvt15.auth.service;
 
-public class SecurityService {
+public interface SecurityService {
+    String findLoggedInUsername();
+
+    void autologin(String username, String password);
 }
