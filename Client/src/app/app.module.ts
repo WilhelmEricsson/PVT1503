@@ -22,6 +22,8 @@ import { AchievmentPage} from '../pages/achievment/achievment';
 import { DailyRoutesPage} from '../pages/daily-routes/daily-routes';
 
 import { LocalNotifications } from '@ionic-native/local-notifications'
+import { PhonegapLocalNotification } from "@ionic-native/phonegap-local-notification";
+import { Push, PushObject, PushOptions} from '@ionic-native/push'
 
 @NgModule({
   declarations: [
@@ -66,6 +68,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications'
     StatusBar,
     SplashScreen,
     LocalNotifications,
+    PhonegapLocalNotification,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Facebook
   ]
