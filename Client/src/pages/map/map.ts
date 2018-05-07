@@ -38,6 +38,7 @@ export class MapPage {
     this.placePins();
   }
 
+
   placePins() {
     var marker = new google.maps.Marker({
       position: (new google.maps.LatLng(59.3293, 18.0686)), map: this.map, icon: "assets/imgs/pins/bluepin.png"
@@ -53,15 +54,18 @@ export class MapPage {
       pathBetween.setMap(this.map);
     });
 
-    new google.maps.Marker({
+    //Lila/Purple pin som heter purplePin. Visas på kartan baserad på kordinaterna vart den ska ligga
+    var purplePin= new google.maps.Marker({
       position: (new google.maps.LatLng(59.326599, 18.066159)), map: this.map, icon: "assets/imgs/pins/purplepin.png"
     })
 
-    new google.maps.Marker({
+    //Röd pin som heter redPin
+    var redPin= new google.maps.Marker({
       position: (new google.maps.LatLng(59.326730, 18.070922)), map: this.map, icon: "assets/imgs/pins/redpin.png"
     })
 
-    new google.maps.Marker({
+    //Grön pin som heter purplePin. Visas på kartan baserad på kordinaterna vart den ska ligga
+    var greenPin= new google.maps.Marker({
       position: (new google.maps.LatLng(59.329204, 18.065987)), map: this.map, icon: "assets/imgs/pins/greenpin.png"
     })
   }
