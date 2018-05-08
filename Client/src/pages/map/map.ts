@@ -4,6 +4,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 import { HomePage } from '../home/home';
 import { QuestionViewPage } from '../question-view/question-view';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs'
 
 /**
  * Generated class for the MapPage page.
@@ -46,9 +47,41 @@ export class MapPage {
             position: latLng, 
             icon: 'assets/imgs/pins/redpin.png' 
           })
-          
-          
-          this.placePins();
+
+           // onSuccess Callback
+    //   This method accepts a `Position` object, which contains
+    //   the current GPS coordinates
+    //
+    /*var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000 });
+    function onSuccess(position) {
+      var element = document.getElementById('geolocation');
+      element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
+                          'Longitude: ' + position.coords.longitude     + '<br />' +
+                          '<hr />'      + element.innerHTML;
+  }
+
+  // onError Callback receives a PositionError object
+  //
+  function onError(error) {
+      alert('code: '    + error.code    + '\n' +
+            'message: ' + error.message + '\n');
+  }
+
+  // Options: throw an error if no update is received every 30 seconds.
+  //
+ 
+         /*navigator.geolocation.watchPosition(watchSuccess);
+          function watchSuccess(position){
+            myPositionMarker.setPosition(latLng);
+          }
+
+         /* let watch = this.geolocation.watchPosition();
+          watch.subscribe((data) => {
+         // data can be a set of coordinates, or an error (if an error occurred).
+           data.coords.latitude
+           data.coords.longitude
+           });*/
+
       },(err) => {
         console.log(err);
       });

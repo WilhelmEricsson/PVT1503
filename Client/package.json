@@ -44,7 +44,7 @@
     "de.appplant.cordova.plugin.local-notification": "^0.8.5",
     "geolocation-marker": "^2.0.5",
     "ionic-angular": "3.9.2",
-    "ionic-native": "^2.5.1",
+    "ionic-native": "^2.9.0",
     "ionicons": "3.0.0",
     "phonegap-plugin-local-notification": "^1.0.1",
     "phonegap-plugin-push": "^2.1.3",
