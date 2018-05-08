@@ -57,6 +57,7 @@ export class MapPage {
             position: latLng, 
             icon: 'assets/imgs/pins/redpin.png' 
           })
+          this.placePins();
       },(err) => {
         let alert = this.alert.create({
           title: err.message,
@@ -66,7 +67,7 @@ export class MapPage {
         console.log(err);
       });
     } 
-    this.placePins();
+   
     }
 
   ChooseGameController(){
