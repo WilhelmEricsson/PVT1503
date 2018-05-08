@@ -55,36 +55,6 @@ export class MapPage {
           buttons: ['Dismiss']
           });
           alert.present();
-        /*switch(err.code) {
-          case err.PERMISSION_DENIED:
-            alert = this.alert.create({
-            title: 'Permission Denied',
-            buttons: ['Dismiss']
-            });
-            alert.present();
-            break;
-          case err.POSITION_UNAVAILABLE:
-            alert = this.alert.create({
-            title: 'Position Unavailable',
-            buttons: ['Dismiss']
-            });
-            alert.present();
-            break;
-          case err.TIMEOUT:
-            alert = this.alert.create({
-            title: 'Timeout',
-            buttons: ['Dismiss']
-            });
-            alert.present();
-            break;
-          case err.UNKNOWN_ERROR:
-          alert = this.alert.create({
-            title: 'Unkown Error',
-            buttons: ['Dismiss']
-            });
-            alert.present();
-            break;
-        }*/
         console.log(err);
       });
     } 
