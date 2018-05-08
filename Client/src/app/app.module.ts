@@ -27,8 +27,6 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 //Notifications
 import { LocalNotifications } from '@ionic-native/local-notifications'
-import { PhonegapLocalNotification } from "@ionic-native/phonegap-local-notification";
-import { Push, PushObject, PushOptions} from '@ionic-native/push'
 
 //Component
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
@@ -78,7 +76,6 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
     StatusBar,
     SplashScreen,
     LocalNotifications,
-    PhonegapLocalNotification,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Facebook,
     Geolocation

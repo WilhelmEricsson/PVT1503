@@ -59,9 +59,8 @@ export class MapPage {
   }
 
   placePins() {
-    //Blå pin som heter marker?. Visas på kartan baserad på kordinaterna vart den ska ligga
     var marker1 = new google.maps.Marker({
-      position: (new google.maps.LatLng(59.3293, 18.0686)), map: this.map, icon: "assets/imgs/lyktstolpar/turkos.png"
+      position: (new google.maps.LatLng(59.3293, 18.0686)), map: this.map, icon: "assets/imgs/lyktstolpar/lila2.png"
     })
 
     var info = new google.maps.InfoWindow({
@@ -70,21 +69,6 @@ export class MapPage {
     
     marker1.addListener('click', function() {
        info.open(Map, marker1);
-    });
-    
-  
-
-    //Lila/Purple pin som heter purplePin. Visas på kartan baserad på kordinaterna vart den ska ligga
-    var marker2 = new google.maps.Marker({
-      position: (new google.maps.LatLng(59.326730, 18.070922)), map: this.map, icon: "assets/imgs/lyktstolpar/lila.png"
-    })
-
-    info = new google.maps.InfoWindow({
-      content: document.getElementById("infoStolpe1")
-    });
-    
-    marker2.addListener('click', function() {
-       info.open(Map, marker2);
     });
   }
 
