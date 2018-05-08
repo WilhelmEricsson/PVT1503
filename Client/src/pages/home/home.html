@@ -23,13 +23,13 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <button ion-button round large item-start color="yellow"(click)="AchievmentController()" full=true>Achievement</button>
+          <button ion-button round large item-start color="yellow" full=true (click)="AchievmentController()">Achievement</button>
         </ion-col>
         <ion-col>
-          <button ion-button round large item-start color="yellow" full=true (click)= "DailyRoutesController()">Daily Routes</button>
+          <button ion-button round large item-start color="yellow" full=true (click)="DailyRoutesController()">Daily Routes</button>
         </ion-col>
         <ion-col>
-          <button ion-button full (click)="showNotification()" >Test!</button>
+          <button ion-button round large color="yellow" full=true (click)="lightpostController()" [disabled]="connected">Interact With Lightpost</button>
         </ion-col>
         <ion-col>
           

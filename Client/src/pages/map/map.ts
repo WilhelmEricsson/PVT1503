@@ -33,7 +33,7 @@ export class MapPage {
 
     loadMap() {
       //https://stackoverflow.com/questions/14586916/google-maps-directions-from-users-geo-location Bra att kolla igenom
-      if (navigator.geolocation)
+      if (navigator.geolocation) {
         this.geolocation.getCurrentPosition().then((position) => {
           let latLng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
           let mapOptions = {
@@ -49,12 +49,16 @@ export class MapPage {
             position: latLng, 
             icon: 'assets/imgs/pins/redpin.png' 
           })
-          
-          
-          this.placePins();
       },(err) => {
+        switch(err.code) {
+          case err.PERMISSION_DENIED:
+            this.navCtrl.push(HomePage);
+            break;
+        }
         console.log(err);
       });
+    } 
+    this.placePins();
     }
 
   ChooseGameController(){

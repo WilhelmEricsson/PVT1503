@@ -1,21 +1,19 @@
-import { Component, state } from '@angular/core';
+import { Component, state} from '@angular/core';
 import { NavController, AlertController, Platform, Alert} from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { NewGamePage } from '../new-game/new-game';
 import {AchievmentPage} from '../achievment/achievment';
 import {DailyRoutesPage}from '../daily-routes/daily-routes';
 
-import { LocalNotifications } from '@ionic-native/local-notifications'
-
-
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+
+  connected: boolean = true;
   
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private platform: Platform, private localNotification: LocalNotifications) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private platform: Platform) {
  /*   this.platform.ready().then((ready) => {
       this.localNotification.on('click', (notification, state) => {
        let json = JSON.parse(notification.data);
@@ -28,8 +26,8 @@ export class HomePage {
     });
     */
 
-
   }
+
   AchievmentController(){
     this.navCtrl.push(AchievmentPage)
   }
@@ -45,22 +43,9 @@ export class HomePage {
   MapController() {
     this.navCtrl.push(MapPage);
   }
-  showNotification(){
-    // var testNot = new Notification("My title", {
-    //   tag: 'message1',
-    //   body: "My body"
-    // });
-    // testNot.onclick = function(){
-    //   console.log('test');
-    // };
 
-   this.localNotification.schedule({
-      id: 1,
-      title: "Test",
-      text: 'Test1',
-      trigger: {at: new Date(new Date().getTime() + 3000)},
-      data: { mydata: 'Test3'}
-    });
+  lightpostController() {
+    console.log("not disabled");
   }
 
 }
