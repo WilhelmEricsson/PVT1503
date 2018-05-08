@@ -50,8 +50,12 @@ export class MapPage {
             icon: 'assets/imgs/pins/redpin.png' 
           })
       },(err) => {
-        let alert;
-        switch(err.code) {
+        let alert = this.alert.create({
+          title: err.message,
+          buttons: ['Dismiss']
+          });
+          alert.present();
+        /*switch(err.code) {
           case err.PERMISSION_DENIED:
             alert = this.alert.create({
             title: 'Permission Denied',
@@ -80,7 +84,7 @@ export class MapPage {
             });
             alert.present();
             break;
-        }
+        }*/
         console.log(err);
       });
     } 
