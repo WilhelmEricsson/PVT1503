@@ -20,7 +20,7 @@ public class UserService {
     //-------------------------------Methods--------------------------------------
     public User lookup(String username) throws UsernameNotFoundException {
        Object user = userRepository.findById(username);
-       if(!(user instanceof User)) {
+       if(!(user instanceof User) || user == null) {
            throw new UsernameNotFoundException(username);
        }
         return (User)user;
