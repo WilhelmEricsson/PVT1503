@@ -1,4 +1,4 @@
-package com.pvt15.repository;
+package com.pvt15.DB.repository;
 
 public class QuestionRepositoryTest {
 

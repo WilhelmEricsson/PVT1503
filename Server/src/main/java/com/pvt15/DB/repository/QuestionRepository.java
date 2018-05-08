@@ -1,7 +1,7 @@
-package com.pvt15.repository;
+package com.pvt15.DB.repository;
 
 
-import com.pvt15.entity.Question;
+import com.pvt15.DB.entity.Question;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

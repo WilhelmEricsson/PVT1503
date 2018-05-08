@@ -1,7 +1,7 @@
-package com.pvt15.controller;
+package com.pvt15.DB.controller;
 
-import com.pvt15.entity.Question;
-import com.pvt15.repository.QuestionRepository;
+import com.pvt15.DB.entity.Question;
+import com.pvt15.DB.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

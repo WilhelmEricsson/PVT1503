@@ -1,8 +1,6 @@
-package com.pvt15.entity;
+package com.pvt15.DB.entity;
 
 import org.junit.Test;
-
-import javax.validation.constraints.Null;
 
 import static org.junit.Assert.*;
 

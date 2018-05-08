@@ -1,4 +1,4 @@
-package com.pvt15.entity;
+package com.pvt15.DB.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
