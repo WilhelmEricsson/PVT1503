@@ -56,40 +56,37 @@ export class MapPage {
 
   Test(){
     this.navCtrl.push(QuestionViewPage);
-
   }
-  
 
   placePins() {
     //Blå pin som heter marker?. Visas på kartan baserad på kordinaterna vart den ska ligga
-    var marker = new google.maps.Marker({
+    var marker1 = new google.maps.Marker({
       position: (new google.maps.LatLng(59.3293, 18.0686)), map: this.map, icon: "assets/imgs/lyktstolpar/turkos.png"
     })
-    
-    
-    marker.addListener('click', function() {
-        var pathBetween = new google.maps.Polyline({
-        path: [(new google.maps.LatLng(59.327637, 18.068339)), (new google.maps.LatLng(59.3293, 18.0686))],
 
-       strokeColor: '#FF0000',
-       strokeOpacity: 1.0,
-       strokeWeight: 2 
-      });
-
-
-
-      pathBetween.setMap(this.map);
+    var info = new google.maps.InfoWindow({
+      content: document.getElementById("infoStolpe1")
     });
     
-<<<<<<< HEAD
-=======
+    marker1.addListener('click', function() {
+       info.open(Map, marker1);
+    });
+    
   
->>>>>>> e3d1c0962e31767ae584dcb660730167de7cb486
 
     //Lila/Purple pin som heter purplePin. Visas på kartan baserad på kordinaterna vart den ska ligga
-    var purplePin= new google.maps.Marker({
+    var marker2 = new google.maps.Marker({
       position: (new google.maps.LatLng(59.326730, 18.070922)), map: this.map, icon: "assets/imgs/lyktstolpar/lila.png"
     })
+
+    info = new google.maps.InfoWindow({
+      content: document.getElementById("infoStolpe1")
+    });
+    
+    marker2.addListener('click', function() {
+       info.open(Map, marker2);
+    });
   }
+
 
 }

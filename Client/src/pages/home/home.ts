@@ -21,7 +21,6 @@ export class HomePage {
  /*   this.platform.ready().then((ready) => {
       this.localNotification.on('click', (notification, state) => {
        let json = JSON.parse(notification.data);
-
        let alert = this.alertCtrl.create({
          title: notification.title,
          subTitle: json.mydata
