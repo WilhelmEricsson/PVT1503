@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 
 import { HomePage } from '../home/home';
@@ -24,7 +24,7 @@ export class MapPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation, private alert: AlertController) {
   }
 
   ionViewDidLoad(){
@@ -50,18 +50,35 @@ export class MapPage {
             icon: 'assets/imgs/pins/redpin.png' 
           })
       },(err) => {
+        let alert;
         switch(err.code) {
           case err.PERMISSION_DENIED:
-            this.navCtrl.push(HomePage);
+            alert = this.alert.create({
+            title: 'Permission Denied',
+            buttons: ['Dismiss']
+            });
+            alert.present();
             break;
           case err.POSITION_UNAVAILABLE:
-            this.navCtrl.push(HomePage);
+            alert = this.alert.create({
+            title: 'Position Unavailable',
+            buttons: ['Dismiss']
+            });
+            alert.present();
             break;
           case err.TIMEOUT:
-            this.navCtrl.push(HomePage);
+            alert = this.alert.create({
+            title: 'Timeout',
+            buttons: ['Dismiss']
+            });
+            alert.present();
             break;
           case err.UNKNOWN_ERROR:
-            this.navCtrl.push(HomePage);
+          alert = this.alert.create({
+            title: 'Unkown Error',
+            buttons: ['Dismiss']
+            });
+            alert.present();
             break;
         }
         console.log(err);
