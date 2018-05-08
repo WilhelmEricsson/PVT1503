@@ -5,12 +5,18 @@ import com.pvt15.security.entity.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 
-public class AppUserDetailsService implements UserDetailsService {
+@Component
+public class AppUserDetailService implements UserDetailsService {
 
-    private UserService userService;
+    private final UserService userService;
+
+    public AppUserDetailService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public final UserDetails loadUserByUsername(String username)
