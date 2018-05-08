@@ -23,6 +23,7 @@ import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { AchievmentPage} from '../pages/achievment/achievment';
 import { DailyRoutesPage} from '../pages/daily-routes/daily-routes';
+import { Geolocation } from '@ionic-native/geolocation';
 
 //Notifications
 import { LocalNotifications } from '@ionic-native/local-notifications'
@@ -79,7 +80,8 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
     LocalNotifications,
     PhonegapLocalNotification,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Facebook
+    Facebook,
+    Geolocation
   ]
 })
 export class AppModule {}

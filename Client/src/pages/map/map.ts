@@ -1,5 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Geolocation } from '@ionic-native/geolocation';
+
 import { HomePage } from '../home/home';
 import { QuestionViewPage } from '../question-view/question-view';
 
@@ -21,24 +23,36 @@ export class MapPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
   }
 
   ionViewDidLoad(){
     this.loadMap();
   }
 
-  loadMap() {
-    let latLng = new google.maps.LatLng(59.3293, 18.0686);
-    let mapOptions = {
-      center: latLng,
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+    loadMap() {
+        this.geolocation.getCurrentPosition().then((position) => {
+          let latLng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+          let mapOptions = {
+            center: latLng,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          }
+          this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+        
+          //Röd pin som visar användarens position på kartan
+          var myPositionMarker = new google.maps.Marker({
+            map: this.map,
+            position: latLng, 
+            icon: 'assets/imgs/pins/redpin.png' 
+          })
+          
+          
+          this.placePins();
+      },(err) => {
+        console.log(err);
+      });
     }
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-
-    this.placePins();
-  }
 
   Test(){
     this.navCtrl.push(QuestionViewPage);
@@ -67,6 +81,10 @@ export class MapPage {
       pathBetween.setMap(this.map);
     });
     
+<<<<<<< HEAD
+=======
+  
+>>>>>>> e3d1c0962e31767ae584dcb660730167de7cb486
 
     //Lila/Purple pin som heter purplePin. Visas på kartan baserad på kordinaterna vart den ska ligga
     var purplePin= new google.maps.Marker({
