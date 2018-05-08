@@ -1,9 +1,12 @@
 package com.pvt15.security.Entity;
 
+import org.springframework.data.annotation.Id;
+
 import javax.persistence.Entity;
 
 @Entity
 public class User {
+    @Id
     private String username;
     private String email;
     private String password;
