@@ -2,6 +2,8 @@ package com.pvt15.security.entity;
 
 
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -42,5 +44,9 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void encodePassword(PasswordEncoder passwordEncoder) {
+        this.password = passwordEncoder.encode(this.password);
     }
 }
