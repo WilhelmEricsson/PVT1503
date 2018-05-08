@@ -37,6 +37,7 @@
     "cordova-plugin-app-event": "^1.2.1",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-facebook4": "^2.1.0",
+    "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.2.1",
     "cordova-plugin-splashscreen": "^5.0.2",
@@ -76,7 +77,8 @@
       "phonegap-plugin-push": {
         "FCM_VERSION": "11.6.2"
       },
-      "phonegap-plugin-local-notification": {}
+      "phonegap-plugin-local-notification": {},
+      "cordova-plugin-geolocation": {}
     },
     "platforms": [
       "browser",
