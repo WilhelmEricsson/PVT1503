@@ -1,14 +1,17 @@
-package com.pvt15.security.Entity;
+package com.pvt15.security.entity;
 
-import org.springframework.data.annotation.Id;
+
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class User {
     @Id
     private String username;
+
     private String email;
+
     private String password;
 
     //--------------------------Constructor------------------------

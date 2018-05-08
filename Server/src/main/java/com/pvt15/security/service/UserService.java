@@ -1,18 +1,13 @@
 package com.pvt15.security.service;
 
-import com.pvt15.security.Entity.User;
+import com.pvt15.security.entity.User;
 import com.pvt15.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.rmi.NoSuchObjectException;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-
 @Service
 public class UserService {
-
+    @Autowired
     private UserRepository userRepository;
 
     //-------------------------------Constructor----------------------------------
@@ -22,7 +17,7 @@ public class UserService {
 
 
     //-------------------------------Methods--------------------------------------
-    public User lookup(String username) { //EXECPTION
+    public User lookup(String username)  {
        Object user = userRepository.findById(username);
 
         return (User)user;
