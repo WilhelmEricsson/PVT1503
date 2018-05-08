@@ -24,6 +24,8 @@ public class TokenProvider {
     private final UserDetailsService userService;
 
     public TokenProvider(AppConfig config, @Qualifier("appUserDetailService") UserDetailsService userService) {
+        System.out.println("HEJ config = [" + config + "], userService = [" + userService + "]");
+
         this.secretKey = Base64.getEncoder().encodeToString(config.getSecret().getBytes());
         this.tokenValidityInMilliseconds = 1000 * config.getTokenValidityInSeconds();
         this.userService = userService;
