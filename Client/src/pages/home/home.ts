@@ -6,6 +6,7 @@ import {AchievmentPage} from '../achievment/achievment';
 import {DailyRoutesPage}from '../daily-routes/daily-routes';
 
 
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
