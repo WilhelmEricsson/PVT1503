@@ -4,6 +4,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 import { HomePage } from '../home/home';
 import { QuestionViewPage } from '../question-view/question-view';
+import { ChooseGamePage } from '../choose-game/choose-game';
 
 /**
  * Generated class for the MapPage page.
@@ -54,8 +55,8 @@ export class MapPage {
       });
     }
 
-  Test(){
-    this.navCtrl.push(QuestionViewPage);
+  ChooseGameController(){
+    this.navCtrl.push(ChooseGamePage);
   }
 
   placePins() {

@@ -24,6 +24,8 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { AchievmentPage} from '../pages/achievment/achievment';
 import { DailyRoutesPage} from '../pages/daily-routes/daily-routes';
 import { Geolocation } from '@ionic-native/geolocation';
+import { ChooseGamePage } from "../pages/choose-game/choose-game";
+
 
 //Notifications
 import { LocalNotifications } from '@ionic-native/local-notifications'
@@ -51,6 +53,7 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
     AchievmentPage,
     DailyRoutesPage,
     ProgressBarComponent,
+    ChooseGamePage,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +76,7 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
     MyProfilePage,
     AchievmentPage,
     DailyRoutesPage,
+    ChooseGamePage,
   ],
   providers: [
     StatusBar,
