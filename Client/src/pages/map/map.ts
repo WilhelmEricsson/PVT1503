@@ -32,6 +32,8 @@ export class MapPage {
   }
 
     loadMap() {
+      //https://stackoverflow.com/questions/14586916/google-maps-directions-from-users-geo-location Bra att kolla igenom
+      if (navigator.geolocation)
         this.geolocation.getCurrentPosition().then((position) => {
           let latLng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
           let mapOptions = {
