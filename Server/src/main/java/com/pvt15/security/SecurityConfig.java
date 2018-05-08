@@ -1,6 +1,7 @@
 package com.pvt15.security;
 
 
+import com.pvt15.security.util.JWTConfigurer;
 import com.pvt15.security.util.TokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

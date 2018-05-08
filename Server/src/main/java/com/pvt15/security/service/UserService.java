@@ -3,6 +3,7 @@ package com.pvt15.security.service;
 import com.pvt15.security.entity.User;
 import com.pvt15.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,9 +18,11 @@ public class UserService {
 
 
     //-------------------------------Methods--------------------------------------
-    public User lookup(String username)  {
+    public User lookup(String username) throws UsernameNotFoundException {
        Object user = userRepository.findById(username);
-
+       if(!(user instanceof User) || user == null) {
+           throw new UsernameNotFoundException(username);
+       }
         return (User)user;
     }
 
