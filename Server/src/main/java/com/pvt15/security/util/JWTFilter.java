@@ -1,4 +1,4 @@
-package com.pvt15.security;
+package com.pvt15.security.util;
 
 import com.pvt15.ServerApplication;
 import com.pvt15.security.util.TokenProvider;
