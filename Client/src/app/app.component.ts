@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -8,6 +8,7 @@ import { QuestionViewPage } from '../pages/question-view/question-view';
 import { LoginPage } from '../pages/login/login';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -44,6 +45,16 @@ export class MyApp {
 
   logOut() {
     this.nav.setRoot(LoginPage);
+  }
+
+  simulateBluetooth() {
+    this.localNotification.schedule({
+      id: 1,
+      title: "Test",
+      text: 'Test1',
+      trigger: {at: new Date(new Date().getTime() + 3000)},
+      data: { mydata: 'Test3'}
+    });
   }
 
   openPage(page) {
