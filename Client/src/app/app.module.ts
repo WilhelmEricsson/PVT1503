@@ -21,6 +21,11 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { AchievmentPage} from '../pages/achievment/achievment';
 import { DailyRoutesPage} from '../pages/daily-routes/daily-routes';
 import { Geolocation } from '@ionic-native/geolocation';
+
+import { LocalNotifications } from '@ionic-native/local-notifications'
+import { PhonegapLocalNotification } from "@ionic-native/phonegap-local-notification";
+import { Push, PushObject, PushOptions} from '@ionic-native/push'
+
 @NgModule({
   declarations: [
     MyApp,
@@ -63,6 +68,8 @@ import { Geolocation } from '@ionic-native/geolocation';
   providers: [
     StatusBar,
     SplashScreen,
+    LocalNotifications,
+    PhonegapLocalNotification,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Facebook,
     Geolocation
