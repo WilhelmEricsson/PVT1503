@@ -54,6 +54,15 @@ export class MapPage {
           case err.PERMISSION_DENIED:
             this.navCtrl.push(HomePage);
             break;
+          case err.POSITION_UNAVAILABLE:
+            this.navCtrl.push(HomePage);
+            break;
+          case err.TIMEOUT:
+            this.navCtrl.push(HomePage);
+            break;
+          case err.UNKNOWN_ERROR:
+            this.navCtrl.push(HomePage);
+            break;
         }
         console.log(err);
       });
