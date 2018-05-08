@@ -3,6 +3,7 @@ package com.pvt15.security.util;
 import com.pvt15.AppConfig;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +23,7 @@ public class TokenProvider {
 
     private final UserDetailsService userService;
 
-    public TokenProvider(AppConfig config, UserDetailsService userService) {
+    public TokenProvider(AppConfig config, @Qualifier("appUserDetailService") UserDetailsService userService) {
         this.secretKey = Base64.getEncoder().encodeToString(config.getSecret().getBytes());
         this.tokenValidityInMilliseconds = 1000 * config.getTokenValidityInSeconds();
         this.userService = userService;
