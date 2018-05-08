@@ -29,44 +29,30 @@ export class MapPage {
   }
 
     loadMap() {
-      this.geolocation.getCurrentPosition().then((position) => {
-        let latLng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-        let mapOptions = {
-          center: latLng,
-          zoom: 15,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-       
+        this.geolocation.getCurrentPosition().then((position) => {
+          let latLng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+          let mapOptions = {
+            center: latLng,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          }
+          this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
         
+          //Röd pin som visar användarens position på kartan
+          var myPositionMarker = new google.maps.Marker({
+            map: this.map,
+            position: latLng, 
+            icon: 'assets/imgs/pins/redpin.png' 
+          })
+          
+          
+          this.placePins();
+      },(err) => {
+        console.log(err);
+      });
+    }
 
-        this.geolocaitionPin();
-        this.placePins();
-    },(err) => {
-      console.log(err);
-    });
-  }
 
-geolocaitionPin(){
-  var myMarker = null;
-  navigator.geolocation.getCurrentPosition(showPosition);
-  function showPosition(position){
-    myMarker = new google.maps.Marker(
-      { position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-        map: new google.maps.Map(document.getElementById("map")),
-        icon: 'assets/imgs/pins/purplepin.png'}
-    );
-  }
-    navigator.geolocation.watchPosition(watchSuccess);
-
-// change marker location everytime position is updated
-function watchSuccess(position) {
-    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    // set marker position
-    myMarker.setPosition(latLng);
-    
-}
-}
   placePins() {
     var marker = new google.maps.Marker({
       position: (new google.maps.LatLng(59.3293, 18.0686)), map: this.map, icon: "assets/imgs/pins/bluepin.png"
