@@ -13,6 +13,10 @@ public class LightPost {
     private int numOfUsersPresent;
     private Color colorOfLight;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "light_post_locations_id")
+    private LightPostLocations location;
+
     //------------------------Constructor-----------------------
     public LightPost(){
     }
@@ -42,5 +46,12 @@ public class LightPost {
         this.colorOfLight = colorOfLight;
     }
 
+    public LightPostLocations getLocation() {
+        return location;
+    }
+
+    public void setLocation(LightPostLocations location) {
+        this.location = location;
+    }
 
 }
