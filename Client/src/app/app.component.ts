@@ -66,6 +66,7 @@ export class MyApp {
 
 
 
+  
   simulateBluetooth() {
     this.localNotification.requestPermission().then(res =>{
       if (res == true) {
