@@ -1,19 +1,17 @@
 package com.pvt15.DB.entity;
 
-import org.springframework.stereotype.Repository;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import java.io.Serializable;
 
 @Entity
-public class LightPostLocations {
+public class LightPostLocations implements Serializable {
 
-
+    //måste mappas till LightPost så att id:t är samma.
     @Id
-    @OneToOne
     int lightPostId;
-    String geoLocation;
+    String geoLocationLang;
+    String geoLocationLat;
 
     //------------------------Constructor-----------------------
     public LightPostLocations(){
@@ -29,12 +27,20 @@ public class LightPostLocations {
         this.lightPostId = lightPostId;
     }
 
-    public String getGeoLocation() {
-        return geoLocation;
+    public String getGeoLocationLang() {
+        return geoLocationLang;
     }
 
-    public void setGeoLocation(String geoLocation) {
-        this.geoLocation = geoLocation;
+    public void setGeoLocationLang(String geoLocationLang) {
+        this.geoLocationLang = geoLocationLang;
+    }
+
+    public String getGeoLocationLat() {
+        return geoLocationLat;
+    }
+
+    public void setGeoLocationLat(String geoLocationLat) {
+        this.geoLocationLat = geoLocationLat;
     }
 
 
