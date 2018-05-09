@@ -78,9 +78,6 @@
     </platform>
     <allow-navigation href="http://10.200.42.196:8100" />
     <allow-navigation href="http://10.200.54.27:8100" />
-    <engine name="browser" spec="5.0.3" />
-    <engine name="ios" spec="^4.5.4" />
-    <engine name="android" spec="^6.3.0" />
     <plugin name="cordova-plugin-facebook4" spec="^2.1.0">
         <variable name="APP_ID" value="2042312596091464" />
         <variable name="APP_NAME" value="PVT15" />
@@ -100,4 +97,7 @@
     </plugin>
     <plugin name="phonegap-plugin-local-notification" spec="^1.0.1" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
+    <engine name="browser" spec="5.0.3" />
+    <engine name="ios" spec="^4.5.4" />
+    <engine name="android" spec="^6.3.0" />
 </widget>
