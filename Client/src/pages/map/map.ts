@@ -44,10 +44,9 @@ export class MapPage {
           this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
         
           this.geolocation.watchPosition().subscribe((position => {
-            let latLng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-            var myPositionMarker = new google.maps.Marker({
+            new google.maps.Marker({
               map: this.map,
-              position: latLng, 
+              position: new google.maps.LatLng(position.coords.latitude,position.coords.longitude), 
               icon: 'assets/imgs/pins/redpin.png' 
             })
           }));
