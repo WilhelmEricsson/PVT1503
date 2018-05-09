@@ -23,7 +23,7 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook,) {
     this.initializeApp();
     this.platform.ready().then(() => {
       this.localNotification.on("click").subscribe(noti => {
@@ -55,9 +55,16 @@ export class MyApp {
     });
   }
 
-  logOut() {
-    this.nav.setRoot(LoginPage);
+  logOut(){
+    this.fb.getLoginStatus().then( data=>{
+      if(data.status =='connected'){
+        this.fb.logout()
+        this.nav.setRoot(LoginPage);
+      }
+    });
   }
+
+
 
   simulateBluetooth() {
     this.localNotification.schedule({
