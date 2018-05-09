@@ -9,6 +9,7 @@ import { LoginPage } from '../pages/login/login';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { ChooseGamePage } from '../pages/choose-game/choose-game';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class MyApp {
     this.initializeApp();
     this.platform.ready().then(() => {
       this.localNotification.on("click").subscribe(noti =>{
-        this.nav.push(QuestionViewPage);
+        this.nav.push(ChooseGamePage);
       });
     }); 
     
@@ -58,7 +59,7 @@ export class MyApp {
       id: 1,
       title: "Test",
       text: 'Test1',
-      trigger: {at: new Date(new Date().getTime() + 3000)},
+      trigger: {at: new Date(new Date().getTime() + 10000)},
       data: { mydata: 'Test3'}
     });
   }
