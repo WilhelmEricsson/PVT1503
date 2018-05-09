@@ -66,9 +66,10 @@ export class MyApp {
 
 
 
-  
+
   simulateBluetooth() {
-    this.localNotification.requestPermission().then(res =>{
+    this.localNotification.requestPermission()
+    this.localNotification.hasPermission().then(res => {
       if (res == true) {
         this.localNotification.schedule({
           id: 1,
@@ -82,7 +83,7 @@ export class MyApp {
           });
           alert.present();
       }
-    });
+    })
   }
 
   openPage(page) {
