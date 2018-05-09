@@ -1,6 +1,7 @@
 package com.pvt15.security.controller;
 
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.pvt15.ServerApplication;
 import com.pvt15.security.entity.User;
 import com.pvt15.security.service.UserService;
@@ -37,6 +38,7 @@ public class AuthController {
 
         User user = new User();
         user.setUsername("admin");
+        user.setEmail("admin@PVT1503.com");
         user.setPassword(this.passwordEncoder.encode("admin"));
         this.userService.save(user);
     }
@@ -46,6 +48,8 @@ public class AuthController {
     public void authenticate(){
 
     }
+
+
 
     @PostMapping("/login")
     public String authorize(@Valid @RequestBody User loginUser, HttpServletResponse response){
@@ -58,7 +62,7 @@ public class AuthController {
         catch(AuthenticationException e){
             ServerApplication.logger.info("Security exception {}", e.getMessage());
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            return null;
+            return loginUser.getUsername()+ " " + loginUser.getEmail() + " " + loginUser.getPassword();
 
         }
 
