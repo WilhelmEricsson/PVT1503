@@ -1,4 +1,4 @@
-import { Component, ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -9,6 +9,8 @@ import { LoginPage } from '../pages/login/login';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { ChooseGamePage } from '../pages/choose-game/choose-game';
+import { Facebook } from '@ionic-native/facebook';
 
 
 @Component({
@@ -19,10 +21,20 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook,) {
     this.initializeApp();
+    this.platform.ready().then(() => {
+      this.localNotification.on("click").subscribe(noti => {
+        this.fb.getLoginStatus().then(res => {
+          if (res.status === "connected") {
+            this.nav.push(ChooseGamePage);
+          }
+        })
+      });
+    });
+
 
     // used for an example of ngFor and navigation
     this.pages = [
@@ -43,17 +55,24 @@ export class MyApp {
     });
   }
 
-  logOut() {
-    this.nav.setRoot(LoginPage);
+  logOut(){
+    this.fb.getLoginStatus().then( data=>{
+      if(data.status =='connected'){
+        this.fb.logout()
+        this.nav.setRoot(LoginPage);
+      }
+    });
   }
+
+
 
   simulateBluetooth() {
     this.localNotification.schedule({
       id: 1,
       title: "Test",
       text: 'Test1',
-      trigger: {at: new Date(new Date().getTime() + 3000)},
-      data: { mydata: 'Test3'}
+      trigger: { at: new Date(new Date().getTime() + 10000) },
+      data: { mydata: 'Test3' }
     });
   }
 
