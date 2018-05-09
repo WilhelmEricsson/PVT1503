@@ -42,7 +42,7 @@ export class MapPage {
             enableHighAccuracy: true, timeout: 10000, maximumAge: 3000
           });
         }*/
-        this.geolocation.getCurrentPosition({maximumAge: 3000, timeout: 5000, enableHighAccuracy: true}).then((position) => {
+        this.geolocation.getCurrentPosition().then((position) => {
           let latLng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
           let mapOptions = {
             center: latLng,

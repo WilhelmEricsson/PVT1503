@@ -11,6 +11,7 @@ import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { ChooseGamePage } from '../pages/choose-game/choose-game';
 import { Facebook } from '@ionic-native/facebook';
+import {AuthProvider} from "../providers/auth/auth";
 
 
 @Component({
@@ -23,7 +24,7 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private alert: AlertController) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController) {
     this.initializeApp();
     this.platform.ready().then(() => {
       this.localNotification.on("click").subscribe(noti => {
@@ -43,6 +44,18 @@ export class MyApp {
       { title: 'Notifications', component: NotificationsPage },
       { title: 'My profile', component: MyProfilePage },
     ];
+
+    //Subscribe to authentication token
+    authProvider.authUser.subscribe(jwt => {
+      if (jwt) {
+        this.rootPage = HomePage;
+      }
+      else {
+        this.rootPage = LoginPage;
+      }
+    });
+
+    authProvider.checkLogin();
 
   }
 
@@ -68,9 +81,10 @@ export class MyApp {
 
 
   simulateBluetooth() {
-    this.localNotification.requestPermission()
+    this.localNotification.requestPermission();
     this.localNotification.hasPermission().then(res => {
-      if (res == true) {
+      console.log(res);
+      if (res) {
         this.localNotification.schedule({
           id: 1,
           title: "Test",
@@ -91,4 +105,7 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
+  
+ 
 }

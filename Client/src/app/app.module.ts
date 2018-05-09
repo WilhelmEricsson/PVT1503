@@ -25,6 +25,7 @@ import { AchievmentPage} from '../pages/achievment/achievment';
 import { DailyRoutesPage} from '../pages/daily-routes/daily-routes';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ChooseGamePage } from "../pages/choose-game/choose-game";
+import { SignupPage } from "../pages/signup/signup";
 
 
 //Notifications
@@ -32,6 +33,29 @@ import { LocalNotifications } from '@ionic-native/local-notifications'
 
 //Component
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
+
+//CustomForms
+import {CustomFormsModule} from 'ng2-validation';
+
+//Storage
+import {Storage, IonicStorageModule} from "@ionic/storage";
+
+//AuthProvider
+import { AuthProvider } from "../providers/auth/auth";
+
+//HttpClientModule
+import {HttpClientModule} from "@angular/common/http";
+
+//JWTOptions
+import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
+
+//Whitelisted URL's for authentication header
+export function jwtOptionsFactory(storage:Storage){
+  return{
+    tokenGetter: ()=>storage.get('jwt_token'),
+    whitelistedDomains: ['localhost:8080']
+  }
+}
 
 
 @NgModule({
@@ -52,10 +76,21 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
     DailyRoutesPage,
     ProgressBarComponent,
     ChooseGamePage,
+    SignupPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpClientModule,
+    JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptionsFactory,
+        deps: [Storage]
+      }
+    }),
+  IonicStorageModule.forRoot(),
+  CustomFormsModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -75,6 +110,7 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
     AchievmentPage,
     DailyRoutesPage,
     ChooseGamePage,
+    SignupPage,
   ],
   providers: [
     StatusBar,
@@ -82,7 +118,8 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
     LocalNotifications,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Facebook,
-    Geolocation
+    Geolocation,
+    AuthProvider,
   ]
 })
 export class AppModule {}
