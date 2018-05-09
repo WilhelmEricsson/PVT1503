@@ -1,5 +1,5 @@
 import { Component, ViewChild} from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -21,8 +21,14 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications) {
+  constructor(public navCtrl: NavController, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications) {
     this.initializeApp();
+    this.platform.ready().then(() => {
+      this.localNotification.on("click").subscribe(noti =>{
+          this.navCtrl.push(QuestionViewPage);
+      });
+    }); 
+    
 
     // used for an example of ngFor and navigation
     this.pages = [
