@@ -1,5 +1,5 @@
 import { Component, ViewChild} from '@angular/core';
-import { Nav, Platform, NavController } from 'ionic-angular';
+import { Nav, Platform, NavController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -21,11 +21,15 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public navCtrl: NavController, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private alert: AlertController) {
     this.initializeApp();
     this.platform.ready().then(() => {
       this.localNotification.on("click").subscribe(noti =>{
-          this.navCtrl.push(QuestionViewPage);
+        let alert = this.alert.create({
+          title: "Notifikation klickad",
+          buttons: ['Dismiss']
+          });
+          alert.present();
       });
     }); 
     
