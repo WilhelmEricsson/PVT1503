@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -24,7 +24,7 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController) {
     this.initializeApp();
     this.platform.ready().then(() => {
       this.localNotification.on("click").subscribe(noti => {
@@ -79,14 +79,24 @@ export class MyApp {
 
 
 
+
   simulateBluetooth() {
-    this.localNotification.schedule({
-      id: 1,
-      title: "Test",
-      text: 'Test1',
-      trigger: { at: new Date(new Date().getTime() + 10000) },
-      data: { mydata: 'Test3' }
-    });
+    this.localNotification.requestPermission()
+    this.localNotification.hasPermission().then(res => {
+      if (res == true) {
+        this.localNotification.schedule({
+          id: 1,
+          title: "Test",
+          text: 'Test1',
+        });
+      } else {
+        let alert = this.alert.create({
+          title: "Notifications not allowed",
+          buttons: ['Dismiss']
+          });
+          alert.present();
+      }
+    })
   }
 
   openPage(page) {
