@@ -1,13 +1,11 @@
 package com.pvt15.DB.entity;
 
-import org.hibernate.annotations.Tables;
-
 import javax.persistence.*;
 import java.awt.*;
 
 @Entity
-@Table(name = "Lightposts")
-public class Lightpost {
+@Table(name = "Light_posts")
+public class LightPost {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,7 +14,7 @@ public class Lightpost {
     private Color colorOfLight;
 
     //------------------------Constructor-----------------------
-    public Lightpost(){
+    public LightPost(){
 
     }
 
