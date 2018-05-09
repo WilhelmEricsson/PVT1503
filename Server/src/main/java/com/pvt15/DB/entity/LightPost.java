@@ -15,7 +15,6 @@ public class LightPost {
 
     //------------------------Constructor-----------------------
     public LightPost(){
-
     }
 
     //------------------------Methods---------------------------
