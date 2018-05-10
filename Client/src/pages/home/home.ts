@@ -9,6 +9,7 @@ import {JwtHelperService} from "@auth0/angular-jwt";
 import {SERVER_URL} from "../../config";
 import {AuthProvider} from "../../providers/auth/auth";
 import {HttpClient} from "@angular/common/http";
+import {SocialSharing} from "@ionic-native/social-sharing";
 
 @Component({
   selector: 'page-home',
@@ -22,7 +23,7 @@ export class HomePage {
   user: string;
   message: string;
   
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private platform: Platform,
+  constructor(private socialSharing: SocialSharing, public navCtrl: NavController, public alertCtrl: AlertController, private platform: Platform,
     private readonly authProvider: AuthProvider,
     jwtHelper: JwtHelperService,
     private readonly httpClient: HttpClient) {
@@ -68,6 +69,9 @@ export class HomePage {
     this.navCtrl.push(MapPage);
   }
 
+  ShareController() {
+  this.socialSharing.shareViaFacebook("message","assets/imgs/lampa.jpg","https://www.facebook.com");
+  }
 /**test */
   ionViewWillEnter() {
     this.httpClient.get(`${SERVER_URL}/secret`, {responseType: 'text'}).subscribe(

@@ -31,6 +31,9 @@ import { SignupPage } from "../pages/signup/signup";
 //Notifications
 import { LocalNotifications } from '@ionic-native/local-notifications'
 
+//SocialSharing
+import { SocialSharing } from '@ionic-native/social-sharing'
+
 //Component
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 
@@ -120,6 +123,7 @@ export function jwtOptionsFactory(storage:Storage){
     Facebook,
     Geolocation,
     AuthProvider,
+    SocialSharing
   ]
 })
 export class AppModule {}
