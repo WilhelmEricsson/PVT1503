@@ -50,8 +50,7 @@ export class MapPage {
             var userPosition = new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
             currentMarker = new google.maps.Marker({
               map: this.map,
-              position: userPosition, 
-              icon: 'assets/imgs/pins/redpin.png' 
+              position: userPosition 
             })
             this.map.panTo(userPosition);
           }));
