@@ -68,9 +68,6 @@ export class HomePage {
     this.navCtrl.push(MapPage);
   }
 
-  lightpostController() {
-    console.log("not disabled");
-  }
 /**test */
   ionViewWillEnter() {
     this.httpClient.get(`${SERVER_URL}/secret`, {responseType: 'text'}).subscribe(
