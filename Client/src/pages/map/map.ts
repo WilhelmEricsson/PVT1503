@@ -53,7 +53,7 @@ export class MapPage {
               position: userPosition, 
               icon: 'assets/imgs/pins/redpin.png' 
             })
-            this.map.center = userPosition;
+            this.map.panTo(userPosition);
           }));
           this.placePins();
       },(err) => {
