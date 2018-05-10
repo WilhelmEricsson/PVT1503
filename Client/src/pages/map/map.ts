@@ -15,6 +15,8 @@ import { ChooseGamePage } from '../choose-game/choose-game';
 
 declare var google;
 var currentMarker;
+let gpsEnabled: boolean = false;
+var gpsEvent;
 
 @IonicPage()
 @Component({
@@ -31,7 +33,7 @@ export class MapPage {
   ionViewDidLoad(){
     this.loadMap();
   }
-
+            
     loadMap() {
       //https://stackoverflow.com/questions/14586916/google-maps-directions-from-users-geo-location Bra att kolla igenom
       if (navigator.geolocation) {
@@ -43,17 +45,6 @@ export class MapPage {
           }
           this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
         
-          this.geolocation.watchPosition({enableHighAccuracy: true}).subscribe((position => {
-            if (currentMarker != null) {
-                currentMarker.setMap(null);
-            }
-            var userPosition = new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
-            currentMarker = new google.maps.Marker({
-              map: this.map,
-              position: userPosition 
-            })
-            this.map.panTo(userPosition);
-          }));
           this.placePins();
       },(err) => {
         let alert = this.alert.create({
@@ -66,6 +57,27 @@ export class MapPage {
     } 
    
     }
+
+  toggleGPS() {
+    if (gpsEnabled) {
+      currentMarker.setMap(null);
+      gpsEvent.unsubscribe();
+      gpsEnabled = false;
+    } else {
+      gpsEvent = this.geolocation.watchPosition({enableHighAccuracy: true}).subscribe((position => {
+        if (currentMarker != null) {
+            currentMarker.setMap(null);
+        }
+        var userPosition = new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
+        currentMarker = new google.maps.Marker({
+          map: this.map,
+          position: userPosition 
+        })
+        this.map.panTo(userPosition);
+      }));
+      gpsEnabled = true;
+    }
+  }
 
   ChooseGameController(){
     this.navCtrl.push(ChooseGamePage);
