@@ -14,6 +14,7 @@ import { ChooseGamePage } from '../choose-game/choose-game';
  */
 
 declare var google;
+var currentMarker;
 
 @IonicPage()
 @Component({
@@ -43,8 +44,11 @@ export class MapPage {
           }
           this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
         
-          this.geolocation.watchPosition().subscribe((position => {
-            new google.maps.Marker({
+          this.geolocation.watchPosition({enableHighAccuracy: true}).subscribe((position => {
+            if (currentMarker != null) {
+                currentMarker.setMap(null);
+            }
+            currentMarker = new google.maps.Marker({
               map: this.map,
               position: new google.maps.LatLng(position.coords.latitude,position.coords.longitude), 
               icon: 'assets/imgs/pins/redpin.png' 
