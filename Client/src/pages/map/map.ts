@@ -35,10 +35,9 @@ export class MapPage {
     loadMap() {
       //https://stackoverflow.com/questions/14586916/google-maps-directions-from-users-geo-location Bra att kolla igenom
       if (navigator.geolocation) {
-        this.geolocation.getCurrentPosition().then((position) => {
-          let latLng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+        this.geolocation.getCurrentPosition({}).then((position) => {
           let mapOptions = {
-            center: latLng,
+            center: new google.maps.LatLng(position.coords.latitude,position.coords.longitude),
             zoom: 15,
             mapTypeId: google.maps.MapTypeId.ROADMAP
           }
@@ -48,20 +47,14 @@ export class MapPage {
             if (currentMarker != null) {
                 currentMarker.setMap(null);
             }
+            var userPosition = new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
             currentMarker = new google.maps.Marker({
               map: this.map,
-              position: new google.maps.LatLng(position.coords.latitude,position.coords.longitude), 
+              position: userPosition, 
               icon: 'assets/imgs/pins/redpin.png' 
             })
+            this.map.center = userPosition;
           }));
-
-          //Röd pin som visar användarens position på kartan
-          /*var myPositionMarker = new google.maps.Marker({
-            map: this.map,
-            position: latLng, 
-            icon: 'assets/imgs/pins/redpin.png' 
-          })
-          */
           this.placePins();
       },(err) => {
         let alert = this.alert.create({
