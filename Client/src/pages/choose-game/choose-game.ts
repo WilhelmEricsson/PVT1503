@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { QuestionViewPage } from '../question-view/question-view';
 
 /**
- * Generated class for the AchievmentPage page.
+ * Generated class for the ChooseGamePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,17 +11,24 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-achievment',
-  templateUrl: 'achievment.html',
+  selector: 'page-choose-game',
+  templateUrl: 'choose-game.html',
 })
-export class AchievmentPage {
-
+export class ChooseGamePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AchievmentPage');
+    console.log('ionViewDidLoad ChooseGamePage');
+  }
+
+  InformationController(){
+
+  }
+
+  QuestionController(){
+    this.navCtrl.push(QuestionViewPage);
   }
 
 }

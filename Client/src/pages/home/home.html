@@ -11,8 +11,13 @@
 </ion-header>
 
 <ion-content padding class="no-scroll">
+
+  <button ion-button (click) = "getData()">Get Weather</button>
+  <ion-row >{{result}}</ion-row>
   
     <ion-grid>
+
+       
       <ion-row>
         <ion-col>
             <div class="lamp" text-center>
@@ -20,18 +25,25 @@
                <img src="assets/imgs/lampa.jpg" (click)="MapController()">
               </div>
         </ion-col>
+     
+     </ion-row>
+    
+     <ion-row>
+        <ion-col>
+          <button ion-button round large item-start color="yellow" full=true (click)="AchievmentController()">Achievement</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button round large item-start color="yellow" full=true (click)="DailyRoutesController()">Daily Routes</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button round large color="yellow" full=true (click)="lightpostController()" [disabled]="connected">Interact With Lightpost</button>
+        </ion-col>
+        <ion-col>
+          
+        </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col>
-          <button ion-button round large item-start color="yellow"(click)="AchievmentController()" full=true>Achievement</button>
-        </ion-col>
-        <ion-col>
-          <button ion-button round large item-start color="yellow" full=true (click)= "DailyRoutesController()">Daily Routes</button>
-        </ion-col>
-        <ion-col>
-          <button ion-button full (click)="showNotification()" >Test!</button>
-        </ion-col>
-      </ion-row>
+
+
     </ion-grid>
 
 </ion-content>
