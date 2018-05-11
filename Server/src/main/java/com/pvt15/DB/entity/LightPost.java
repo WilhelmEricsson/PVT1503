@@ -10,7 +10,9 @@ public class LightPost {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     private int numOfUsersPresent;
+
     private Color colorOfLight;
 
     @OneToOne(cascade = CascadeType.ALL)
