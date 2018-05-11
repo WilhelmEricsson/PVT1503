@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { CreateAccountPage } from '../create-account/create-account';
 import { EmailSignInPage } from '../email-sign-in/email-sign-in';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { Facebook } from '@ionic-native/facebook';
 import { LoadingController, ToastController} from 'ionic-angular';
 import { SignupPage } from "../signup/signup";
 import {AuthProvider} from "../../providers/auth/auth";
