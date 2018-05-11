@@ -1,20 +1,22 @@
 package com.pvt15.DB.entity;
 
+
 import javax.persistence.*;
-import java.awt.*;
+
 
 @Entity
 @Table(name = "Light_posts")
 public class LightPost {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    private int numOfUsersPresent;
-    private Color colorOfLight;
+    private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "light_post_locations_id")
+    @Column(nullable = true)
+    private int numOfUsersPresent;
+    @Column(nullable = true)
+    private String colorOfLight;
+
+    @OneToOne(cascade = CascadeType.ALL,targetEntity = LightPostLocations.class)
     private LightPostLocations location;
 
     //------------------------Constructor-----------------------
@@ -23,10 +25,11 @@ public class LightPost {
 
     //------------------------Methods---------------------------
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(int id) {
+
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -38,11 +41,11 @@ public class LightPost {
         this.numOfUsersPresent = numOfUsersPresent;
     }
 
-    public Color getColorOfLight() {
+    public String getColorOfLight() {
         return colorOfLight;
     }
 
-    public void setColorOfLight(Color colorOfLight) {
+    public void setColorOfLight(String colorOfLight) {
         this.colorOfLight = colorOfLight;
     }
 
@@ -52,6 +55,11 @@ public class LightPost {
 
     public void setLocation(LightPostLocations location) {
         this.location = location;
+    }
+
+    @Override
+    public String toString(){
+        return "Id: " + id + " Num Of People Present: " + numOfUsersPresent + " Lamp Cclor: " + colorOfLight + " Location " + location.toString();
     }
 
 }

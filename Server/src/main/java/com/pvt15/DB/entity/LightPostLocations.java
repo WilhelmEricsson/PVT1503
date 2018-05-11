@@ -1,9 +1,6 @@
 package com.pvt15.DB.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -11,11 +8,16 @@ import java.io.Serializable;
 public class LightPostLocations implements Serializable {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(nullable = true)
     private String geoLocationLang;
+    @Column(nullable = true)
     private String geoLocationLat;
 
-    @OneToOne(mappedBy = "location")
+    @OneToOne
+    @PrimaryKeyJoinColumn
     private LightPost lightPost;
 
     //------------------------Constructor-----------------------
@@ -24,11 +26,11 @@ public class LightPostLocations implements Serializable {
 
     //------------------------Methods---------------------------
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -53,6 +55,11 @@ public class LightPostLocations implements Serializable {
 
     public void setGeoLocationLat(String geoLocationLat) {
         this.geoLocationLat = geoLocationLat;
+    }
+
+    @Override
+    public String toString(){
+        return "Id " + id + " GeoLang " + geoLocationLang + " GeoLat " + geoLocationLat;
     }
 
 

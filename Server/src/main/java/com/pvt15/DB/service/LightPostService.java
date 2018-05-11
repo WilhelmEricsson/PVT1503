@@ -1,5 +1,6 @@
 package com.pvt15.DB.service;
 
+import com.pvt15.DB.entity.LightPost;
 import com.pvt15.DB.entity.LightPostLocations;
 import com.pvt15.DB.repository.LightPostLocationRepository;
 import com.pvt15.DB.repository.LightPostRepository;
@@ -25,5 +26,12 @@ public class LightPostService {
         return lightPostLocationsRepository.findAll();
 
     }
+    public Iterable<LightPost> getAllLightPosts() {
+        return lightPostRepository.findAll();
+    }
+    public void addNewLightPost(LightPost lightPost) {
+        lightPostRepository.save(lightPost);
+    }
+
 
 }
