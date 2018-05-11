@@ -1,9 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
-
-import { HomePage } from '../home/home';
-import { QuestionViewPage } from '../question-view/question-view';
 import { ChooseGamePage } from '../choose-game/choose-game';
 
 /**
@@ -34,18 +31,17 @@ export class MapPage {
     this.loadMap();
   }
             
-    loadMap() {
-      //https://stackoverflow.com/questions/14586916/google-maps-directions-from-users-geo-location Bra att kolla igenom
-      if (navigator.geolocation) {
-        this.geolocation.getCurrentPosition({}).then((position) => {
-          let mapOptions = {
-            center: new google.maps.LatLng(position.coords.latitude,position.coords.longitude),
-            zoom: 15,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          }
-          this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-        
-          this.placePins();
+  loadMap() {
+    //https://stackoverflow.com/questions/14586916/google-maps-directions-from-users-geo-location Bra att kolla igenom
+    if (navigator.geolocation) {
+      this.geolocation.getCurrentPosition({}).then((position) => {
+        let mapOptions = {
+          center: new google.maps.LatLng(position.coords.latitude,position.coords.longitude),
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+        this.placePins();
       },(err) => {
         let alert = this.alert.create({
           title: err.message,
@@ -55,8 +51,7 @@ export class MapPage {
         console.log(err);
       });
     } 
-   
-    }
+   }
 
   toggleGPS() {
     if (gpsEnabled) {
