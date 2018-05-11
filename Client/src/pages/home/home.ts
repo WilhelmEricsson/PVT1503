@@ -1,5 +1,5 @@
 import { Component, state } from '@angular/core';
-import { NavController, AlertController, Platform, Alert } from 'ionic-angular';
+import { NavController, AlertController, Platform } from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { NewGamePage } from '../new-game/new-game';
 import { AchievmentPage } from '../achievment/achievment';
@@ -38,19 +38,6 @@ export class HomePage {
       }
     });
     /**test */
-
-    /*   this.platform.ready().then((ready) => {
-         this.localNotification.on('click', (notification, state) => {
-          let json = JSON.parse(notification.data);
-          let alert = this.alertCtrl.create({
-            title: notification.title,
-            subTitle: json.mydata
-          });
-          alert.present();
-         });
-       });
-       */
-
   }
 
   AchievmentController() {
