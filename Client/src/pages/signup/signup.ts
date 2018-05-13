@@ -5,9 +5,8 @@ import {LoadingController, ToastController} from 'ionic-angular';
 import {NgModel} from "@angular/forms";
 import {AuthProvider} from "../../providers/auth/auth";
 import {finalize} from 'rxjs/operators';
-
 /**
- * Generated class for the CreateAccountPage page.
+ * Generated class for the SignupPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -15,10 +14,10 @@ import {finalize} from 'rxjs/operators';
 
 @IonicPage()
 @Component({
-  selector: 'page-create-account',
-  templateUrl: 'create-account.html',
+  selector: 'page-signup',
+  templateUrl: 'signup.html',
 })
-export class CreateAccountPage {
+export class SignupPage {
 
   @ViewChild('username')
   usernameModel: NgModel;

@@ -1,25 +1,28 @@
 package com.pvt15.security.entity;
 
-
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+
+import javax.persistence.*;
+
+import javax.persistence.*;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
+    @Column(length = 100)
     private String username;
 
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
     //--------------------------Constructor------------------------
     public User(){
-
     }
     //--------------------------Methods----------------------------
 

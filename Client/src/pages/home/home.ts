@@ -1,15 +1,22 @@
 import { Component, state } from '@angular/core';
 import { NavController, AlertController, Platform, Alert} from 'ionic-angular';
+
 import { MapPage } from '../map/map';
 import { NewGamePage } from '../new-game/new-game';
-import {AchievmentPage} from '../achievment/achievment';
-import {DailyRoutesPage}from '../daily-routes/daily-routes';
+import { AchievmentPage } from '../achievment/achievment';
+import { DailyRoutesPage } from '../daily-routes/daily-routes';
+
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { SERVER_URL } from "../../config";
+import { AuthProvider } from "../../providers/auth/auth";
+import { HttpClient } from "@angular/common/http";
+import { SocialSharing } from "@ionic-native/social-sharing";
 
 import { LocalNotifications } from '@ionic-native/local-notifications'
 import { PhonegapLocalNotification } from "@ionic-native/phonegap-local-notification";
 import { Push, PushObject, PushOptions} from '@ionic-native/push'
 
-import { HttpClient } from "@angular/common/http";
+
 import { Observable } from "rxjs/Observable";
 
 
@@ -24,39 +31,39 @@ export class HomePage {
       result: any = [];
       data: Observable<any>;
 
-  
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private platform: Platform, private localNotification: LocalNotifications, private notiPhoneGap: PhonegapLocalNotification, public http: HttpClient) {
- 
-     
-    /*   this.platform.ready().then((ready) => {
-      this.localNotification.on('click', (notification, state) => {
-       let json = JSON.parse(notification.data);
+  user: string;
+  message: string;
 
-       let alert = this.alertCtrl.create({
-         title: notification.title,
-         subTitle: json.mydata
-       });
-       alert.present();
-      });
+  constructor(private socialSharing: SocialSharing, public navCtrl: NavController, public alertCtrl: AlertController, private platform: Platform,
+    private readonly authProvider: AuthProvider,
+    jwtHelper: JwtHelperService,
+    private  httpClient: HttpClient) {
+    /**test */
+    this.authProvider.authUser.subscribe(jwt => {
+      if (jwt) {
+        const decoded = jwtHelper.decodeToken(jwt);
+        this.user = decoded.sub
+      }
+      else {
+        this.user = null;
+      }
     });
-    */
-
-
   }
  
   
   getData(){
     var url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.178/lat/59.211/data.json`;  
-    this.data = this.http.get(url);
+    this.data = this.httpClient.get(url);
     this.data.subscribe(data=>{
-      this.result = JSON.stringify(data.timeSeries[15].parameters[0].values[0], null, 2)
-    })
-  }
-  AchievmentController(){
+      this.result = JSON.stringify(data.timeSeries[0].parameters[11].values[0], null, 2)
+        })
+      }
+
+  AchievmentController() {
     this.navCtrl.push(AchievmentPage)
   }
 
-  DailyRoutesController(){
+  DailyRoutesController() {
     this.navCtrl.push(DailyRoutesPage)
   }
 
@@ -75,6 +82,7 @@ export class HomePage {
     testNot.onclick = function(){
       console.log('test');
     };
+  }
 
    /* this.localNotification.schedule({
       id: 1,
@@ -83,6 +91,20 @@ export class HomePage {
       trigger: {at: new Date(new Date().getTime() + 3000)},
       data: { mydata: 'Test3'}
     });*/
+  ShareController() {
+    this.socialSharing.share("test2", null, "https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg", null);
   }
+  /**test */
+  ionViewWillEnter() {
+    this.httpClient.get(`${SERVER_URL}/secret`, { responseType: 'text' }).subscribe(
+      text => this.message = text,
+      err => console.log(err)
+    );
+  }
+
+  logout() {
+    this.authProvider.logout();
+  }
+  /**test */
 
 }

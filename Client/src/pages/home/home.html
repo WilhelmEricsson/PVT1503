@@ -5,6 +5,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
   
+      <ion-buttons end>
+          <button ion-button icon-only (click)="logout()">
+            <ion-icon name="exit"></ion-icon>
+          </button>
+        </ion-buttons>
 
     <ion-title>Stockholm Light Quiz</ion-title>
   </ion-navbar>
@@ -20,9 +25,8 @@
        
       <ion-row>
         <ion-col>
-            <div class="lamp" text-center>
-               <!-- <img src="assets/imgs/lampa.jpg" (click)="NewGameController()">-->
-               <img src="assets/imgs/lampa.jpg" (click)="MapController()">
+            <div text-center>
+               <img class="lamp" src="assets/imgs/lampav2.png" (click)="MapController()">
               </div>
         </ion-col>
      
@@ -30,16 +34,13 @@
     
      <ion-row>
         <ion-col>
-          <button ion-button round large item-start color="yellow" full=true (click)="AchievmentController()">Achievement</button>
+          <button ion-button round large item-start color="dark" full=true (click)="AchievmentController()">Achievement</button>
         </ion-col>
         <ion-col>
-          <button ion-button round large item-start color="yellow" full=true (click)="DailyRoutesController()">Daily Routes</button>
+          <button ion-button round large item-start color="dark" full=true (click)="DailyRoutesController()">Daily Routes</button>
         </ion-col>
         <ion-col>
-          <button ion-button round large color="yellow" full=true (click)="lightpostController()" [disabled]="connected">Interact With Lightpost</button>
-        </ion-col>
-        <ion-col>
-          
+          <button ion-button round large item-start color="dark" full=true (click)="ShareController()">Facebook share test</button>
         </ion-col>
       </ion-row>
 

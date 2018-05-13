@@ -6,7 +6,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import {HttpClientModule} from "@angular/common/http";
+
 
 //Pages
 import { MyApp } from './app.component';
@@ -26,14 +26,41 @@ import { AchievmentPage} from '../pages/achievment/achievment';
 import { DailyRoutesPage} from '../pages/daily-routes/daily-routes';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ChooseGamePage } from "../pages/choose-game/choose-game";
+import { SignupPage } from "../pages/signup/signup";
 
 
 //Notifications
 import { LocalNotifications } from '@ionic-native/local-notifications'
 
+//SocialSharing
+import { SocialSharing } from '@ionic-native/social-sharing'
+
 //Component
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
+
+//CustomForms
+import {CustomFormsModule} from 'ng2-validation';
+
+//Storage
+import {Storage, IonicStorageModule} from "@ionic/storage";
+
+//AuthProvider
+import { AuthProvider } from "../providers/auth/auth";
+
+//HttpClientModule
+import {HttpClientModule} from "@angular/common/http";
+
+//JWTOptions
+import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
+
+//Whitelisted URL's for authentication header
+export function jwtOptionsFactory(storage:Storage){
+  return{
+    tokenGetter: ()=>storage.get('jwt_token'),
+    whitelistedDomains: ['localhost:8080']
+  }
+}
 
 
 @NgModule({
@@ -54,12 +81,21 @@ import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notifica
     DailyRoutesPage,
     ProgressBarComponent,
     ChooseGamePage,
+    SignupPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
-  
+    HttpClientModule,
+    JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptionsFactory,
+        deps: [Storage]
+      }
+    }),
+  IonicStorageModule.forRoot(),
+  CustomFormsModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -79,6 +115,7 @@ import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notifica
     AchievmentPage,
     DailyRoutesPage,
     ChooseGamePage,
+    SignupPage,
   ],
   providers: [
     StatusBar,
@@ -87,7 +124,9 @@ import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notifica
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Facebook,
     Geolocation,
-    PhonegapLocalNotification
+    PhonegapLocalNotification,
+    AuthProvider, 
+    SocialSharing
   ]
 })
 export class AppModule {}
