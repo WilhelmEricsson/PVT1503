@@ -12,6 +12,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { ChooseGamePage } from '../pages/choose-game/choose-game';
 import { Facebook } from '@ionic-native/facebook';
 import {AuthProvider} from "../providers/auth/auth";
+import {InformationPage} from '../pages/information/information'
 
 
 @Component({
