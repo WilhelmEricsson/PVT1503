@@ -22,7 +22,12 @@ public class LightPost {
     //------------------------Constructor-----------------------
     public LightPost(){
     }
+    public LightPost(int numOfUsersPresent,  String colorOfLight, LightPostLocations location){
+        this.numOfUsersPresent = numOfUsersPresent;
+        this.colorOfLight = colorOfLight;
+        this.location = location;
 
+    }
     //------------------------Methods---------------------------
 
     public Long getId() {
