@@ -77,6 +77,18 @@ export class MapPage {
   ChooseGameController(){
     this.navCtrl.push(ChooseGamePage);
   }
+  
+    myRandom: number;
+
+    ionViewDidEnter() {
+       this.myRandom=this.randomNumber();
+      }
+    
+     randomNumber(): number {
+       let randomNumber = Math.floor(Math.random()*4000)+1;
+       return randomNumber;       
+     }      
+     
 
   placePins() {
     var marker1 = new google.maps.Marker({
