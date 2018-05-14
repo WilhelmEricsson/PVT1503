@@ -23,6 +23,10 @@ public class LightPostLocations implements Serializable {
     //------------------------Constructor-----------------------
     public LightPostLocations(){
     }
+    public LightPostLocations(String geoLocationLat, String geoLocationLang){
+        this.geoLocationLang = geoLocationLang;
+        this.geoLocationLat = geoLocationLat;
+    }
 
     //------------------------Methods---------------------------
 
