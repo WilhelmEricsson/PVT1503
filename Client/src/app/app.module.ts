@@ -51,6 +51,7 @@ import {HttpClientModule} from "@angular/common/http";
 
 //JWTOptions
 import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
+import { LightPostProvider } from '../providers/light-post/light-post';
 
 //Whitelisted URL's for authentication header
 export function jwtOptionsFactory(storage:Storage){
@@ -123,7 +124,8 @@ export function jwtOptionsFactory(storage:Storage){
     Facebook,
     Geolocation,
     AuthProvider,
-    SocialSharing
+    SocialSharing,
+    LightPostProvider
   ]
 })
 export class AppModule {}
