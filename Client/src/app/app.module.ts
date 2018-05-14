@@ -45,13 +45,15 @@ import {Storage, IonicStorageModule} from "@ionic/storage";
 
 //AuthProvider
 import { AuthProvider } from "../providers/auth/auth";
+//LightPostProvider
+import {LightPostProvider} from "../providers/light-post/light-post";
 
 //HttpClientModule
 import {HttpClientModule} from "@angular/common/http";
 
 //JWTOptions
 import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
-import { LightPostProvider } from '../providers/light-post/light-post';
+
 
 //Whitelisted URL's for authentication header
 export function jwtOptionsFactory(storage:Storage){
@@ -107,7 +109,7 @@ export function jwtOptionsFactory(storage:Storage){
     AddFriendsPage,
     PlayFriendsPage,
     CreateAccountPage,
-    EmailSignInPage, 
+    EmailSignInPage,
     NotificationsPage,
     EmailSignInPage,
     MyProfilePage,
