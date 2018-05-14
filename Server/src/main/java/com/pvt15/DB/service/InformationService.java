@@ -1,16 +1,16 @@
 package com.pvt15.DB.service;
 
-import com.pvt15.DB.repository.QuestionRepository;
+import com.pvt15.DB.repository.InformationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class QuestionService {
+public class InformationService {
     @Autowired
-    private QuestionRepository questionRepository;
+    private InformationRepository informationRepository;
 
     //--------------------Constructor-------------------------
-    public QuestionService() {
+    public InformationService() {
 
     }
 
