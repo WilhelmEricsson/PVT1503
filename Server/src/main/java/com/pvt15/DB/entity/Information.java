@@ -11,8 +11,9 @@ public class Information {
 	private Integer id;
 
 	private String name;
-	private String information;
 
+	@Column(length = 500)
+	private String information;
 	
 	//--------------------Constructor-------------------------
 	public Information(){
