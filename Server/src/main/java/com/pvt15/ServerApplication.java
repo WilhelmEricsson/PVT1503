@@ -1,8 +1,14 @@
 package com.pvt15;
 
 
+import com.pvt15.DB.entity.Information;
+import com.pvt15.DB.entity.LightPost;
+import com.pvt15.DB.entity.LightPostLocations;
+import com.pvt15.DB.repository.InformationRepository;
+import com.pvt15.DB.repository.LightPostRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,6 +26,7 @@ public class ServerApplication {
 
 		SpringApplication.run(ServerApplication.class, args);
 
+
 	}
 
 	@Bean
@@ -28,5 +35,31 @@ public class ServerApplication {
 	}
 
 
-	
+	@Bean
+	CommandLineRunner initData(InformationRepository informationRepository, LightPostRepository lightPostRepository) {
+		return args -> {
+			createInformation(informationRepository);
+			createLightPost(lightPostRepository);
+		};
+	}
+	private void createInformation(InformationRepository informationRepository){
+		informationRepository.save(new Information("Gamla stan", " Detta handlar egentligen om gamla stan! Learn how to efficiently build and implement microservices in Spring,\n" +
+				"and how to use Docker and Mesos to push the boundaries. Examine a number of real-world use cases and hands-on code examples.\n" +
+				"Distribute your microservices in a completely new way"));
+		informationRepository.save(new Information("Kungliga slottet", "Detta handlar egentligen om slottet! A no-nonsense guide containing case studies and best practise for Spring Boot"));
+	}
+
+	private void createLightPost(LightPostRepository lightPostRepository){
+		//StOchDraken
+		lightPostRepository.save(new LightPost(0,"FFFF", new LightPostLocations("59.325065", "18.073701")));
+
+		//Stortorget
+		lightPostRepository.save(new LightPost(0,"0000", new LightPostLocations("59.324956", "18.070806")));
+
+		//Lilla nygatan 5
+		lightPostRepository.save(new LightPost(0,"F0F0", new LightPostLocations("59.324368", "18.067855")));
+
+		//Riddarholmen
+		lightPostRepository.save(new LightPost(0,"AAAA", new LightPostLocations("59.324752", "18.063964")));
+	}
 }

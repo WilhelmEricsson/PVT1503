@@ -4,11 +4,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class QuestionTest {
+public class InformationTest {
 
     @Test
     public void getId() {
-        Question testQuest = new Question("HEJ","TEST", new String[]{"TEST","TEST"});
+        Information testQuest = new Information("HEJ","TEST");
         boolean idIsNull = false;
         try{
               testQuest.getId();

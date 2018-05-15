@@ -6,6 +6,12 @@ import { HomePage } from '../home/home';
 import { QuestionViewPage } from '../question-view/question-view';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs'
 import { ChooseGamePage } from '../choose-game/choose-game';
+import {LightPostProvider} from "../../providers/light-post/light-post";
+import {JsonContainer} from "postcss";
+import {Jsonp} from "@angular/http";
+
+
+
 
 /**
  * Generated class for the MapPage page.
@@ -15,9 +21,11 @@ import { ChooseGamePage } from '../choose-game/choose-game';
  */
 
 declare var google;
+
 var currentMarker;
 let gpsEnabled: boolean = false;
 var gpsEvent;
+
 
 @IonicPage()
 @Component({
@@ -28,34 +36,35 @@ export class MapPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation, private alert: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public geolocation: Geolocation, private alert: AlertController,
+              private lightPostProvider: LightPostProvider) {
+    this.getLightPosts();
+
+  }
+
+  getLightPosts(){
+    this.lightPostProvider.getLightPosts().subscribe(data => console.log(data));
+
   }
 
   ionViewDidLoad(){
     this.loadMap();
   }
             
-    loadMap() {
-      //https://stackoverflow.com/questions/14586916/google-maps-directions-from-users-geo-location Bra att kolla igenom
-      if (navigator.geolocation) {
-        this.geolocation.getCurrentPosition({}).then((position) => {
-          let mapOptions = {
-            center: new google.maps.LatLng(position.coords.latitude,position.coords.longitude),
-            zoom: 15,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          }
-          this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-        
-          //Röd pin som visar användarens position på kartan
-          var myPositionMarker = new google.maps.Marker({
-            map: this.map,
-            position: mapOptions, 
-            icon: 'assets/imgs/pins/redpin.png',
-            enableHighAccuracy:true
-          })
-        
-      
-          this.placePins();
+    
+
+  loadMap() {
+    //https://stackoverflow.com/questions/14586916/google-maps-directions-from-users-geo-location Bra att kolla igenom
+    if (navigator.geolocation) {
+      this.geolocation.getCurrentPosition({}).then((position) => {
+        let mapOptions = {
+          center: new google.maps.LatLng(position.coords.latitude,position.coords.longitude),
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+        this.placePins();
       },(err) => {
         let alert = this.alert.create({
           title: err.message,
@@ -65,10 +74,10 @@ export class MapPage {
         console.log(err);
       });
     } 
-   
-    }
+  }
+    
 
-  toggleGPS() {
+  toggleGPS(){
     if (gpsEnabled) {
       currentMarker.setMap(null);
       gpsEvent.unsubscribe();
@@ -81,7 +90,7 @@ export class MapPage {
         var userPosition = new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
         currentMarker = new google.maps.Marker({
           map: this.map,
-          position: userPosition 
+          position: userPosition
         })
         this.map.panTo(userPosition);
       }));
@@ -93,19 +102,34 @@ export class MapPage {
     this.navCtrl.push(ChooseGamePage);
   }
 
-  placePins() {
+    myRandom: number;
+
+    ionViewDidEnter() {
+       this.myRandom=this.randomNumber();
+      }
+
+     randomNumber(): number {
+       let randomNumber = Math.floor(Math.random()*4000)+1;
+       return randomNumber;
+     }
+    placePins(){
     var marker1 = new google.maps.Marker({
       position: (new google.maps.LatLng(59.3293, 18.0686)), map: this.map, icon: "assets/imgs/lyktstolpar/lila2.png"
-    })
+    });
 
     var info = new google.maps.InfoWindow({
       content: document.getElementById("infoStolpe1")
     });
-    
+
     marker1.addListener('click', function() {
        info.open(Map, marker1);
     });
   }
 
 
-}
+
+
+} 
+
+
+
