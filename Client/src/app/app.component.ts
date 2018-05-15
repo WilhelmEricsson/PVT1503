@@ -71,6 +71,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+    this.loadAllLightposts();
   }
 
   logOut(){
@@ -86,27 +87,37 @@ export class MyApp {
     });
   }
 
+  //Hör borde alla lighposts hämtas från databasen och läggas i listan
+  loadAllLightposts() {
+    var mark = new CustomMarker(59.3293, 18.0686);
+    this.dailyRoutesProvider.addMarker(mark);
+  }
+
   simulateBluetooth() {
     var mark = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
-    this.dailyRoutesProvider.addDailyMarker(mark);
-    this.MyProvider.tapEvent()
-    this.localNotification.requestPermission();
-    this.localNotification.hasPermission().then(res => {
-      console.log(res);
-      if (res) {
-        this.localNotification.schedule({
-          id: 1,
-          title: "Test",
-          text: 'Test1',
-        });
-      } else {
-        let alert = this.alert.create({
-          title: "Notifications not allowed",
-          buttons: ['Dismiss']
+    if (!mark.visited) {
+      this.dailyRoutesProvider.addDailyMarker(mark);
+      this.MyProvider.tapEvent()
+      this.localNotification.requestPermission();
+      this.localNotification.hasPermission().then(res => {
+        console.log(res);
+        if (res) {
+          this.localNotification.schedule({
+            id: 1,
+            title: "Test",
+            text: 'Test1',
           });
-          alert.present();
-      }
-    })
+        } else {
+          let alert = this.alert.create({
+            title: "Notifications not allowed",
+            buttons: ['Dismiss']
+            });
+            alert.present();
+        }
+      })
+    } else {
+      console.log("test");
+    }
   }
 
   openPage(page) {

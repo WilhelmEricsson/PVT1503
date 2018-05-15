@@ -9,6 +9,8 @@ import { SERVER_URL } from "../../config";
 import { AuthProvider } from "../../providers/auth/auth";
 import { HttpClient } from "@angular/common/http";
 import { SocialSharing } from "@ionic-native/social-sharing";
+import { DailyRoutesProvider } from '../../providers/daily-routes/daily-routes';
+import { CustomMarker } from '../../providers/CustomMarker';
 
 @Component({
   selector: 'page-home',
@@ -25,7 +27,7 @@ export class HomePage {
   constructor(private socialSharing: SocialSharing, public navCtrl: NavController, public alertCtrl: AlertController, private platform: Platform,
     private readonly authProvider: AuthProvider,
     jwtHelper: JwtHelperService,
-    private readonly httpClient: HttpClient) {
+    private readonly httpClient: HttpClient, private dailyRoutesProvider: DailyRoutesProvider) {
     
     this.authProvider.authUser.subscribe(jwt => {
       if (jwt) {
@@ -36,8 +38,9 @@ export class HomePage {
         this.user = null;
       }
     });
-    
   }
+
+  
 
   AchievmentController() {
     this.navCtrl.push(AchievmentPage)
