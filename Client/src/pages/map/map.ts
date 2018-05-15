@@ -24,6 +24,7 @@ declare var google;
 var currentMarker;
 let gpsEnabled: boolean = false;
 var gpsEvent;
+var lightposts: any[] = [];
 
 
 @IonicPage()
@@ -45,10 +46,13 @@ export class MapPage {
   }
 
   getLightPosts(){
-    this.lightPostProvider.getLightPosts().subscribe(data => console.log(data));
-
-
-
+    this.lightPostProvider.getLightPosts().subscribe(data => {
+      for (let l of data) {
+        console.log(l.location.geoLocationLang);
+        var mark = new CustomMarker(l.location.geoLocationLat, l.location.geoLocationLang);
+        this.dailyRoutesProvider.addMarker(mark);
+      }
+    }); 
   }
 
   ionViewDidLoad(){
