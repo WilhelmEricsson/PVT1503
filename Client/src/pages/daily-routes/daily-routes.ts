@@ -37,7 +37,7 @@ export class DailyRoutesPage {
   }
 
   loadMarkers() {
-    var list = this.dailyRoutesProvider.getMarkers();
+    var list = this.dailyRoutesProvider.getDailylMarkers();
     for (let m of list) {
       var mark = <CustomMarker> m;
       var marker = new google.maps.Marker({
@@ -45,5 +45,13 @@ export class DailyRoutesPage {
       })
     }
   }  
+
+  clearMarkers() {
+    
+  }
+
+  shareMarkers() {
+
+  }
 
 }

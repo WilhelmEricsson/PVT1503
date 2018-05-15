@@ -11,7 +11,9 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { ChooseGamePage } from '../pages/choose-game/choose-game';
 import { Facebook } from '@ionic-native/facebook';
 import {AuthProvider} from "../providers/auth/auth";
-import {InformationPage} from '../pages/information/information';
+import {InformationPage} from '../pages/information/information'
+import { DailyRoutesProvider } from '../providers/daily-routes/daily-routes';
+import { CustomMarker } from '../providers/CustomMarker';
 import { MyProvider } from "../providers/my/my";
 
 
@@ -26,7 +28,8 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController) {
+  
+  constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController) {
     this.initializeApp();
     this.platform.ready().then(() => {
       this.localNotification.on("click").subscribe(noti => {
@@ -84,6 +87,8 @@ export class MyApp {
   }
 
   simulateBluetooth() {
+    var mark = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
+    this.dailyRoutesProvider.addDailyMarker(mark);
     this.MyProvider.tapEvent()
     this.localNotification.requestPermission();
     this.localNotification.hasPermission().then(res => {
