@@ -21,7 +21,6 @@ import { Facebook } from '@ionic-native/facebook';
 import { AchievmentPage} from '../pages/achievment/achievment';
 import { DailyRoutesPage} from '../pages/daily-routes/daily-routes';
 import { Geolocation } from '@ionic-native/geolocation';
-import { ChooseGamePage } from "../pages/choose-game/choose-game";
 import { SignupPage } from "../pages/signup/signup";
 import { InformationPage } from '../pages/information/information';
 
@@ -81,7 +80,6 @@ export function jwtOptionsFactory(storage:Storage){
     AchievmentPage,
     DailyRoutesPage,
     ProgressBarComponent,
-    ChooseGamePage,
     SignupPage,
     InformationPage
   ],
@@ -113,7 +111,6 @@ export function jwtOptionsFactory(storage:Storage){
     MyProfilePage,
     AchievmentPage,
     DailyRoutesPage,
-    ChooseGamePage,
     SignupPage,
     InformationPage
   ],

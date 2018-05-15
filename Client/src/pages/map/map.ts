@@ -1,13 +1,10 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
-import { ChooseGamePage } from '../choose-game/choose-game';
 import { DailyRoutesProvider } from '../../providers/daily-routes/daily-routes';
-import { CustomFormsModule } from 'ng2-validation';
 import { CustomMarker } from '../../providers/CustomMarker';
 import {LightPostProvider} from "../../providers/light-post/light-post";
-import {JsonContainer} from "postcss";
-import {Jsonp} from "@angular/http";
+
 
 
 
@@ -88,9 +85,6 @@ export class MapPage {
     }
   }
 
-  ChooseGameController(){
-    this.navCtrl.push(ChooseGamePage);
-  }
 
     myRandom: number;
 
