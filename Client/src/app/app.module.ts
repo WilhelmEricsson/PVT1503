@@ -53,6 +53,8 @@ import {HttpClientModule} from "@angular/common/http";
 
 //JWTOptions
 import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
+import { MyProvider } from '../providers/my/my';
+
 import { DailyRoutesProvider } from '../providers/daily-routes/daily-routes';
 
 
@@ -129,6 +131,8 @@ export function jwtOptionsFactory(storage:Storage){
     Geolocation,
     AuthProvider,
     SocialSharing,
+    LightPostProvider,
+    MyProvider,
     DailyRoutesProvider,
     LightPostProvider
   ]
