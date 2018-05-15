@@ -27,8 +27,5 @@ export class ChooseGamePage {
 
   }
 
-  QuestionController(){
-    this.navCtrl.push(QuestionViewPage);
-  }
 
 }
