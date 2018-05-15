@@ -6,6 +6,9 @@ import { HomePage } from '../home/home';
 import { QuestionViewPage } from '../question-view/question-view';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs'
 import { ChooseGamePage } from '../choose-game/choose-game';
+import { DailyRoutesProvider } from '../../providers/daily-routes/daily-routes';
+import { CustomFormsModule } from 'ng2-validation';
+import { CustomMarker } from '../../providers/CustomMarker';
 import {LightPostProvider} from "../../providers/light-post/light-post";
 import {JsonContainer} from "postcss";
 import {Jsonp} from "@angular/http";
@@ -36,9 +39,12 @@ export class MapPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
+  
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public geolocation: Geolocation, private alert: AlertController,
-              private lightPostProvider: LightPostProvider) {
+              private lightPostProvider: LightPostProvider, private dailyRoutesProvider: DailyRoutesProvider) {
     this.getLightPosts();
 
   }
@@ -57,8 +63,9 @@ export class MapPage {
   loadMap() {
     //https://stackoverflow.com/questions/14586916/google-maps-directions-from-users-geo-location Bra att kolla igenom
     if (navigator.geolocation) {
+      var mapOptions;
       this.geolocation.getCurrentPosition({}).then((position) => {
-        let mapOptions = {
+        mapOptions = {
           center: new google.maps.LatLng(position.coords.latitude,position.coords.longitude),
           zoom: 15,
           mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -109,7 +116,7 @@ export class MapPage {
       }
 
      randomNumber(): number {
-       let randomNumber = Math.floor(Math.random()*4000)+1;
+       let randomNumber = Math.floor(Math.random()*4000) +1;
        return randomNumber;
      }
     placePins(){
@@ -124,6 +131,9 @@ export class MapPage {
     marker1.addListener('click', function() {
        info.open(Map, marker1);
     });
+
+    var mark = new CustomMarker(59.3293, 18.0686, "test");
+    this.dailyRoutesProvider.addToMarkers(mark);
   }
 
 

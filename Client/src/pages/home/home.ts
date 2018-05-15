@@ -3,7 +3,6 @@ import { NavController, AlertController, Platform, Alert} from 'ionic-angular';
 
 
 import { MapPage } from '../map/map';
-import { NewGamePage } from '../new-game/new-game';
 import { AchievmentPage } from '../achievment/achievment';
 import { DailyRoutesPage } from '../daily-routes/daily-routes';
 
@@ -32,6 +31,7 @@ export class HomePage {
       result: any = [];
       data: Observable<any>;
 
+  
   user: string;
   message: string;
 
@@ -40,6 +40,8 @@ export class HomePage {
     jwtHelper: JwtHelperService,
     private  httpClient: HttpClient) {
     /**test */
+    
+    
     this.authProvider.authUser.subscribe(jwt => {
       if (jwt) {
         const decoded = jwtHelper.decodeToken(jwt);
@@ -49,7 +51,7 @@ export class HomePage {
         this.user = null;
       }
     });
-    /**test */
+    
   }
  
   
@@ -69,9 +71,7 @@ export class HomePage {
     this.navCtrl.push(DailyRoutesPage)
   }
 
-  NewGameController() {
-    this.navCtrl.push(NewGamePage)
-  }
+ 
 
   MapController() {
     this.navCtrl.push(MapPage);
@@ -96,17 +96,6 @@ export class HomePage {
   ShareController() {
     this.socialSharing.share("test2", null, "https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg", null);
   }
-  /**test */
-  ionViewWillEnter() {
-    this.httpClient.get(`${SERVER_URL}/secret`, { responseType: 'text' }).subscribe(
-      text => this.message = text,
-      err => console.log(err)
-    );
-  }
-
-  logout() {
-    this.authProvider.logout();
-  }
-  /**test */
+  
 
 }
