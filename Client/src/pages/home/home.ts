@@ -1,7 +1,6 @@
 import { Component, state } from '@angular/core';
 import { NavController, AlertController, Platform } from 'ionic-angular';
 import { MapPage } from '../map/map';
-import { NewGamePage } from '../new-game/new-game';
 import { AchievmentPage } from '../achievment/achievment';
 import { DailyRoutesPage } from '../daily-routes/daily-routes';
 
@@ -46,10 +45,6 @@ export class HomePage {
 
   DailyRoutesController() {
     this.navCtrl.push(DailyRoutesPage)
-  }
-
-  NewGameController() {
-    this.navCtrl.push(NewGamePage)
   }
 
   MapController() {

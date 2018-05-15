@@ -35,7 +35,7 @@ export class MapPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
-  
+
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -47,6 +47,8 @@ export class MapPage {
 
   getLightPosts(){
     this.lightPostProvider.getLightPosts().subscribe(data => console.log(data));
+
+
 
   }
 
