@@ -75,11 +75,12 @@ export class MyApp {
         this.fb.logout()
         this.nav.setRoot(LoginPage);
       }
+      else{
+          this.authProvider.logout();
+          this.nav.setRoot(LoginPage);
+      }
     });
   }
-
-
-
 
   simulateBluetooth() {
     this.localNotification.requestPermission();
