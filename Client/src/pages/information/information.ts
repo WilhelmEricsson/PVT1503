@@ -10,7 +10,7 @@ import { InformationProvider } from '../../providers/information/information';
 })
 export class InformationPage {
 
-  information: any;
+  users: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public informationProvider: InformationProvider) {
     this.getInformation();
@@ -23,8 +23,8 @@ export class InformationPage {
   getInformation() {
     this.informationProvider.getInformation()
     .then(data => {
-      this.information = data;
-      console.log(this.information);
+      this.users = data;
+      console.log(this.users);
     });
   }
 

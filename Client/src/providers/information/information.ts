@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class InformationProvider {
 
-  apiUrl = 'https://localhost:8080';
+  apiUrl = 'http://localhost:8080';
 
   constructor(public http: HttpClient) {
     console.log('Hello InformationProvider Provider');
@@ -18,7 +18,7 @@ export class InformationProvider {
 
   getInformation() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl+'/public/information').subscribe(data => {
+      this.http.get(this.apiUrl+'/public/information/all').subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
