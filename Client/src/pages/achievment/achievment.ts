@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { MapPage } from '../map/map';
+import { AlertController } from "ionic-angular";
+import { MyApp } from '../../app/app.component';
+import { MyProvider } from "../../providers/my/my";
 
 /**
  * Generated class for the AchievmentPage page.
@@ -16,11 +20,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class AchievmentPage {
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+
+  constructor(public MyProvider: MyProvider, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AchievmentPage');
   }
+  
 
+ 
 }

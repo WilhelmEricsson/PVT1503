@@ -53,7 +53,10 @@ import {HttpClientModule} from "@angular/common/http";
 
 //JWTOptions
 import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
-import { InformationProvider } from '../providers/information/information';
+import { MyProvider } from '../providers/my/my';
+
+import { DailyRoutesProvider } from '../providers/daily-routes/daily-routes';
+
 
 
 //Whitelisted URL's for authentication header
@@ -83,7 +86,7 @@ export function jwtOptionsFactory(storage:Storage){
     DailyRoutesPage,
     ProgressBarComponent,
     ChooseGamePage,
-    SignupPage,
+    SignupPage
   ],
   imports: [
     BrowserModule,
@@ -129,7 +132,9 @@ export function jwtOptionsFactory(storage:Storage){
     AuthProvider,
     SocialSharing,
     LightPostProvider,
-    InformationProvider
+    MyProvider,
+    DailyRoutesProvider,
+    LightPostProvider
   ]
 })
 export class AppModule {}
