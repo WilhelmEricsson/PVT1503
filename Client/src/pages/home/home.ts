@@ -66,10 +66,6 @@ export class HomePage {
       err => console.log(err)
     );
   }
-
-  logout() {
-    this.authProvider.logout();
-  }
   /**test */
 
 }
