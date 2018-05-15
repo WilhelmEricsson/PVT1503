@@ -14,6 +14,7 @@ import { Facebook } from '@ionic-native/facebook';
 import {AuthProvider} from "../providers/auth/auth";
 import {InformationPage} from '../pages/information/information';
 import { MyProvider } from "../providers/my/my";
+import { RulesPage } from '../pages/rules/rules';
 
 
 
@@ -45,7 +46,10 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'Question View', component: QuestionViewPage },
       { title: 'Notifications', component: NotificationsPage },
-      { title: 'My profile', component: MyProfilePage },
+      { title: 'My profile', component: MyProfilePage }, 
+      { title: 'Rules', component: RulesPage },
+      
+
     ];
 
     //Subscribe to authentication token
