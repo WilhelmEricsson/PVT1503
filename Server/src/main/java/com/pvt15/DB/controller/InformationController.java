@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/information")
+@RequestMapping("/public/information")
 public class InformationController {
     @Autowired
     private InformationRepository informationRepository;

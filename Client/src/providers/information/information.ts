@@ -18,7 +18,7 @@ export class InformationProvider {
 
   getInformation() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl+'/information/all').subscribe(data => {
+      this.http.get(this.apiUrl+'/public/information').subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
