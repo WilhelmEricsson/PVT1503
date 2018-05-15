@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {LoadingController, ToastController} from 'ionic-angular';
 import {NgModel} from "@angular/forms";
 import {AuthProvider} from "../../providers/auth/auth";

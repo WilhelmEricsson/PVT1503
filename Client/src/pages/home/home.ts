@@ -1,6 +1,7 @@
 import { Component, state } from '@angular/core';
 import { NavController, AlertController, Platform, Alert} from 'ionic-angular';
 
+
 import { MapPage } from '../map/map';
 import { NewGamePage } from '../new-game/new-game';
 import { AchievmentPage } from '../achievment/achievment';
@@ -48,6 +49,7 @@ export class HomePage {
         this.user = null;
       }
     });
+    /**test */
   }
  
   
@@ -55,7 +57,7 @@ export class HomePage {
     var url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.178/lat/59.211/data.json`;  
     this.data = this.httpClient.get(url);
     this.data.subscribe(data=>{
-      this.result = JSON.stringify(data.timeSeries[0].parameters[11].values[0], null, 2)
+      this.result = JSON.stringify(data.timeSeries[0].parameters[11].values[0], null, 2);
         })
       }
 
