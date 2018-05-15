@@ -24,7 +24,6 @@ declare var google;
 var currentMarker;
 let gpsEnabled: boolean = false;
 var gpsEvent;
-var lightposts: any[] = [];
 
 
 @IonicPage()
@@ -36,22 +35,9 @@ export class MapPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
-
-
-
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public geolocation: Geolocation, private alert: AlertController,
               private lightPostProvider: LightPostProvider, private dailyRoutesProvider: DailyRoutesProvider) {
-    this.getLightPosts();
-  }
-
-  getLightPosts(){
-    this.lightPostProvider.getLightPosts().subscribe(data => {
-      for (let l of data) {
-        var mark = new CustomMarker(l.location.geoLocationLat, l.location.geoLocationLang);
-        this.dailyRoutesProvider.addMarker(mark);
-      }
-    }); 
   }
 
   ionViewDidLoad(){
@@ -117,7 +103,7 @@ export class MapPage {
        return randomNumber;
      }
 
-  //placerar alla lightposts från listan på kartan
+
   placePins() {
     var list = this.dailyRoutesProvider.getallMarkers();
     for (let m of list) {

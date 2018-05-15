@@ -15,6 +15,7 @@ import {InformationPage} from '../pages/information/information'
 import { DailyRoutesProvider } from '../providers/daily-routes/daily-routes';
 import { CustomMarker } from '../providers/CustomMarker';
 import { MyProvider } from "../providers/my/my";
+import { LightPostProvider } from '../providers/light-post/light-post';
 
 
 
@@ -29,7 +30,7 @@ export class MyApp {
   pages: Array<{ title: string, component: any }>;
 
   
-  constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController) {
+  constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController, private lightPostProvider: LightPostProvider) {
     this.initializeApp();
     this.platform.ready().then(() => {
       this.localNotification.on("click").subscribe(noti => {
@@ -71,7 +72,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-    this.loadAllLightposts();
+    this.getLightposts();
   }
 
   logOut(){
@@ -87,10 +88,14 @@ export class MyApp {
     });
   }
 
-  //Hör borde alla lighposts hämtas från databasen och läggas i listan
-  loadAllLightposts() {
-    var mark = new CustomMarker(59.3293, 18.0686);
-    this.dailyRoutesProvider.addMarker(mark);
+  //hämtar alla stolpar från servern
+  getLightposts() {
+    this.lightPostProvider.getLightPosts().subscribe(data => {
+      for (let l of data) {
+        var mark = new CustomMarker(l.location.geoLocationLat, l.location.geoLocationLang);
+        this.dailyRoutesProvider.addMarker(mark);
+      }
+    }); 
   }
 
   simulateBluetooth() {
