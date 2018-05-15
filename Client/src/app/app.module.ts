@@ -23,6 +23,7 @@ import { DailyRoutesPage} from '../pages/daily-routes/daily-routes';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ChooseGamePage } from "../pages/choose-game/choose-game";
 import { SignupPage } from "../pages/signup/signup";
+import { InformationPage } from '../pages/information/information';
 
 
 //Notifications
@@ -53,6 +54,7 @@ import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
 import { MyProvider } from '../providers/my/my';
 
 import { DailyRoutesProvider } from '../providers/daily-routes/daily-routes';
+import { InformationProvider } from '../providers/information/information';
 
 
 
@@ -80,7 +82,8 @@ export function jwtOptionsFactory(storage:Storage){
     DailyRoutesPage,
     ProgressBarComponent,
     ChooseGamePage,
-    SignupPage
+    SignupPage,
+    InformationPage
   ],
   imports: [
     BrowserModule,
@@ -112,6 +115,7 @@ export function jwtOptionsFactory(storage:Storage){
     DailyRoutesPage,
     ChooseGamePage,
     SignupPage,
+    InformationPage
   ],
   providers: [
     StatusBar,
@@ -125,7 +129,8 @@ export function jwtOptionsFactory(storage:Storage){
     LightPostProvider,
     MyProvider,
     DailyRoutesProvider,
-    LightPostProvider
+    LightPostProvider,
+    InformationProvider
   ]
 })
 export class AppModule {}
