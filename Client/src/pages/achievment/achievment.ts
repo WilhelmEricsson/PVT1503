@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { AlertController } from "ionic-angular";
+import { MyApp } from '../../app/app.component';
+import { MyProvider } from "../../providers/my/my";
 
 /**
  * Generated class for the AchievmentPage page.
@@ -17,33 +19,17 @@ import { AlertController } from "ionic-angular";
 })
 export class AchievmentPage {
 
-  public tap: number = 0;
 
 
-  constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
+
+  constructor(public MyProvider: MyProvider, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
+    this.MyProvider.tapEvent()
     console.log('ionViewDidLoad AchievmentPage');
   }
-  tapEvent(e) {
-    this.tap++
+  
 
-    if(this.tap == 10){
-      if(this.tap ==10){
-        this.tap =0;
-      
-      let alert = this.alertCtrl.create({
-        title: 'Coupon!',
-        subTitle: 'You got a coupon at Kungafamiljen. Show this code to the guard: X4SDF',
-        buttons: ['OK']
-        
-        
-      
-      });
-      alert.present();
-    }
-    }
-  }
  
 }
