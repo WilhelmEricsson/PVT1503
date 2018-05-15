@@ -48,7 +48,6 @@ export class MapPage {
   getLightPosts(){
     this.lightPostProvider.getLightPosts().subscribe(data => {
       for (let l of data) {
-        console.log(l.location.geoLocationLang);
         var mark = new CustomMarker(l.location.geoLocationLat, l.location.geoLocationLang);
         this.dailyRoutesProvider.addMarker(mark);
       }
