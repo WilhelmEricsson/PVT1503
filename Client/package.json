@@ -25,6 +25,7 @@
     "@ionic-native/core": "^4.7.0",
     "@ionic-native/facebook": "^4.7.0",
     "@ionic-native/geolocation": "^4.7.0",
+    "@ionic-native/http": "^4.7.0",
     "@ionic-native/local-notifications": "^4.7.0",
     "@ionic-native/phonegap-local-notification": "^4.7.0",
     "@ionic-native/push": "^4.7.0",
@@ -36,9 +37,11 @@
     "cordova-android-support-gradle-release": "^1.4.2",
     "cordova-browser": "5.0.3",
     "cordova-ios": "^4.5.4",
+    "cordova-plugin-advanced-http": "^1.11.1",
     "cordova-plugin-app-event": "^1.2.1",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-facebook4": "^2.1.0",
+    "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.2.1",
@@ -85,7 +88,8 @@
       },
       "phonegap-plugin-local-notification": {},
       "cordova-plugin-geolocation": {},
-      "cordova-plugin-x-socialsharing": {}
+      "cordova-plugin-x-socialsharing": {},
+      "cordova-plugin-advanced-http": {}
     },
     "platforms": [
       "browser",

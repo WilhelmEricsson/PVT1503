@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/information")
 public class InformationController {
     @Autowired
@@ -20,6 +21,7 @@ public class InformationController {
     //--------------------Methods----------------------------
 
     @PostMapping("/add")
+
     public @ResponseBody String addNewInformation ( @RequestParam String name
             , @RequestParam String information) {
 
