@@ -13,6 +13,8 @@ import { ChooseGamePage } from '../pages/choose-game/choose-game';
 import { Facebook } from '@ionic-native/facebook';
 import {AuthProvider} from "../providers/auth/auth";
 import {InformationPage} from '../pages/information/information'
+import { DailyRoutesProvider } from '../providers/daily-routes/daily-routes';
+import { CustomMarker } from '../providers/CustomMarker';
 
 
 @Component({
@@ -25,7 +27,7 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController, private dailyRoutesProvider: DailyRoutesProvider) {
     this.initializeApp();
     this.platform.ready().then(() => {
       this.localNotification.on("click").subscribe(noti => {
@@ -83,6 +85,8 @@ export class MyApp {
   }
 
   simulateBluetooth() {
+    var mark = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
+    this.dailyRoutesProvider.addDailyMarker(mark);
     this.localNotification.requestPermission();
     this.localNotification.hasPermission().then(res => {
       console.log(res);

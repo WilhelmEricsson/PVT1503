@@ -35,19 +35,14 @@ export class MapPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
-  
-
-
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public geolocation: Geolocation, private alert: AlertController,
               private lightPostProvider: LightPostProvider, private dailyRoutesProvider: DailyRoutesProvider) {
     this.getLightPosts();
-
   }
 
   getLightPosts(){
     this.lightPostProvider.getLightPosts().subscribe(data => console.log(data));
-
   }
 
   ionViewDidLoad(){
@@ -124,11 +119,11 @@ export class MapPage {
     });
 
     marker1.addListener('click', function() {
-       info.open(Map, marker1);
+      info.open(Map, marker1);
     });
 
-    var mark = new CustomMarker(59.3293, 18.0686, "test");
-    this.dailyRoutesProvider.addToMarkers(mark);
+    var mark = new CustomMarker(marker1.getPosition().lat(), marker1.getPosition().lng());
+    this.dailyRoutesProvider.addMarker(mark);
   }
 
 

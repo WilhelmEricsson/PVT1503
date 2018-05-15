@@ -1,12 +1,10 @@
 export class CustomMarker {
     lat: number;
     lng: number;
-    info: string;
 
-    constructor (lat: number, lng: number, info: string) {
+    constructor(lat: number, lng: number) {
         this.lat = lat;
         this.lng = lng;
-        this.info = info;
     }
 
     getLat() {
