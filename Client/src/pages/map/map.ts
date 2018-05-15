@@ -102,7 +102,7 @@ export class MapPage {
       }
 
      randomNumber(): number {
-       let randomNumber = Math.floor(Math.random()*4000)+1;
+       let randomNumber = Math.floor(Math.random()*4000) +1;
        return randomNumber;
      }
 
