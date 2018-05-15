@@ -2,6 +2,12 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ChooseGamePage } from '../choose-game/choose-game';
+import {LightPostProvider} from "../../providers/light-post/light-post";
+import {JsonContainer} from "postcss";
+import {Jsonp} from "@angular/http";
+
+
+
 
 /**
  * Generated class for the MapPage page.
@@ -11,9 +17,11 @@ import { ChooseGamePage } from '../choose-game/choose-game';
  */
 
 declare var google;
+
 var currentMarker;
 let gpsEnabled: boolean = false;
 var gpsEvent;
+
 
 @IonicPage()
 @Component({
@@ -24,13 +32,22 @@ export class MapPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation, private alert: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public geolocation: Geolocation, private alert: AlertController,
+              private lightPostProvider: LightPostProvider) {
+    this.getLightPosts();
+
+  }
+
+  getLightPosts(){
+    this.lightPostProvider.getLightPosts().subscribe(data => console.log(data));
+
   }
 
   ionViewDidLoad(){
     this.loadMap();
   }
-            
+
   loadMap() {
     //https://stackoverflow.com/questions/14586916/google-maps-directions-from-users-geo-location Bra att kolla igenom
     if (navigator.geolocation) {
@@ -50,7 +67,7 @@ export class MapPage {
           alert.present();
         console.log(err);
       });
-    } 
+    }
    }
 
   toggleGPS() {
@@ -66,7 +83,7 @@ export class MapPage {
         var userPosition = new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
         currentMarker = new google.maps.Marker({
           map: this.map,
-          position: userPosition 
+          position: userPosition
         })
         this.map.panTo(userPosition);
       }));
@@ -77,32 +94,37 @@ export class MapPage {
   ChooseGameController(){
     this.navCtrl.push(ChooseGamePage);
   }
-  
+
     myRandom: number;
 
     ionViewDidEnter() {
        this.myRandom=this.randomNumber();
       }
-    
+
      randomNumber(): number {
        let randomNumber = Math.floor(Math.random()*4000)+1;
-       return randomNumber;       
-     }      
-     
+       return randomNumber;
+     }
+
 
   placePins() {
     var marker1 = new google.maps.Marker({
       position: (new google.maps.LatLng(59.3293, 18.0686)), map: this.map, icon: "assets/imgs/lyktstolpar/lila2.png"
-    })
+    });
 
     var info = new google.maps.InfoWindow({
       content: document.getElementById("infoStolpe1")
     });
-    
+
     marker1.addListener('click', function() {
        info.open(Map, marker1);
     });
   }
 
 
+
+
 }
+
+
+

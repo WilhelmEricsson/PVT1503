@@ -50,7 +50,16 @@ public class ServerApplication {
 	}
 
 	private void createLightPost(LightPostRepository lightPostRepository){
-		LightPost lightPost = new LightPost(0,"FFFF", new LightPostLocations("59.3293", "18.0686"));
-		lightPostRepository.save(lightPost);
+		//StOchDraken
+		lightPostRepository.save(new LightPost(0,"FFFF", new LightPostLocations("59.325065", "18.073701")));
+
+		//Stortorget
+		lightPostRepository.save(new LightPost(0,"0000", new LightPostLocations("59.324956", "18.070806")));
+
+		//Lilla nygatan 5
+		lightPostRepository.save(new LightPost(0,"F0F0", new LightPostLocations("59.324368", "18.067855")));
+
+		//Riddarholmen
+		lightPostRepository.save(new LightPost(0,"AAAA", new LightPostLocations("59.324752", "18.063964")));
 	}
 }
