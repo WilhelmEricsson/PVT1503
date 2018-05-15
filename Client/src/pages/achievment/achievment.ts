@@ -26,7 +26,7 @@ export class AchievmentPage {
   }
 
   ionViewDidLoad() {
-    this.MyProvider.tapEvent()
+    //this.MyProvider.tapEvent()
     console.log('ionViewDidLoad AchievmentPage');
   }
   
