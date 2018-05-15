@@ -8,7 +8,6 @@ import { LoginPage } from '../pages/login/login';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { LocalNotifications } from '@ionic-native/local-notifications';
-import { ChooseGamePage } from '../pages/choose-game/choose-game';
 import { Facebook } from '@ionic-native/facebook';
 import {AuthProvider} from "../providers/auth/auth";
 import {InformationPage} from '../pages/information/information'
@@ -29,14 +28,14 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  
+
   constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController, private lightPostProvider: LightPostProvider) {
     this.initializeApp();
     this.platform.ready().then(() => {
       this.localNotification.on("click").subscribe(noti => {
         this.fb.getLoginStatus().then(res => {
           if (res.status === "connected") {
-            this.nav.push(ChooseGamePage);
+            this.nav.push(InformationPage);
           }
         })
       });
@@ -95,7 +94,7 @@ export class MyApp {
         var mark = new CustomMarker(l.location.geoLocationLat, l.location.geoLocationLang);
         this.dailyRoutesProvider.addMarker(mark);
       }
-    }); 
+    });
   }
 
   simulateBluetooth() {
@@ -131,6 +130,6 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  
- 
+
+
 }
