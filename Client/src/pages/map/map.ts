@@ -114,7 +114,18 @@ export class MapPage {
        return randomNumber;
      }
 
+  //placerar alla lightposts från listan på kartan
+  placePins() {
+    var list = this.dailyRoutesProvider.getallMarkers();
+    for (let m of list) {
+      var mark = <CustomMarker> m;
+      var lightpost = new google.maps.Marker({
+        position: (new google.maps.LatLng(mark.getLat(),mark.getLng())), map: this.map, icon: "assets/imgs/lyktstolpar/lila2.png"
+      });
+    }
+  }
 
+/*
   placePins() {
     var marker1 = new google.maps.Marker({
       position: (new google.maps.LatLng(59.3293, 18.0686)), map: this.map, icon: "assets/imgs/lyktstolpar/lila2.png"
@@ -131,6 +142,7 @@ export class MapPage {
     var mark = new CustomMarker(marker1.getPosition().lat(), marker1.getPosition().lng());
     this.dailyRoutesProvider.addMarker(mark);
   }
+  */
 
 
 

@@ -71,6 +71,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+    this.loadAllLightposts();
   }
 
   logOut(){
@@ -84,6 +85,12 @@ export class MyApp {
           this.nav.setRoot(LoginPage);
       }
     });
+  }
+
+  //Hör borde alla lighposts hämtas från databasen och läggas i listan
+  loadAllLightposts() {
+    var mark = new CustomMarker(59.3293, 18.0686);
+    this.dailyRoutesProvider.addMarker(mark);
   }
 
   simulateBluetooth() {
