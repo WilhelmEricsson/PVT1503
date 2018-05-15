@@ -9,7 +9,7 @@ import { CustomMarker } from '../CustomMarker';
   and Angular DI.
 */
 var allMarkers: any[] = [];
-var dailyallMarkers: any[] = [];
+var dailyMarkers: any[] = [];
 
 @Injectable()
 export class DailyRoutesProvider {
@@ -22,7 +22,7 @@ export class DailyRoutesProvider {
   }
 
   addDailyMarker(mark: CustomMarker) {
-    dailyallMarkers.push(mark);
+    dailyMarkers.push(mark);
   }
 
   getallMarkers() {
@@ -30,7 +30,7 @@ export class DailyRoutesProvider {
   }
 
   getDailylMarkers() {
-    return dailyallMarkers;
+    return dailyMarkers;
   }
 
   chooseRandomMarker() {

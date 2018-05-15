@@ -12,10 +12,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { QuestionViewPage } from '../pages/question-view/question-view';
 import { MapPage } from '../pages/map/map';
-import { NewGamePage } from '../pages/new-game/new-game';
 import { LoginPage } from '../pages/login/login';
-import { AddFriendsPage } from '../pages/add-friends/add-friends';
-import { PlayFriendsPage } from '../pages/play-friends/play-friends';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { EmailSignInPage } from '../pages/email-sign-in/email-sign-in';
 import { NotificationsPage } from '../pages/notifications/notifications';
@@ -53,6 +50,8 @@ import {HttpClientModule} from "@angular/common/http";
 
 //JWTOptions
 import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
+import { MyProvider } from '../providers/my/my';
+
 import { DailyRoutesProvider } from '../providers/daily-routes/daily-routes';
 
 
@@ -72,10 +71,7 @@ export function jwtOptionsFactory(storage:Storage){
     HomePage,
     QuestionViewPage,
     MapPage,
-    NewGamePage,
     LoginPage,
-    AddFriendsPage,
-    PlayFriendsPage,
     CreateAccountPage,
     EmailSignInPage,
     NotificationsPage,
@@ -106,10 +102,7 @@ export function jwtOptionsFactory(storage:Storage){
     HomePage,
     QuestionViewPage,
     MapPage,
-    NewGamePage,
     LoginPage,
-    AddFriendsPage,
-    PlayFriendsPage,
     CreateAccountPage,
     EmailSignInPage,
     NotificationsPage,
@@ -129,6 +122,8 @@ export function jwtOptionsFactory(storage:Storage){
     Geolocation,
     AuthProvider,
     SocialSharing,
+    LightPostProvider,
+    MyProvider,
     DailyRoutesProvider,
     LightPostProvider
   ]

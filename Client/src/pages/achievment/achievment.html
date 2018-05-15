@@ -14,10 +14,10 @@
 
 
 <ion-content padding>
-    <ion-card (tap)="tapEvent($event)">
+    <ion-card (MyProvider.tap)="MyProvider.tapEvent($event)">
         <ion-item>
           <p>Tap to show coupon!:</p> 
-          {{tap}} out of 10!
+          {{MyProvider.tap}} out of 10!
         </ion-item>
       </ion-card>
 

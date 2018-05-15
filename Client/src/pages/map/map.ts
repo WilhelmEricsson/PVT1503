@@ -35,6 +35,9 @@ export class MapPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
+
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public geolocation: Geolocation, private alert: AlertController,
               private lightPostProvider: LightPostProvider, private dailyRoutesProvider: DailyRoutesProvider) {
@@ -43,6 +46,9 @@ export class MapPage {
 
   getLightPosts(){
     this.lightPostProvider.getLightPosts().subscribe(data => console.log(data));
+
+
+
   }
 
   ionViewDidLoad(){

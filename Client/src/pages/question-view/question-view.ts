@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http'; 
+import { InformationProvider } from '../../providers/information/information';
 
 
 /**
@@ -17,20 +18,17 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: 'question-view.html',
 })
 export class QuestionViewPage {
-  information : Observable<any>;
+  information: any;
 
-  question: String = "test fråga";
-  alternatives: Array<String> = ["alt1", "alt2", "alt3", "alt4"];
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public httpClient: HttpClient) {
-    this.information = this.httpClient.get('localhost:8080/information/all');
-    
+  constructor(public navCtrl: NavController, public navParams: NavParams, public informationProvider: InformationProvider) {
+      this.getInformation();
   }
 
-  
-
-  openDetails(information){
-    this.navCtrl.push('InformationPage', {information: information});
+  getInformation() {
+    this.informationProvider.getInformation()
+    .then(data => {
+      this.information = data;
+      console.log(this.information);
+    });
   }
-
 }
