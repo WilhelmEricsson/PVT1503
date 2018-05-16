@@ -33,16 +33,16 @@ export class MyApp {
 
   constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController, private lightPostProvider: LightPostProvider, private informationProvider: InformationProvider) {
     this.initializeApp();
-   if(this.platform.is('cordova')){
-     this.platform.ready().then(() => {
-       this.localNotification.on("click").subscribe(noti => {
-         this.fb.getLoginStatus().then(res => {
-           if (res.status === "connected") {
-             this.nav.push(InformationPage);
-           }
-         })
-       });
-     });
+    if(this.platform.is('cordova')){
+      this.platform.ready().then(() => {
+        this.localNotification.on("click").subscribe(noti => {
+          this.fb.getLoginStatus().then(res => {
+            if (res.status === "connected") {
+              this.nav.push(InformationPage);
+            }
+          })
+        });
+      });
    }
 
     // used for an example of ngFor and navigation
@@ -115,26 +115,29 @@ export class MyApp {
       this.informationProvider.currentLightPost = mark.id;
       this.dailyRoutesProvider.addDailyMarker(mark);
       this.MyProvider.tapEvent()
+    } else {
+      let alert = this.alert.create({
+        title: "Lightpost already visited",
+        buttons: ['Dismiss']
+        });
+        alert.present();
+    }
+    
+    if(this.platform.is('cordova')){
       this.localNotification.requestPermission();
       this.localNotification.hasPermission().then(res => {
-        console.log(res);
         if (res) {
           this.localNotification.schedule({
             id: mark.id,
-            title: "Test",
-            text: 'Test1',
+            title: "Lightpost connected",
+            text: 'Click to get information',
           });
-        } else {
-          let alert = this.alert.create({
-            title: "Notifications not allowed",
-            buttons: ['Dismiss']
-            });
-            alert.present();
         }
-      })
+      });
     } else {
-      console.log("test");
-    }
+      console.log("Cordova not available, notification skipped");
+      this.nav.push(InformationPage);
+    }    
   }
 
   openPage(page) {
