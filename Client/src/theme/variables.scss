@@ -40,14 +40,15 @@ $colors: (
   light:      #0a9673,
   dark:      black,
   test: white,
-  blue: rgb(47, 0, 255)
+  blue: rgb(47, 0, 255),
+  grey:  rgb(90, 90, 90)
 );
 
 $tabs-tab-color-active: color($colors, secondary);
-$tabs-background: color($colors, primary);
+$tabs-background: color($colors, grey);
 $background-color: color($colors, test);
 $list-border-color: color($colors, dark);
-$text-color: #fff;
+$text-color: black;
 $card-md-header-color: #fff;
 $card-ios-header-color: #fff;
 
