@@ -1,7 +1,7 @@
 package com.pvt15.DB.entity;
-
-
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -16,6 +16,10 @@ public class LightPost {
     @Column(nullable = true)
     private String colorOfLight;
 
+    @OneToMany(cascade = CascadeType.ALL,
+            orphanRemoval = true, mappedBy="lightPost")
+    private List<Information> information;
+
     @OneToOne(cascade = CascadeType.ALL,targetEntity = LightPostLocations.class)
     private LightPostLocations location;
 
@@ -26,6 +30,7 @@ public class LightPost {
         this.numOfUsersPresent = numOfUsersPresent;
         this.colorOfLight = colorOfLight;
         this.location = location;
+        information = new ArrayList<>();
 
     }
     //------------------------Methods---------------------------
@@ -65,6 +70,24 @@ public class LightPost {
     @Override
     public String toString(){
         return "Id: " + id + " Num Of People Present: " + numOfUsersPresent + " Lamp Cclor: " + colorOfLight + " Location " + location.toString();
+    }
+
+    public List<Information> getInformation() {
+        return information;
+    }
+
+    public void setInformation(List<Information> information) {
+        this.information = information;
+    }
+
+    public void addInformation(Information information) {
+        this.information.add(information);
+        information.setLightPost(this);
+    }
+
+    public void removeComment(Information information) {
+        this.information.remove(information);
+        information.setLightPost(null);
     }
 
 }
