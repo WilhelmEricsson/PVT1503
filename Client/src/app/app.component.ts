@@ -15,6 +15,7 @@ import { CustomMarker } from '../providers/CustomMarker';
 import { MyProvider } from "../providers/my/my";
 import { LightPostProvider } from '../providers/light-post/light-post';
 import {InformationProvider} from "../providers/information/information";
+import {Cordova} from "ionic-native";
 
 
 
@@ -31,16 +32,17 @@ export class MyApp {
 
   constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController, private lightPostProvider: LightPostProvider, private informationProvider: InformationProvider) {
     this.initializeApp();
-    this.platform.ready().then(() => {
-      this.localNotification.on("click").subscribe(noti => {
-        this.fb.getLoginStatus().then(res => {
-          if (res.status === "connected") {
-            this.nav.push(InformationPage);
-          }
-        })
-      });
-    });
-
+   if(this.platform.is('cordova')){
+     this.platform.ready().then(() => {
+       this.localNotification.on("click").subscribe(noti => {
+         this.fb.getLoginStatus().then(res => {
+           if (res.status === "connected") {
+             this.nav.push(InformationPage);
+           }
+         })
+       });
+     });
+   }
 
     // used for an example of ngFor and navigation
     this.pages = [
@@ -75,7 +77,9 @@ export class MyApp {
   }
 
   logOut(){
-    this.fb.getLoginStatus().then( data=>{
+    if(this.platform.is('cordova')){
+
+      this.fb.getLoginStatus().then( data=>{
       if(data.status =='connected'){
         this.fb.logout()
         this.nav.setRoot(LoginPage);
@@ -85,6 +89,10 @@ export class MyApp {
           this.nav.setRoot(LoginPage);
       }
     });
+    }else{
+      this.authProvider.logout();
+      this.nav.setRoot(LoginPage);
+    }
   }
 
   //hämtar alla stolpar från servern
