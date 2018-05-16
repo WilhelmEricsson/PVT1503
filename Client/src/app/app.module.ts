@@ -57,6 +57,8 @@ import { MyProvider } from '../providers/my/my';
 import { DailyRoutesProvider } from '../providers/daily-routes/daily-routes';
 import { RulesPage } from '../pages/rules/rules';
 import { InformationProvider } from '../providers/information/information';
+import { InformationTabsComponent } from '../components/information-tabs/information-tabs';
+import { SavedInformationPage } from '../pages/saved-information/saved-information';
 
 
 
@@ -86,7 +88,9 @@ export function jwtOptionsFactory(storage: Storage) {
     SignupPage,
     RulesPage,
     SignupPage,
-    InformationPage
+    InformationPage,
+    InformationTabsComponent,
+    SavedInformationPage
   ],
   imports: [
     BrowserModule,
@@ -121,7 +125,9 @@ export function jwtOptionsFactory(storage: Storage) {
     DailyRoutesPage,
     SignupPage,
     RulesPage,
-    InformationPage
+    InformationPage,
+    InformationTabsComponent,
+    SavedInformationPage
   ],
 
   providers: [

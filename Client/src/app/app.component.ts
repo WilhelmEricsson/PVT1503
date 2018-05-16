@@ -17,6 +17,7 @@ import { RulesPage } from '../pages/rules/rules';
 import { LightPostProvider } from '../providers/light-post/light-post';
 import {InformationProvider} from "../providers/information/information";
 import {Cordova} from "ionic-native";
+import { InformationTabsComponent } from '../components/information-tabs/information-tabs';
 
 
 
@@ -48,7 +49,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'Information view', component: InformationPage },
+      { title: 'Information view', component: InformationTabsComponent },
       { title: 'Notifications', component: NotificationsPage },
       { title: 'My profile', component: MyProfilePage }, 
       { title: 'Rules', component: RulesPage },
