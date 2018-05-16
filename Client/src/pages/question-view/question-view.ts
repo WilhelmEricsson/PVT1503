@@ -24,4 +24,5 @@ export class QuestionViewPage {
       console.log(this.information);
     });
   }
+  
 }
