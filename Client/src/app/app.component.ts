@@ -16,7 +16,7 @@ import { MyProvider } from "../providers/my/my";
 import { RulesPage } from '../pages/rules/rules';
 import { LightPostProvider } from '../providers/light-post/light-post';
 import {InformationProvider} from "../providers/information/information";
-import {Cordova} from "ionic-native";
+
 
 
 
@@ -50,9 +50,9 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'Information view', component: InformationPage },
       { title: 'Notifications', component: NotificationsPage },
-      { title: 'My profile', component: MyProfilePage }, 
+      { title: 'My profile', component: MyProfilePage },
       { title: 'Rules', component: RulesPage },
-      
+
 
     ];
 
