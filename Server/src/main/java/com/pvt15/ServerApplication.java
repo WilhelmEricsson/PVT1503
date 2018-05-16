@@ -38,28 +38,42 @@ public class ServerApplication {
 	@Bean
 	CommandLineRunner initData(InformationRepository informationRepository, LightPostRepository lightPostRepository) {
 		return args -> {
-			createInformation(informationRepository);
-			createLightPost(lightPostRepository);
+			createLightPostAndInformation(lightPostRepository, informationRepository);
 		};
 	}
-	private void createInformation(InformationRepository informationRepository){
-		informationRepository.save(new Information("Gamla stan", " Detta handlar egentligen om gamla stan! Learn how to efficiently build and implement microservices in Spring,\n" +
-				"and how to use Docker and Mesos to push the boundaries. Examine a number of real-world use cases and hands-on code examples.\n" +
-				"Distribute your microservices in a completely new way"));
-		informationRepository.save(new Information("Kungliga slottet", "Detta handlar egentligen om slottet! A no-nonsense guide containing case studies and best practise for Spring Boot"));
-	}
 
-	private void createLightPost(LightPostRepository lightPostRepository){
+	private void createLightPostAndInformation(LightPostRepository lightPostRepository, InformationRepository informationRepository){
 		//StOchDraken
-		lightPostRepository.save(new LightPost(0,"FFFF", new LightPostLocations("59.325065", "18.073701")));
+		LightPost stGoran = new LightPost(0,"FFFF", new LightPostLocations("59.325065", "18.073701"));
+		newLightPostWithInformation(lightPostRepository,informationRepository,stGoran , new Information("St. George and the Dragon", "St. George and the Dragon is Sweden's most famous artworks. It was created in the late 1400s in order to manifest the Swedish regent Sten Sture the Elder (Sr.) victory over the Danish union king, " +
+					"King Christian I of the Battle of Brunkeberg year 1471. The original wooden stands inside the Great Church and consecrated in 1489, while standing on Köpmantorget is a replica in " +
+					"bronze and granite, which was inaugurated in 1912. It should we tell the artwork's history and background"));
+
+		newLightPostWithInformation(lightPostRepository,informationRepository,stGoran, new Information("Mer Info", "Det här är ett test"));
+
+
 
 		//Stortorget
-		lightPostRepository.save(new LightPost(0,"0000", new LightPostLocations("59.324956", "18.070806")));
+		newLightPostWithInformation(lightPostRepository, informationRepository,
+				new LightPost(0,"0000", new LightPostLocations("59.324956", "18.070806")),
+				new Information("Stortorget", "Det här är Stortorget"));
+
 
 		//Lilla nygatan 5
-		lightPostRepository.save(new LightPost(0,"F0F0", new LightPostLocations("59.324368", "18.067855")));
+		newLightPostWithInformation(lightPostRepository,informationRepository,
+				new LightPost(0,"F0F0", new LightPostLocations("59.324368", "18.067855")),
+				new Information("Lilla Nygatan 5", "Loheskatten is a large silver treasure hidden around 1741 and found in 1937 in a store room here at Lilla Nygatan 5 in Gamla Stan, Stockholm. " +
+				"The treasure, weighing 205 kg is the largest ever found in Sweden and is on display at Stockholm City Museum and the Royal Coin Cabinet. The former store room, today houses a hotel restaurant."));
 
 		//Riddarholmen
-		lightPostRepository.save(new LightPost(0,"AAAA", new LightPostLocations("59.324752", "18.063964")));
+		newLightPostWithInformation(lightPostRepository,informationRepository,new LightPost(0,"AAAA", new LightPostLocations("59.324752", "18.063964")), new Information("Riddarholmen", "Det här är Riddarholmen"));
+	}
+
+	private void newLightPostWithInformation(LightPostRepository lightPostRepository, InformationRepository informationRepository, LightPost lightPost, Information information)
+	{
+		lightPost.addInformation(information);
+		lightPostRepository.save(lightPost);
+
+
 	}
 }
