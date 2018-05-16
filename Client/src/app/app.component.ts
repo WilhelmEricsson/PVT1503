@@ -14,6 +14,7 @@ import { DailyRoutesProvider } from '../providers/daily-routes/daily-routes';
 import { CustomMarker } from '../providers/CustomMarker';
 import { MyProvider } from "../providers/my/my";
 import { LightPostProvider } from '../providers/light-post/light-post';
+import {InformationProvider} from "../providers/information/information";
 
 
 
@@ -28,7 +29,7 @@ export class MyApp {
   pages: Array<{ title: string, component: any }>;
 
 
-  constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController, private lightPostProvider: LightPostProvider) {
+  constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController, private lightPostProvider: LightPostProvider, private informationProvider: InformationProvider) {
     this.initializeApp();
     this.platform.ready().then(() => {
       this.localNotification.on("click").subscribe(noti => {
@@ -90,7 +91,7 @@ export class MyApp {
   getLightposts() {
     this.lightPostProvider.getLightPosts().subscribe(data => {
       for (let l of data) {
-        var mark = new CustomMarker(l.location.geoLocationLat, l.location.geoLocationLang);
+        var mark = new CustomMarker(l.id,l.location.geoLocationLat, l.location.geoLocationLang);
         this.dailyRoutesProvider.addMarker(mark);
       }
     });
@@ -99,6 +100,7 @@ export class MyApp {
   simulateBluetooth() {
     var mark = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
     if (!mark.visited) {
+      this.informationProvider.currentLightPost = mark.id;
       this.dailyRoutesProvider.addDailyMarker(mark);
       this.MyProvider.tapEvent()
       this.localNotification.requestPermission();
@@ -106,7 +108,7 @@ export class MyApp {
         console.log(res);
         if (res) {
           this.localNotification.schedule({
-            id: 1,
+            id: mark.id,
             title: "Test",
             text: 'Test1',
           });
