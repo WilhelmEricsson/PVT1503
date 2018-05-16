@@ -8,28 +8,43 @@ import { CustomMarker } from '../CustomMarker';
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
-declare var google; 
-var markers: any[] = [];
+var allMarkers: any[] = [];
+var dailyRouteMarkers: any[] = [];
 
 @Injectable()
 export class DailyRoutesProvider {
-
-  map: any;
-  mapOptions: any;
-  test: string;
   
-   
-
   constructor(public http: HttpClient) {
-
   }
 
-  addToMarkers(mark: CustomMarker) {
-    markers.push(mark);
+  addMarker(mark: CustomMarker) {
+    allMarkers.push(mark);
   }
 
-  getMarkers() {
-    return markers;
+  addDailyMarker(mark: CustomMarker) {
+    dailyRouteMarkers.push(mark);
+    mark.toggleVisited();
+  }
+
+  clearDailyRouteMarkers() {
+    for (let m of dailyRouteMarkers) {
+      var mark = <CustomMarker> m;
+      mark.toggleVisited();
+    }
+    dailyRouteMarkers = [];
+  }
+
+  getallMarkers() {
+    return allMarkers;
+  }
+
+  getDailylMarkers() {
+    return dailyRouteMarkers;
+  }
+
+  chooseRandomMarker() {
+    let rnd: number = Math.floor(Math.random() * allMarkers.length);
+    return allMarkers[rnd];
   }
 
 }

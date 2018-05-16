@@ -2,19 +2,19 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
 import { HomePage } from '../pages/home/home';
-import { QuestionViewPage } from '../pages/question-view/question-view';
 import { LoginPage } from '../pages/login/login';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { LocalNotifications } from '@ionic-native/local-notifications';
-import { ChooseGamePage } from '../pages/choose-game/choose-game';
 import { Facebook } from '@ionic-native/facebook';
 import {AuthProvider} from "../providers/auth/auth";
-import {InformationPage} from '../pages/information/information';
+import {InformationPage} from '../pages/information/information'
+import { DailyRoutesProvider } from '../providers/daily-routes/daily-routes';
+import { CustomMarker } from '../providers/CustomMarker';
 import { MyProvider } from "../providers/my/my";
 import { RulesPage } from '../pages/rules/rules';
+import { LightPostProvider } from '../providers/light-post/light-post';
 
 
 
@@ -28,13 +28,14 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController) {
+
+  constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController, private lightPostProvider: LightPostProvider) {
     this.initializeApp();
     this.platform.ready().then(() => {
       this.localNotification.on("click").subscribe(noti => {
         this.fb.getLoginStatus().then(res => {
           if (res.status === "connected") {
-            this.nav.push(ChooseGamePage);
+            this.nav.push(InformationPage);
           }
         })
       });
@@ -44,7 +45,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'Question View', component: QuestionViewPage },
+      { title: 'Information view', component: InformationPage },
       { title: 'Notifications', component: NotificationsPage },
       { title: 'My profile', component: MyProfilePage }, 
       { title: 'Rules', component: RulesPage },
@@ -73,6 +74,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+    this.getLightposts();
   }
 
   logOut(){
@@ -88,25 +90,41 @@ export class MyApp {
     });
   }
 
-  simulateBluetooth() {
-    this.MyProvider.tapEvent()
-    this.localNotification.requestPermission();
-    this.localNotification.hasPermission().then(res => {
-      console.log(res);
-      if (res) {
-        this.localNotification.schedule({
-          id: 1,
-          title: "Test",
-          text: 'Test1',
-        });
-      } else {
-        let alert = this.alert.create({
-          title: "Notifications not allowed",
-          buttons: ['Dismiss']
-          });
-          alert.present();
+  //hämtar alla stolpar från servern
+  getLightposts() {
+    this.lightPostProvider.getLightPosts().subscribe(data => {
+      for (let l of data) {
+        var mark = new CustomMarker(l.location.geoLocationLat, l.location.geoLocationLang);
+        this.dailyRoutesProvider.addMarker(mark);
       }
-    })
+    });
+  }
+
+  simulateBluetooth() {
+    var mark = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
+    if (!mark.visited) {
+      this.dailyRoutesProvider.addDailyMarker(mark);
+      this.MyProvider.tapEvent()
+      this.localNotification.requestPermission();
+      this.localNotification.hasPermission().then(res => {
+        console.log(res);
+        if (res) {
+          this.localNotification.schedule({
+            id: 1,
+            title: "Test",
+            text: 'Test1',
+          });
+        } else {
+          let alert = this.alert.create({
+            title: "Notifications not allowed",
+            buttons: ['Dismiss']
+            });
+            alert.present();
+        }
+      })
+    } else {
+      console.log("test");
+    }
   }
 
   openPage(page) {
@@ -115,6 +133,6 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  
- 
+
+
 }

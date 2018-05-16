@@ -1,12 +1,16 @@
 export class CustomMarker {
     lat: number;
     lng: number;
-    info: string;
+    visited: boolean;
 
-    constructor (lat: number, lng: number, info: string) {
+    constructor(lat: number, lng: number) {
         this.lat = lat;
         this.lng = lng;
-        this.info = info;
+        this.visited = false;
+    }
+
+    toggleVisited() {
+       this.visited = !this.visited;
     }
 
     getLat() {

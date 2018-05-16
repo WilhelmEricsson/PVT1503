@@ -11,6 +11,8 @@ import { SERVER_URL } from "../../config";
 import { AuthProvider } from "../../providers/auth/auth";
 import { HttpClient } from "@angular/common/http";
 import { SocialSharing } from "@ionic-native/social-sharing";
+import { DailyRoutesProvider } from '../../providers/daily-routes/daily-routes';
+import { CustomMarker } from '../../providers/CustomMarker';
 
 import { LocalNotifications } from '@ionic-native/local-notifications'
 import { PhonegapLocalNotification } from "@ionic-native/phonegap-local-notification";
@@ -38,9 +40,7 @@ export class HomePage {
   constructor(private socialSharing: SocialSharing, public navCtrl: NavController, public alertCtrl: AlertController, private platform: Platform,
     private readonly authProvider: AuthProvider,
     jwtHelper: JwtHelperService,
-    private  httpClient: HttpClient) {
-    /**test */
-    
+    private  httpClient: HttpClient, private dailyRoutesProvider: DailyRoutesProvider) {
     
     this.authProvider.authUser.subscribe(jwt => {
       if (jwt) {
@@ -51,7 +51,6 @@ export class HomePage {
         this.user = null;
       }
     });
-    
   }
  
   
@@ -62,6 +61,8 @@ export class HomePage {
       this.result = JSON.stringify(data.timeSeries[0].parameters[11].values[0], null, 2);
         })
       }
+
+  
 
   AchievmentController() {
     this.navCtrl.push(AchievmentPage)
