@@ -34,13 +34,22 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
+  primary: black,
+  secondary:  #FFE300,
   danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222,
-  yellow:   #F3F162
+  light:      #0a9673,
+  dark:      black,
+  test: white,
+  blue: rgb(47, 0, 255)
 );
+
+$tabs-tab-color-active: color($colors, secondary);
+$tabs-background: color($colors, primary);
+$background-color: color($colors, test);
+$list-border-color: color($colors, dark);
+$text-color: #fff;
+$card-md-header-color: #fff;
+$card-ios-header-color: #fff;
 
 
 
