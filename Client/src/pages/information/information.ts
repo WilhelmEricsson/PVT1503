@@ -10,10 +10,14 @@ import { InformationProvider } from '../../providers/information/information';
 })
 export class InformationPage {
 
+
   users: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public informationProvider: InformationProvider) {
+
     this.getInformation();
+
+
   }
 
   ionViewDidLoad() {
@@ -27,5 +31,14 @@ export class InformationPage {
       console.log(this.users);
     });
   }
+  getInformationByLightPostId(id: number) {
+    this.informationProvider.getInformationByLightPostId(id)
+      .then(data => {
+        this.users = data;
+        console.log(this.users);
+      });
+  }
+
+
 
 }
