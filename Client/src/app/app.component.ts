@@ -15,6 +15,8 @@ import { CustomMarker } from '../providers/CustomMarker';
 import { MyProvider } from "../providers/my/my";
 import { RulesPage } from '../pages/rules/rules';
 import { LightPostProvider } from '../providers/light-post/light-post';
+import {InformationProvider} from "../providers/information/information";
+import {Cordova} from "ionic-native";
 
 
 
@@ -29,18 +31,19 @@ export class MyApp {
   pages: Array<{ title: string, component: any }>;
 
 
-  constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController, private lightPostProvider: LightPostProvider) {
+  constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController, private lightPostProvider: LightPostProvider, private informationProvider: InformationProvider) {
     this.initializeApp();
-    this.platform.ready().then(() => {
-      this.localNotification.on("click").subscribe(noti => {
-        this.fb.getLoginStatus().then(res => {
-          if (res.status === "connected") {
-            this.nav.push(InformationPage);
-          }
-        })
-      });
-    });
-
+   if(this.platform.is('cordova')){
+     this.platform.ready().then(() => {
+       this.localNotification.on("click").subscribe(noti => {
+         this.fb.getLoginStatus().then(res => {
+           if (res.status === "connected") {
+             this.nav.push(InformationPage);
+           }
+         })
+       });
+     });
+   }
 
     // used for an example of ngFor and navigation
     this.pages = [
@@ -78,7 +81,9 @@ export class MyApp {
   }
 
   logOut(){
-    this.fb.getLoginStatus().then( data=>{
+    if(this.platform.is('cordova')){
+
+      this.fb.getLoginStatus().then( data=>{
       if(data.status =='connected'){
         this.fb.logout()
         this.nav.setRoot(LoginPage);
@@ -88,13 +93,17 @@ export class MyApp {
           this.nav.setRoot(LoginPage);
       }
     });
+    }else{
+      this.authProvider.logout();
+      this.nav.setRoot(LoginPage);
+    }
   }
 
   //hämtar alla stolpar från servern
   getLightposts() {
     this.lightPostProvider.getLightPosts().subscribe(data => {
       for (let l of data) {
-        var mark = new CustomMarker(l.location.geoLocationLat, l.location.geoLocationLang);
+        var mark = new CustomMarker(l.id,l.location.geoLocationLat, l.location.geoLocationLang);
         this.dailyRoutesProvider.addMarker(mark);
       }
     });
@@ -103,6 +112,7 @@ export class MyApp {
   simulateBluetooth() {
     var mark = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
     if (!mark.visited) {
+      this.informationProvider.currentLightPost = mark.id;
       this.dailyRoutesProvider.addDailyMarker(mark);
       this.MyProvider.tapEvent()
       this.localNotification.requestPermission();
@@ -110,7 +120,7 @@ export class MyApp {
         console.log(res);
         if (res) {
           this.localNotification.schedule({
-            id: 1,
+            id: mark.id,
             title: "Test",
             text: 'Test1',
           });
