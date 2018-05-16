@@ -115,28 +115,27 @@ export class MyApp {
       this.informationProvider.currentLightPost = mark.id;
       this.dailyRoutesProvider.addDailyMarker(mark);
       this.MyProvider.tapEvent()
+      if(this.platform.is('cordova')){
+        this.localNotification.requestPermission();
+        this.localNotification.hasPermission().then(res => {
+          if (res) {
+            this.localNotification.schedule({
+              id: mark.id,
+              title: "Lightpost connected",
+              text: 'Click to get information',
+            });
+          }
+        });
+      } else {
+        console.log("Cordova not available, notification skipped");
+        this.nav.push(InformationPage);
+      }
     } else {
       let alert = this.alert.create({
         title: "Lightpost already visited",
         buttons: ['Dismiss']
         });
         alert.present();
-    }
-    
-    if(this.platform.is('cordova')){
-      this.localNotification.requestPermission();
-      this.localNotification.hasPermission().then(res => {
-        if (res) {
-          this.localNotification.schedule({
-            id: mark.id,
-            title: "Lightpost connected",
-            text: 'Click to get information',
-          });
-        }
-      });
-    } else {
-      console.log("Cordova not available, notification skipped");
-      this.nav.push(InformationPage);
     }    
   }
 
