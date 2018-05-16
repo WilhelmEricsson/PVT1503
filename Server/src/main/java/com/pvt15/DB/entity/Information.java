@@ -1,16 +1,23 @@
 package com.pvt15.DB.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+
 
 
 @Entity
 @Table(name = "information")
-public class Information {
+public class Information  {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-
 	private String name;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="lightPost_id")
+	@JsonBackReference
+	private LightPost lightPost;
 
 	@Column(length = 500)
 	private String information;
@@ -23,7 +30,6 @@ public class Information {
 		super();
 		this.name = name;
 		this.information = information;
-
 	}
 	//--------------------Methods-----------------------------
 	public Integer getId(){
@@ -45,5 +51,31 @@ public class Information {
 	}
 
 
-	
+	public LightPost getLightPost() {
+		return lightPost;
+	}
+
+	public void setLightPost(LightPost lightPost) {
+		this.lightPost = lightPost;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof Information )) {
+			return false;
+		}
+		return id != null && id.equals(((Information) o).id);
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 1;
+		hash = hash * 17 + id;
+		hash = hash * 31 + name.hashCode();
+		hash = hash * 13 + (lightPost == null ? 0 :(int)((double)lightPost.getId()));
+		return hash;
+	}
+
+
+
 }
