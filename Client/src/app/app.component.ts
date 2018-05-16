@@ -21,6 +21,7 @@ import { InformationTabsComponent } from '../components/information-tabs/informa
 
 
 
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -34,16 +35,16 @@ export class MyApp {
 
   constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController, private lightPostProvider: LightPostProvider, private informationProvider: InformationProvider) {
     this.initializeApp();
-   if(this.platform.is('cordova')){
-     this.platform.ready().then(() => {
-       this.localNotification.on("click").subscribe(noti => {
-         this.fb.getLoginStatus().then(res => {
-           if (res.status === "connected") {
-             this.nav.push(InformationPage);
-           }
-         })
-       });
-     });
+    if(this.platform.is('cordova')){
+      this.platform.ready().then(() => {
+        this.localNotification.on("click").subscribe(noti => {
+          this.fb.getLoginStatus().then(res => {
+            if (res.status === "connected") {
+              this.nav.push(InformationPage);
+            }
+          })
+        });
+      });
    }
 
     // used for an example of ngFor and navigation
@@ -51,9 +52,9 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'Information view', component: InformationTabsComponent },
       { title: 'Notifications', component: NotificationsPage },
-      { title: 'My profile', component: MyProfilePage }, 
+      { title: 'My profile', component: MyProfilePage },
       { title: 'Rules', component: RulesPage },
-      
+
 
     ];
 
@@ -112,30 +113,32 @@ export class MyApp {
 
   simulateBluetooth() {
     var mark = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
-    if (!mark.visited) {
+    if (mark != null) {
       this.informationProvider.currentLightPost = mark.id;
       this.dailyRoutesProvider.addDailyMarker(mark);
       this.MyProvider.tapEvent()
-      this.localNotification.requestPermission();
-      this.localNotification.hasPermission().then(res => {
-        console.log(res);
-        if (res) {
-          this.localNotification.schedule({
-            id: mark.id,
-            title: "Test",
-            text: 'Test1',
-          });
-        } else {
-          let alert = this.alert.create({
-            title: "Notifications not allowed",
-            buttons: ['Dismiss']
+      if(this.platform.is('cordova')){
+        this.localNotification.requestPermission();
+        this.localNotification.hasPermission().then(res => {
+          if (res) {
+            this.localNotification.schedule({
+              id: mark.id,
+              title: "Lightpost connected",
+              text: 'Click to get information',
             });
-            alert.present();
-        }
-      })
+          }
+        });
+      } else {
+        console.log("Cordova not available, notification skipped");
+        this.nav.push(InformationPage);
+      }
     } else {
-      console.log("test");
-    }
+      let alert = this.alert.create({
+        title: "All lightposts visited",
+        buttons: ['Dismiss']
+        });
+        alert.present();
+    }    
   }
 
   openPage(page) {

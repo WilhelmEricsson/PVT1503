@@ -42,12 +42,42 @@ export class DailyRoutesPage {
 
   loadMarkers() {
     var list = this.dailyRoutesProvider.getDailylMarkers();
+    var pathList: any[] = [];
+    var currentLatLng;
+    var counter = 0;
     for (let m of list) {
       var mark = <CustomMarker> m;
-      var marker = new google.maps.Marker({
-        position: (new google.maps.LatLng(mark.getLat(), mark.getLng())), map: this.map, icon: "assets/imgs/lyktstolpar/lila2.png"
-      })
+      currentLatLng = new google.maps.LatLng(mark.getLat(), mark.getLng());
+      if (counter == 0) {
+        new google.maps.Marker({
+          position: currentLatLng,
+          map: this.map,
+          icon: "assets/imgs/lyktstolpar/lykstolpestart.png"
+        });
+      } else if (counter == list.length - 1) {
+        new google.maps.Marker({
+          position: currentLatLng,
+          map: this.map,
+          icon: "assets/imgs/lyktstolpar/lyktstolpefinish.png"
+        });
+      } else {
+        new google.maps.Marker({
+          position: currentLatLng,
+          map: this.map,
+          icon: "assets/imgs/lyktstolpar/lila2.png"
+        });
+      }
+      pathList.push(currentLatLng);
+      counter++;
     }
+    var path = new google.maps.Polyline({
+      path: pathList,
+      geodesic: true,
+      strokeColor: '#0000FF',
+      strokeOpacity: 1.0,
+      strokeWeight: 2
+    });
+    path.setMap(this.map);
   }  
 
   clearMarkers() {
