@@ -43,8 +43,14 @@ export class DailyRoutesProvider {
   }
 
   chooseRandomMarker() {
-    let rnd: number = Math.floor(Math.random() * allMarkers.length);
-    return allMarkers[rnd];
+    let rnd: number;
+    for (var i = 0; i < allMarkers.length; i++) {
+      console.log(i)
+      rnd = Math.floor(Math.random() * allMarkers.length);
+      var temp = <CustomMarker> allMarkers[rnd];
+      if (!temp.visited) {
+        return temp;
+      } 
+    }
   }
-
 }

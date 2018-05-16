@@ -111,7 +111,7 @@ export class MyApp {
 
   simulateBluetooth() {
     var mark = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
-    if (!mark.visited) {
+    if (mark != null) {
       this.informationProvider.currentLightPost = mark.id;
       this.dailyRoutesProvider.addDailyMarker(mark);
       this.MyProvider.tapEvent()
@@ -132,7 +132,7 @@ export class MyApp {
       }
     } else {
       let alert = this.alert.create({
-        title: "Lightpost already visited",
+        title: "All lightposts visited",
         buttons: ['Dismiss']
         });
         alert.present();
