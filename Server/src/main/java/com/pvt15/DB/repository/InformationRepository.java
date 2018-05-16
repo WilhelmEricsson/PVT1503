@@ -20,5 +20,7 @@ public interface InformationRepository extends CrudRepository<Information, Integ
     List<Information> findByName(@Param("name") String name);
     List<Information> findById(@Param("id") int id);
 
+    List<Information> findByLightPostId(@Param("lightPost_id") Long lightPostId);
+
 
 }
