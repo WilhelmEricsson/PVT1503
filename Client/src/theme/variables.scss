@@ -34,18 +34,17 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary: black,
+  primary: grey,
   secondary:  #FFE300,
   danger:     #f53d3d,
   light:      #0a9673,
   dark:      black,
   test: white,
   blue: rgb(47, 0, 255),
-  grey:  rgb(90, 90, 90)
 );
 
 $tabs-tab-color-active: color($colors, secondary);
-$tabs-background: color($colors, grey);
+$tabs-background: color($colors, primary);
 $background-color: color($colors, test);
 $list-border-color: color($colors, dark);
 $text-color: black;
