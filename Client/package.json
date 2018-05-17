@@ -48,6 +48,7 @@
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-whitelist": "^1.3.3",
     "cordova-plugin-x-socialsharing": "^5.4.0",
+    "cordova-sqlite-storage": "^2.3.1",
     "de.appplant.cordova.plugin.local-notification": "^0.8.5",
     "es6-promise-plugin": "^4.2.2",
     "geolocation-marker": "^2.0.5",
@@ -90,7 +91,8 @@
       "phonegap-plugin-local-notification": {},
       "cordova-plugin-geolocation": {},
       "cordova-plugin-x-socialsharing": {},
-      "cordova-plugin-advanced-http": {}
+      "cordova-plugin-advanced-http": {},
+      "cordova-sqlite-storage": {}
     },
     "platforms": [
       "browser",
