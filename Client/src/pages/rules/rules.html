@@ -14,31 +14,14 @@
 </ion-header>
 
 
-<ion-content padding>
-  <div class="wrapper1">
-    
-    <h6>Welcome to Stockholm Light Pursuit!</h6>
-  </div>
+<ion-content >
+  <ion-slides pager = "true">
 
-  <h6> This is a guide for you tourists that like walking around in Stockholm. If you want to learn more about Stockholm look
-    after purple coloured street lights.
-    <br>
+   <ion-slide *ngFor="let slide of slider">
+     <img [src] = "slide.image">
+     <h2 [innerHTML] = "slide.title"></h2>
 
-    <br> There is a map where you can see position of the street lights that are containing information about Stockholm.
-    <br>
-
-    <br>All you need to do is to find a street light that is purple, go to it and connect to it via Bluetooth on your phone.
-    The information then will be shown on a display.
-    <br>
-
-    <br> You can visit as many street lights as you want and then you can share your daily routes on Facebook. </h6>
-
-
-  <div class="wrapper1">
-
-    <h6>Good luck!</h6>
-  </div>
-
-<button ion-button round large item-start color="dark" full=true (click)="Continue()">Continue</button>
-
+   </ion-slide>
+  </ion-slides>
+ 
 </ion-content>
