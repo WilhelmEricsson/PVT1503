@@ -41,7 +41,7 @@ export class DailyRoutesPage {
   }
 
   loadMarkers() {
-    var list = this.dailyRoutesProvider.getDailylMarkers();
+    var list = this.dailyRoutesProvider.getDailyMarkers();
     var pathList: any[] = [];
     var currentLatLng;
     var counter = 0;
@@ -78,7 +78,9 @@ export class DailyRoutesPage {
       strokeWeight: 2
     });
     path.setMap(this.map);
+    
   }  
+  
 
   clearMarkers() {
     this.dailyRoutesProvider.clearDailyRouteMarkers();

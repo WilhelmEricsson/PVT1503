@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CustomMarker } from '../CustomMarker';
+import { Storage } from '@ionic/storage';
 
 /*
   Generated class for the DailyRouteProvider provider.
@@ -14,32 +15,47 @@ var dailyRouteMarkers: any[] = [];
 @Injectable()
 export class DailyRoutesProvider {
   
-  constructor(public http: HttpClient) {
-  }
-
-  addMarker(mark: CustomMarker) {
-    allMarkers.push(mark);
+  constructor(public http: HttpClient, private storage: Storage) {
   }
 
   addDailyMarker(mark: CustomMarker) {
+    dailyRouteMarkers = [];
+    this.getDailyMarkersFromStorage();
     dailyRouteMarkers.push(mark);
     mark.toggleVisited();
+    this.storage.set("dailyRoute", dailyRouteMarkers);
   }
 
   clearDailyRouteMarkers() {
+    dailyRouteMarkers = [];
+    this.getDailyMarkersFromStorage();
     for (let m of dailyRouteMarkers) {
       var mark = <CustomMarker> m;
       mark.toggleVisited();
     }
     dailyRouteMarkers = [];
+    this.storage.set("dailyRoute", dailyRouteMarkers);
+  }
+
+  getDailyMarkersFromStorage() {
+    this.storage.get("dailyRoute").then((val) => {
+      dailyRouteMarkers = val;
+    });
+  }
+
+  getDailyMarkers() {
+    dailyRouteMarkers = [];
+    this.getDailyMarkersFromStorage();
+    return dailyRouteMarkers;
+  }
+
+  //All markers
+  addMarker(mark: CustomMarker) {
+    allMarkers.push(mark);
   }
 
   getallMarkers() {
     return allMarkers;
-  }
-
-  getDailylMarkers() {
-    return dailyRouteMarkers;
   }
 
   chooseRandomMarker() {
