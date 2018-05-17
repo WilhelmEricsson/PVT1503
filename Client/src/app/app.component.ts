@@ -130,7 +130,7 @@ export class MyApp {
         });
       } else {
         console.log("Cordova not available, notification skipped");
-        this.nav.push(InformationPage);
+        this.nav.push(InformationTabsComponent);
       }
     } else {
       let alert = this.alert.create({
