@@ -16,6 +16,8 @@ import { MyProvider } from "../providers/my/my";
 import { RulesPage } from '../pages/rules/rules';
 import { LightPostProvider } from '../providers/light-post/light-post';
 import {InformationProvider} from "../providers/information/information";
+import {Cordova} from "ionic-native";
+import { InformationTabsComponent } from '../components/information-tabs/information-tabs';
 
 
 
@@ -48,7 +50,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'Information view', component: InformationPage },
+      { title: 'Information view', component: InformationTabsComponent },
       { title: 'Notifications', component: NotificationsPage },
       { title: 'My profile', component: MyProfilePage },
       { title: 'Rules', component: RulesPage },
@@ -111,7 +113,7 @@ export class MyApp {
 
   simulateBluetooth() {
     var mark = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
-    if (!mark.visited) {
+    if (mark != null) {
       this.informationProvider.currentLightPost = mark.id;
       this.dailyRoutesProvider.addDailyMarker(mark);
       this.MyProvider.tapEvent()
@@ -128,11 +130,11 @@ export class MyApp {
         });
       } else {
         console.log("Cordova not available, notification skipped");
-        this.nav.push(InformationPage);
+        this.nav.push(InformationTabsComponent);
       }
     } else {
       let alert = this.alert.create({
-        title: "Lightpost already visited",
+        title: "All lightposts visited",
         buttons: ['Dismiss']
         });
         alert.present();

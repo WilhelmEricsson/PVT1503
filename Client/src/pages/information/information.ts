@@ -11,7 +11,7 @@ import { InformationProvider } from '../../providers/information/information';
 export class InformationPage {
 
 
-  users: any;
+  information: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public informationProvider: InformationProvider) {
 
@@ -27,15 +27,16 @@ export class InformationPage {
   getInformation() {
     this.informationProvider.getInformation()
     .then(data => {
-      this.users = data;
-      console.log(this.users);
+      this.information = data;
+      console.log(this.information);
     });
   }
   getInformationByLightPostId(id: number) {
     this.informationProvider.getInformationByLightPostId(id)
       .then(data => {
-        this.users = data;
-        console.log(this.users);
+        this.information = data;
+        
+        console.log(this.information);
       });
   }
 
