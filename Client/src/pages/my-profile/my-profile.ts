@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 
 /**
@@ -17,12 +17,17 @@ import { Facebook } from '@ionic-native/facebook';
 export class MyProfilePage {
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private fb: Facebook) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private fb: Facebook, private platform: Platform) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyProfilePage');
-    this.testGetFacebookData()
+    if(this.platform.is('cordova')){
+      this.testGetFacebookData()
+    }else{
+
+    }
+
   }
 
   testGetFacebookData() {
@@ -35,6 +40,10 @@ export class MyProfilePage {
         })
       }
     })
+  }
+
+  testGetDBName(){
+
   }
 
 }
