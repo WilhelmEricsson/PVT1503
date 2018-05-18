@@ -16,7 +16,6 @@ import { MyProvider } from "../providers/my/my";
 import { RulesPage } from '../pages/rules/rules';
 import { LightPostProvider } from '../providers/light-post/light-post';
 import {InformationProvider} from "../providers/information/information";
-import {Cordova} from "ionic-native";
 import { InformationTabsComponent } from '../components/information-tabs/information-tabs';
 
 
@@ -138,7 +137,7 @@ export class MyApp {
         buttons: ['Dismiss']
         });
         alert.present();
-    }    
+    }
   }
 
   openPage(page) {

@@ -59,6 +59,7 @@ import { RulesPage } from '../pages/rules/rules';
 import { InformationProvider } from '../providers/information/information';
 import { InformationTabsComponent } from '../components/information-tabs/information-tabs';
 import { SavedInformationPage } from '../pages/saved-information/saved-information';
+import { MyProfileProvider } from '../providers/my-profile/my-profile';
 
 
 
@@ -144,7 +145,8 @@ export function jwtOptionsFactory(storage: Storage) {
     MyProvider,
     DailyRoutesProvider,
     LightPostProvider,
-    InformationProvider
+    InformationProvider,
+    MyProfileProvider
   ]
 })
 export class AppModule { }
