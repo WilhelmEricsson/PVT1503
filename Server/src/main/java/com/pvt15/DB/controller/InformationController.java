@@ -38,8 +38,8 @@ public class InformationController {
         return informationRepository.findAll();
     }
     @GetMapping("/lightposts/")
-    public @ResponseBody Iterable<Information> getInformationByLightPostId(@RequestParam Long lightPostId) {
-        return informationRepository.findByLightPostId(lightPostId);
+    public @ResponseBody Iterable<Information> getInformationByLightPostId(@RequestParam String lightPostId) {
+        return informationRepository.findByLightPostId(Long.parseLong(lightPostId));
     }
 
 
