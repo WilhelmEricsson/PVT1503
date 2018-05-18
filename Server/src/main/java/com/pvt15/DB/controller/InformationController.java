@@ -32,7 +32,7 @@ public class InformationController {
         return "Saved";
     }
 
-    @GetMapping()
+    @GetMapping("/all")
     public @ResponseBody Iterable<Information> getAllInformation() {
         // This returns a JSON or XML with the users
         return informationRepository.findAll();
