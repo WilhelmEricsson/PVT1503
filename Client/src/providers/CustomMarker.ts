@@ -11,15 +11,9 @@ export class CustomMarker {
         this.visited = false;
     }
 
-    toggleVisited() {
+    public toggleVisited() {
        this.visited = !this.visited;
     }
 
-    getLat() {
-        return this.lat;
-    }
-
-    getLng() {
-        return this.lng;
-    }
+    
 }

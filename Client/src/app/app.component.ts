@@ -18,6 +18,7 @@ import { LightPostProvider } from '../providers/light-post/light-post';
 import {InformationProvider} from "../providers/information/information";
 import {Cordova} from "ionic-native";
 import { InformationTabsComponent } from '../components/information-tabs/information-tabs';
+import { Storage } from '@ionic/storage';
 
 
 
@@ -33,7 +34,7 @@ export class MyApp {
   pages: Array<{ title: string, component: any }>;
 
 
-  constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController, private lightPostProvider: LightPostProvider, private informationProvider: InformationProvider) {
+  constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController, private lightPostProvider: LightPostProvider, private informationProvider: InformationProvider, private storage: Storage) {
     this.initializeApp();
     if(this.platform.is('cordova')){
       this.platform.ready().then(() => {
@@ -80,6 +81,16 @@ export class MyApp {
       this.splashScreen.hide();
     });
     this.getLightposts();
+    this.storage.get("dailyRoute").then((list) => {
+      if (list!=null) {
+        console.log("storage found")
+        console.log(list);
+      } else {
+        console.log("storage not found, creating key")
+        var temp: CustomMarker[] = [];
+        this.storage.set("dailyRoute", temp);
+      }
+    });
   }
 
   logOut(){
@@ -112,7 +123,7 @@ export class MyApp {
   }
 
   simulateBluetooth() {
-    var mark = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
+    var mark: CustomMarker = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
     if (mark != null) {
       this.informationProvider.currentLightPost = mark.id;
       this.dailyRoutesProvider.addDailyMarker(mark);
@@ -130,8 +141,8 @@ export class MyApp {
         });
       } else {
         console.log("Cordova not available, notification skipped");
-        this.nav.push(InformationTabsComponent);
       }
+      this.nav.push(InformationTabsComponent);
     } else {
       let alert = this.alert.create({
         title: "All lightposts visited",
