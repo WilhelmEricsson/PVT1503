@@ -18,7 +18,9 @@ export class RulesPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
-
+  Continue(){
+    this.navCtrl.setRoot(HomePage);
+  }
   
 
   
