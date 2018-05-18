@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import {SERVER_URL} from "../../config";
 
 var allInformation: any[] = [];
 
 @Injectable()
 export class InformationProvider {
 
-  apiUrl = 'http://localhost:8080';
+  apiUrl = SERVER_URL;
   currentLightPost: number;
 
   constructor(public http: HttpClient) {
@@ -21,7 +21,7 @@ export class InformationProvider {
     }
 
   }
-  
+
   getArray(){
     return allInformation;
   }
@@ -53,7 +53,7 @@ export class InformationProvider {
     }
     console.log(data)
   }
-  
+
 
 
 }
