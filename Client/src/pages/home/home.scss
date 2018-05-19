@@ -5,7 +5,20 @@ page-home {
 
    .lamp {
     margin:0 auto;
-    position: relative;
+    position: center;
     height: 250px; 
     }
+    ion-content {
+        background-image: url('../assets/imgs/DarkPurple.jpg');
+        background-size: cover;
+    }
+    //ion-content {
+    //    background-color: yellow;
+    //}
+    .toolbar-background {
+        background-color: rgb(19, 19, 39);
+      }
+      .toolbar-title.toolbar-title-md, 
+      .toolbar-title.toolbar-title-ios, 
+      .toolbar-title.toolbar-title-wp { color: yellow; }
 }
