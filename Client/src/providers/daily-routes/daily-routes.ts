@@ -10,7 +10,8 @@ import { AlertController } from 'ionic-angular';
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
-var allMarkers: any[] = [];
+var allMarkers: CustomMarker[] = [];
+var currentLocalStorage: CustomMarker[] = [];
 
 @Injectable()
 export class DailyRoutesProvider {
@@ -24,6 +25,7 @@ export class DailyRoutesProvider {
       list.push(mark);
       this.storage.set("dailyRoute", list);
     });
+    currentLocalStorage.push(mark);
   }
 
   clearDailyRouteMarkers() {
@@ -31,6 +33,22 @@ export class DailyRoutesProvider {
       list = [];
       this.storage.set("dailyRoute", list);
     });
+    for (let m of currentLocalStorage) {
+      if (m instanceof CustomMarker) {
+        console.log(m.id + " cleared")
+        var mark = m as CustomMarker;
+        mark.toggleVisited();
+      }
+    }
+    currentLocalStorage = [];
+  }
+
+  setCurrentLocalStorage(list) {
+    currentLocalStorage = list;
+  }
+
+  getCurrentStorage() {
+    return currentLocalStorage;
   }
 
   //All markers
@@ -43,13 +61,23 @@ export class DailyRoutesProvider {
   }
 
   chooseRandomMarker() {
+    let allTested: number[] = [];
     let rnd: number;
-    for (var i = 0; i < allMarkers.length; i++) {
+    do {
       rnd = Math.floor(Math.random() * allMarkers.length);
-      var temp = <CustomMarker> allMarkers[rnd];
-      if (!temp.visited) {
-        return temp;
-      } 
-    }
+      var alreadyTested = false;
+      for (let n of allTested) {
+        if (n==rnd) {
+          alreadyTested = true;
+        }
+      }
+      if (!alreadyTested) {
+        var temp = <CustomMarker> allMarkers[rnd];
+        if (!temp.visited) {
+          return temp;
+        } 
+      }
+      allTested.push(rnd);
+    } while (allTested.length <= allMarkers.length)
   }
 }

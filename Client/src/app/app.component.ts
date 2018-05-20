@@ -82,8 +82,9 @@ export class MyApp {
     this.getLightposts();
     this.storage.get("dailyRoute").then((list) => {
       if (list!=null) {
-        console.log("storage found")
         console.log(list);
+        console.log("^Storage found")
+        this.dailyRoutesProvider.setCurrentLocalStorage(list);
       } else {
         console.log("storage not found, creating key")
         var temp: CustomMarker[] = [];
@@ -116,6 +117,12 @@ export class MyApp {
     this.lightPostProvider.getLightPosts().subscribe(data => {
       for (let l of data) {
         var mark = new CustomMarker(l.id,l.location.geoLocationLat, l.location.geoLocationLang);
+        for (let m of this.dailyRoutesProvider.getCurrentStorage()) {
+          if (mark.id == m.id) {
+            mark.toggleVisited();
+            break;
+          }
+        }
         this.dailyRoutesProvider.addMarker(mark);
       }
     });

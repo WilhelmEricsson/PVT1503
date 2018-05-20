@@ -32,6 +32,8 @@ export class DailyRoutesPage {
 
   ionViewWillEnter() {
     this.loadMap();
+    console.log(this.dailyRoutesProvider.getCurrentStorage())
+    console.log("^Current local storage")
   }
 
   loadMap() {
@@ -48,9 +50,9 @@ export class DailyRoutesPage {
     var pathList: any[] = [];
     var currentLatLng;
     var counter = 0;
-    this.storage.get("dailyRoute").then((val) => {
-      for (let m of val) {
-        var mark = <CustomMarker> m;
+    this.storage.get("dailyRoute").then((list) => {
+      for (let m of list) {
+        var mark = m as CustomMarker;
         currentLatLng = new google.maps.LatLng(mark.lat, mark.lng);
         if (counter == 0) {
           new google.maps.Marker({
@@ -58,7 +60,7 @@ export class DailyRoutesPage {
             map: this.map,
             icon: "assets/imgs/lyktstolpar/lykstolpestart.png"
           });
-        } else if (counter == val.length - 1) {
+        } else if (counter == list.length - 1) {
           new google.maps.Marker({
             position: currentLatLng,
             map: this.map,
@@ -71,11 +73,14 @@ export class DailyRoutesPage {
             icon: "assets/imgs/lyktstolpar/lila2.png"
           });
         }
-        pathList.push(currentLatLng);
         counter++;
       }
-      console.log(pathList)
     });
+    for (let m of this.dailyRoutesProvider.getCurrentStorage()) {
+      var mark = m as CustomMarker;
+      currentLatLng = new google.maps.LatLng(mark.lat, mark.lng);
+      pathList.push(currentLatLng);
+    }
     var path = new google.maps.Polyline({
       path: pathList,
       geodesic: true,
@@ -90,7 +95,7 @@ export class DailyRoutesPage {
 
   clearMarkers() {
     this.dailyRoutesProvider.clearDailyRouteMarkers();
-    this.storage.get("dailyRoute").then((val) => {
+    this.storage.get("dailyRoute").then((list) => {
       this.loadMap();
     });
   }
