@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CustomMarker } from '../CustomMarker';
 import { Storage } from '@ionic/storage';
+import { AlertController } from 'ionic-angular';
 
 /*
   Generated class for the DailyRouteProvider provider.
@@ -10,43 +11,26 @@ import { Storage } from '@ionic/storage';
   and Angular DI.
 */
 var allMarkers: any[] = [];
-var dailyRouteMarkers: any[] = [];
 
 @Injectable()
 export class DailyRoutesProvider {
   
-  constructor(public http: HttpClient, private storage: Storage) {
+  constructor(public http: HttpClient, private storage: Storage, private alert: AlertController) {
   }
 
   addDailyMarker(mark: CustomMarker) {
-    dailyRouteMarkers = [];
-    this.getDailyMarkersFromStorage();
-    dailyRouteMarkers.push(mark);
     mark.toggleVisited();
-    this.storage.set("dailyRoute", dailyRouteMarkers);
-  }
-
-  clearDailyRouteMarkers() {
-    dailyRouteMarkers = [];
-    this.getDailyMarkersFromStorage();
-    for (let m of dailyRouteMarkers) {
-      var mark = <CustomMarker> m;
-      mark.toggleVisited();
-    }
-    dailyRouteMarkers = [];
-    this.storage.set("dailyRoute", dailyRouteMarkers);
-  }
-
-  getDailyMarkersFromStorage() {
-    this.storage.get("dailyRoute").then((val) => {
-      dailyRouteMarkers = val;
+    this.storage.get("dailyRoute").then((list) => {
+      list.push(mark);
+      this.storage.set("dailyRoute", list);
     });
   }
 
-  getDailyMarkers() {
-    dailyRouteMarkers = [];
-    this.getDailyMarkersFromStorage();
-    return dailyRouteMarkers;
+  clearDailyRouteMarkers() {
+    this.storage.get("dailyRoute").then((list) => {
+      list = [];
+      this.storage.set("dailyRoute", list);
+    });
   }
 
   //All markers
@@ -61,7 +45,6 @@ export class DailyRoutesProvider {
   chooseRandomMarker() {
     let rnd: number;
     for (var i = 0; i < allMarkers.length; i++) {
-      console.log(i)
       rnd = Math.floor(Math.random() * allMarkers.length);
       var temp = <CustomMarker> allMarkers[rnd];
       if (!temp.visited) {

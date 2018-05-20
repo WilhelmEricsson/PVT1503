@@ -106,9 +106,9 @@ export class MapPage {
   placePins() {
     var list = this.dailyRoutesProvider.getallMarkers();
     for (let m of list) {
-      var mark = <CustomMarker>m;
+      var mark = <CustomMarker> m;
       var lightpost = new google.maps.Marker({
-        position: (new google.maps.LatLng(mark.getLat(), mark.getLng())), map: this.map, icon: "assets/imgs/lyktstolpar/lila2.png"
+        position: (new google.maps.LatLng(mark.lat, mark.lng)), map: this.map, icon: "assets/imgs/lyktstolpar/lila2.png"
       });
     }
   }
