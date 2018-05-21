@@ -37,10 +37,13 @@ $colors: (
   primary: grey,
   secondary:  #FFE300,
   danger:     #f53d3d,
-  light:      #0a9673,
-  dark:      black,
-  test: white,
-  blue: rgb(47, 0, 255),
+  light:      #f4f4f4,
+  dark:       #222,
+  yellow:     #E6FF7F,
+  yellow2:    #FFF800,
+  orange:   rgb(255, 0, 0),
+  blue:       #327eff,
+  test: white
 );
 
 $tabs-tab-color-active: color($colors, secondary);

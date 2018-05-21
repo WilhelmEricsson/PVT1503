@@ -5,8 +5,23 @@ page-home {
 
    .lamp {
     margin:0 auto;
-    position: relative;
-    height: 250px; 
+    position: center;
+    height: 220px; 
+    box-shadow: -1px 0px 10px rgba(0, 0, 0, 0.5);
     }
    
+    ion-content {
+        background-image: url('../assets/imgs/DarkPurple.jpg');
+        background-size: cover;
+    }
+    //ion-content {
+    //    background-color: yellow;
+    //}
+    .toolbar-background{
+        //background-image: url('../assets/imgs/DarkPurple.jpg');
+        background-color: rgb(68, 13, 68);
+      }
+      .toolbar-title.toolbar-title-md, 
+      .toolbar-title.toolbar-title-ios, 
+      .toolbar-title.toolbar-title-wp { color: yellow; }
 }

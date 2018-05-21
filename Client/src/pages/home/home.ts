@@ -10,6 +10,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import { SERVER_URL } from "../../config";
 import { AuthProvider } from "../../providers/auth/auth";
 import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs/observable";
 import { SocialSharing } from "@ionic-native/social-sharing";
 import { DailyRoutesProvider } from '../../providers/daily-routes/daily-routes';
 import { CustomMarker } from '../../providers/CustomMarker';
@@ -19,19 +20,18 @@ import { PhonegapLocalNotification } from "@ionic-native/phonegap-local-notifica
 import { Push, PushObject, PushOptions} from '@ionic-native/push'
 
 
-import { Observable } from "rxjs/Observable";
-
-
-
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
 
-      result: any = [];
-      data: Observable<any>;
+  rainResult: any = [];
+  temperature: any = [];
+  icon: any = [];
+  data: Observable<any>;
+
+  connected: boolean = true;
 
   
   user: string;
@@ -52,17 +52,42 @@ export class HomePage {
       }
     });
   }
- 
-  
-  getData(){
-    var url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.178/lat/59.211/data.json`;  
+
+  ionViewDidLoad() {
+    this.getWeather();
+  }
+
+  getWeather() {
+    var url = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.178/lat/59.211/data.json';
     this.data = this.httpClient.get(url);
-    this.data.subscribe(data=>{
-      this.result = JSON.stringify(data.timeSeries[0].parameters[11].values[0], null, 2);
-        })
+    this.data.subscribe(data=> {
+      this.temperature = JSON.stringify(data.timeSeries[1].parameters[11].values[0],null, 2);
+      var i;
+      var rain = 0;
+      var rainArray = [];
+      for (i=0 ; i<5 ; i++) {
+        rainArray [i] = JSON.stringify(data.timeSeries[i+1].parameters[2].values[0],null, 2);
+        if (rainArray [i] != "0") {
+          rain = 1;
+        }
       }
 
-  
+      if (rain==1) {
+        this.rainResult = 'Risk for rain';
+      } else this.rainResult = 'Clear skies';
+      
+      this.icon = JSON.stringify(data.timeSeries[1].parameters[18].values[0],null, 2);
+      var iconImage;
+      if (this.icon==1) {
+        iconImage = document.getElementById("iconImage") as HTMLImageElement;
+        iconImage.src="assets/imgs/Sun icon.png";
+      }
+      if (this.icon==2) {
+        iconImage = document.getElementById("iconImage") as HTMLImageElement;
+        iconImage.src="assets/imgs/Rain icon.png";
+      }
+    })
+  }
 
   AchievmentController() {
     this.navCtrl.push(AchievmentPage)
