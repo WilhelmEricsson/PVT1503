@@ -89,6 +89,7 @@ export class MyApp {
         console.log("storage not found, creating key")
         var temp: CustomMarker[] = [];
         this.storage.set("dailyRoute", temp);
+        this.dailyRoutesProvider.setCurrentLocalStorage(temp);
       }
     });
   }
@@ -117,12 +118,6 @@ export class MyApp {
     this.lightPostProvider.getLightPosts().subscribe(data => {
       for (let l of data) {
         var mark = new CustomMarker(l.id,l.location.geoLocationLat, l.location.geoLocationLang);
-        for (let m of this.dailyRoutesProvider.getCurrentStorage()) {
-          if (mark.id == m.id) {
-            mark.toggleVisited();
-            break;
-          }
-        }
         this.dailyRoutesProvider.addMarker(mark);
       }
     });
@@ -130,6 +125,7 @@ export class MyApp {
 
   simulateBluetooth() {
     var mark: CustomMarker = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
+    console.log(mark);
     if (mark != null) {
       this.informationProvider.currentLightPost = mark.id;
       this.dailyRoutesProvider.addDailyMarker(mark);
