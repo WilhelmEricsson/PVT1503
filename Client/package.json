@@ -60,6 +60,7 @@
     "npm": "^6.0.1",
     "phonegap-plugin-local-notification": "^1.0.1",
     "phonegap-plugin-push": "^2.2.2",
+    "rx-observable-update": "^1.0.0",
     "rxjs": "^5.5.10",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.26"

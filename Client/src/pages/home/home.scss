@@ -6,12 +6,37 @@ page-home {
    .lamp {
     margin:0 auto;
     position: center;
-    height: 250px; 
+    height: 220px; 
+    background-color: #7d5494;
+    border-radius:50%;
+    box-shadow: 0 0 0 10px #7d5494;
+    text-align: center;
     }
+   
     ion-content {
         background-image: url('../assets/imgs/DarkPurple.jpg');
         background-size: cover;
     }
+
+    /*ion-grid {
+        height: 100%;
+        justify-content: center;
+    }*/
+
+    .Absolute-Center {
+        width: 100%;
+        height: 100%;
+        //overflow: auto;
+        margin: auto;
+        position: absolute;
+        top: 10; left: 0; bottom: 0; right: 0;
+  }
+  .flex-col {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+    
     //ion-content {
     //    background-color: yellow;
     //}
@@ -22,4 +47,7 @@ page-home {
       .toolbar-title.toolbar-title-md, 
       .toolbar-title.toolbar-title-ios, 
       .toolbar-title.toolbar-title-wp { color: yellow; }
+      $toolbar-ios-title-text-align: center;
+
+      
 }
