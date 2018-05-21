@@ -18,6 +18,7 @@ import { CustomMarker } from '../../providers/CustomMarker';
 import { LocalNotifications } from '@ionic-native/local-notifications'
 import { PhonegapLocalNotification } from "@ionic-native/phonegap-local-notification";
 import { Push, PushObject, PushOptions} from '@ionic-native/push'
+import {number} from "ng2-validation/dist/number";
 
 
 @Component({
@@ -25,10 +26,18 @@ import { Push, PushObject, PushOptions} from '@ionic-native/push'
   templateUrl: 'home.html'
 })
 export class HomePage {
-  weatherIconArray: number[] = [1,1,1,1,2,2,2,3,3,3,4,5,5,5,5,5,5,3,3,3,4,5,5,5,5,5,5];
-    rainResult: any = [];
+
+  /*
+    weatherIconArray nummerförklaring
+    1 = Sol bild, 2 = sol och moln, 3 = moln bild, 4 = Regn bild, 5 = åska bild,6 = snö bild
+   */
+  weatherIconArray: number[] = [1,1,2,2,3,3,3,4,4,4,5,6,6,6,6,6,6,4,4,4,5,6,6,6,6,6,6];
+  weatherDescription: string[] = ["Clear sky","Nearly clear sky", "Variable cloudiness","Halfclear sky", "Cloudy sky","Overcast","Fog", "Light rain showers", "Moderate rain showers", "Heavy rain showers",
+                                  "Thunderstorm", "Light sleet showers", "Moderate sleet showers", "Heavy sleet showers", "Light snow showers", "Moderate snow showers", "Heavy snow showers", "Light rain",
+                                  "Moderate rain", "Heavy rain", "Thunder", "Light sleet", "Moderate sleet", "Heavy sleet", "Light snowfall", "Moderate snowfall", "Heavy snowfall"];
+  rainResult: any = [];
   temperature: any = [];
-  icon: any = [];
+  weatherSymbol: any = [];
   data: Observable<any>;
 
   connected: boolean = true;
@@ -62,27 +71,33 @@ export class HomePage {
     this.data = this.httpClient.get(url);
     this.data.subscribe(data=> {
       this.temperature = JSON.stringify(data.timeSeries[1].parameters[11].values[0],null, 2);
-      var i;
+      this.weatherSymbol = JSON.stringify(data.timeSeries[1].parameters[18].values[0],null, 2);
+      this.rainResult = this.weatherDescription[this.weatherSymbol-1];
+      var iconImage = document.getElementById("weatherImg") as HTMLImageElement;
+          iconImage.src="assets/imgs/weather/weather" + this.weatherIconArray[this.weatherSymbol-1] + ".png";
+
+    })
+  }
+
+  riskForRain(){
+    this.data.subscribe(data=> {
       var rain = 0;
       var rainArray = [];
-      for (i=0 ; i<5 ; i++) {
+      for (var i =0 ; i<5 ; i++) {
         rainArray [i] = JSON.stringify(data.timeSeries[i+1].parameters[2].values[0],null, 2);
         if (rainArray [i] != "0") {
           rain = 1;
         }
       }
 
-      if (rain==1) {
-        this.rainResult = 'Risk for rain';
-      } else this.rainResult = 'Clear skies';
-
-      this.icon = JSON.stringify(data.timeSeries[1].parameters[18].values[0],null, 2);
-      console.log("assets/imgs/weather/weather" + this.weatherIconArray[this.icon])
-      var iconImage = document.getElementById("weatherImg") as HTMLImageElement;
-          iconImage.src="assets/imgs/weather/weather" + this.weatherIconArray[this.icon] + ".png";
-
+       if (rain==1) {
+         this.rainResult = 'Risk for rain';
+       } else this.rainResult = 'Clear skies';
     })
   }
+
+
+
 
   AchievmentController() {
     this.navCtrl.push(AchievmentPage)
