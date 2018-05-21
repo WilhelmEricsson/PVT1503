@@ -43,7 +43,8 @@ $colors: (
   yellow2:    #FFF800,
   orange:   rgb(255, 0, 0),
   blue:       #327eff,
-  test: white
+  test: white,
+  purple1:  rgb(68, 13, 68)
 );
 
 $tabs-tab-color-active: color($colors, secondary);
