@@ -6,7 +6,7 @@ var allInformation: any[] = [];
 
 @Injectable()
 export class InformationProvider {
-
+  infoFetched: boolean = false;
   apiUrl = SERVER_URL;
   currentLightPost: number;
 
@@ -40,11 +40,21 @@ export class InformationProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl+'/public/information/lightposts/'+id).subscribe(data => {
         resolve(data);
-        this.addToArray(data);
+        if(this.infoFetched !== true){
+          this.addToArray(data);
+          this.infoFetched = true;
+        }
+        
       }, err => {
         console.log(err);
       });
     });
+  }
+  setCurrentLightPost(newLightPostId: number){
+    if(this.currentLightPost !== newLightPostId){
+      this.infoFetched = false;
+      this.currentLightPost = newLightPostId;
+    }
   }
 
   addToArray(data){

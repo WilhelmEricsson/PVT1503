@@ -17,6 +17,9 @@ import { LightPostProvider } from '../providers/light-post/light-post';
 import {InformationProvider} from "../providers/information/information";
 import { InformationTabsComponent } from '../components/information-tabs/information-tabs';
 import { Storage } from '@ionic/storage';
+import { AchievementsProvider } from '../providers/achievements/achievements';
+import { Achievement } from '../providers/Achievement';
+import { Coupon } from '../providers/Coupon';
 
 
 
@@ -32,7 +35,7 @@ export class MyApp {
   pages: Array<{ title: string, component: any }>;
 
 
-  constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController, private lightPostProvider: LightPostProvider, private informationProvider: InformationProvider, private storage: Storage) {
+  constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController, private lightPostProvider: LightPostProvider, private informationProvider: InformationProvider, private storage: Storage, private achievementsProvider: AchievementsProvider) {
     this.initializeApp();
     if(this.platform.is('cordova')){
       this.platform.ready().then(() => {
@@ -78,18 +81,8 @@ export class MyApp {
       this.splashScreen.hide();
     });
     this.getLightposts();
-    this.storage.get("dailyRoute").then((list) => {
-      if (list!=null) {
-        console.log(list);
-        console.log("^Storage found")
-        this.dailyRoutesProvider.setCurrentLocalStorage(list);
-      } else {
-        console.log("storage not found, creating key")
-        var temp: CustomMarker[] = [];
-        this.storage.set("dailyRoute", temp);
-        this.dailyRoutesProvider.setCurrentLocalStorage(temp);
-      }
-    });
+    this.getLocalStorageDailyRoute();
+    this.getLocalStorageAchievements();
   }
 
   logOut(){
@@ -111,6 +104,37 @@ export class MyApp {
     }
   }
 
+  getLocalStorageDailyRoute() {
+    this.storage.get("dailyRoute").then((list) => {
+      if (list!=null) {
+        console.log(list);
+        console.log("^'Daily Route'-storage found")
+        this.dailyRoutesProvider.setCurrentLocalStorage(list);
+      } else {
+        console.log("'Daily Route'-storage not found, creating key")
+        var temp: CustomMarker[] = [];
+        this.storage.set("dailyRoute", temp);
+        this.dailyRoutesProvider.setCurrentLocalStorage(temp);
+      }
+    });
+  }
+
+  getLocalStorageAchievements() {
+    this.storage.get("achievements").then((list) => {
+      if (list!=null) {
+        console.log(list);
+        console.log("^'Achievement'-storage found")
+        this.achievementsProvider.setUsersAchievements(list);
+      } else {
+        console.log("'Achievement'-storage not found, creating key")
+        var temp: Achievement[] = [];
+        temp.push(new Achievement(new Coupon(this.achievementsProvider.randomizeCouponCode())));
+        this.achievementsProvider.setUsersAchievements(temp);
+        this.storage.set("achievements", temp);
+      }
+    });
+  }
+
   //hämtar alla stolpar från servern
   getLightposts() {
     this.lightPostProvider.getLightPosts().subscribe(data => {
@@ -125,9 +149,10 @@ export class MyApp {
     var mark: CustomMarker = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
     console.log(mark);
     if (mark != null) {
-      this.informationProvider.currentLightPost = mark.id;
+      this.informationProvider.setCurrentLightPost(mark.id);
       this.dailyRoutesProvider.addDailyMarker(mark);
-      this.MyProvider.tapEvent()
+      this.achievementsProvider.handleAchievement();
+      //this.MyProvider.tapEvent()
       if(this.platform.is('cordova')){
         this.localNotification.requestPermission();
         this.localNotification.hasPermission().then(res => {
@@ -142,6 +167,7 @@ export class MyApp {
       } else {
         console.log("Cordova not available, notification skipped");
       }
+      
       this.nav.push(InformationTabsComponent);
     } else {
       let alert = this.alert.create({
