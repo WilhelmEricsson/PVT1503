@@ -25,15 +25,15 @@ import { Push, PushObject, PushOptions} from '@ionic-native/push'
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-  rainResult: any = [];
+  weatherIconArray: number[] = [1,1,1,1,2,2,2,3,3,3,4,5,5,5,5,5,5,3,3,3,4,5,5,5,5,5,5];
+    rainResult: any = [];
   temperature: any = [];
   icon: any = [];
   data: Observable<any>;
 
   connected: boolean = true;
 
-  
+
   user: string;
   message: string;
 
@@ -41,7 +41,7 @@ export class HomePage {
     private readonly authProvider: AuthProvider,
     jwtHelper: JwtHelperService,
     private  httpClient: HttpClient, private dailyRoutesProvider: DailyRoutesProvider) {
-    
+
     this.authProvider.authUser.subscribe(jwt => {
       if (jwt) {
         const decoded = jwtHelper.decodeToken(jwt);
@@ -75,17 +75,12 @@ export class HomePage {
       if (rain==1) {
         this.rainResult = 'Risk for rain';
       } else this.rainResult = 'Clear skies';
-      
+
       this.icon = JSON.stringify(data.timeSeries[1].parameters[18].values[0],null, 2);
-      var iconImage;
-      if (this.icon==1) {
-        iconImage = document.getElementById("iconImage") as HTMLImageElement;
-        iconImage.src="assets/imgs/Sun icon.png";
-      }
-      if (this.icon==2) {
-        iconImage = document.getElementById("iconImage") as HTMLImageElement;
-        iconImage.src="assets/imgs/Rain icon.png";
-      }
+      console.log("assets/imgs/weather/weather" + this.weatherIconArray[this.icon])
+      var iconImage = document.getElementById("weatherImg") as HTMLImageElement;
+          iconImage.src="assets/imgs/weather/weather" + this.weatherIconArray[this.icon] + ".png";
+
     })
   }
 
@@ -97,7 +92,7 @@ export class HomePage {
     this.navCtrl.push(DailyRoutesPage)
   }
 
- 
+
 
   MapController() {
     this.navCtrl.push(MapPage);
@@ -122,6 +117,6 @@ export class HomePage {
   ShareController() {
     this.socialSharing.share("test2", null, "https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg", null);
   }
-  
+
 
 }
