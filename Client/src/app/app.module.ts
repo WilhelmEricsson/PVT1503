@@ -16,7 +16,6 @@ import { MapPage } from '../pages/map/map';
 import { LoginPage } from '../pages/login/login';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { EmailSignInPage } from '../pages/email-sign-in/email-sign-in';
-import { NotificationsPage } from '../pages/notifications/notifications';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { Facebook } from '@ionic-native/facebook';
 import { AchievmentPage } from '../pages/achievment/achievment';
@@ -81,7 +80,6 @@ export function jwtOptionsFactory(storage: Storage) {
     LoginPage,
     CreateAccountPage,
     EmailSignInPage,
-    NotificationsPage,
     MyProfilePage,
     AchievmentPage,
     DailyRoutesPage,
@@ -119,7 +117,6 @@ export function jwtOptionsFactory(storage: Storage) {
     LoginPage,
     CreateAccountPage,
     EmailSignInPage,
-    NotificationsPage,
     EmailSignInPage,
     MyProfilePage,
     AchievmentPage,
