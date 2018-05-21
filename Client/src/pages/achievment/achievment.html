@@ -14,11 +14,20 @@
 
 
 <ion-content padding>
-    <ion-card (MyProvider.tap)="MyProvider.tapEvent($event)">
+    <ion-item menuClose ion-item *ngFor="let a of usersAcheivements" (click)="handleAchievementClick()">
+        <p>Tap to show content!:</p>
+        {{a.getProgress()}} out of 10!
+    </ion-item>
+
+    <!--
+<ion-card (MyProvider.tap)="MyProvider.tapEvent($event)">
         <ion-item>
           <p>Tap to show coupon!:</p> 
           {{MyProvider.tap}} out of 10!
         </ion-item>
-      </ion-card>
+      </ion-card>>
+
+    -->
+    
 
 </ion-content>
