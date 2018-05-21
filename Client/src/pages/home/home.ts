@@ -9,6 +9,8 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/observable";
 import { SocialSharing } from "@ionic-native/social-sharing";
 import { DailyRoutesProvider } from '../../providers/daily-routes/daily-routes';
+import {WeatherForecastPage} from "../weather-forecast/weather-forecast";
+
 
 
 
@@ -61,6 +63,9 @@ export class HomePage {
   }
 
   presentWeatherForecast(){
+    const weatherForecastModal = this.modalController.create("WeatherForecastPage");
+    weatherForecastModal.present();
+
     console.log("TEST Weather Forecasts!");
   }
 
