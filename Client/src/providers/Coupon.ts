@@ -3,9 +3,9 @@ export class Coupon {
     title: string;
     subtitle: string;
 
-    constructor(code: string, title: string, subtitle: string) {
+    constructor(code: string) {
         this.code = code;
-        this.title = title;
-        this.subtitle = subtitle;
+        this.title = "Coupon!";
+        this.subtitle = "You got a coupon at Kungafamiljen. Show this code to the guards: ";
     }
 }
