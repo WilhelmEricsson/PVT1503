@@ -7,25 +7,23 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 
+
 //Pages
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { QuestionViewPage } from '../pages/question-view/question-view';
 import { MapPage } from '../pages/map/map';
-import { NewGamePage } from '../pages/new-game/new-game';
 import { LoginPage } from '../pages/login/login';
-import { AddFriendsPage } from '../pages/add-friends/add-friends';
-import { PlayFriendsPage } from '../pages/play-friends/play-friends';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { EmailSignInPage } from '../pages/email-sign-in/email-sign-in';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { Facebook } from '@ionic-native/facebook';
-import { AchievmentPage} from '../pages/achievment/achievment';
-import { DailyRoutesPage} from '../pages/daily-routes/daily-routes';
+import { AchievmentPage } from '../pages/achievment/achievment';
+import { DailyRoutesPage } from '../pages/daily-routes/daily-routes';
 import { Geolocation } from '@ionic-native/geolocation';
-import { ChooseGamePage } from "../pages/choose-game/choose-game";
 import { SignupPage } from "../pages/signup/signup";
+import { InformationPage } from '../pages/information/information';
 
 
 //Notifications
@@ -36,27 +34,39 @@ import { SocialSharing } from '@ionic-native/social-sharing'
 
 //Component
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
+import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
 
 //CustomForms
-import {CustomFormsModule} from 'ng2-validation';
+import { CustomFormsModule } from 'ng2-validation';
 
 //Storage
-import {Storage, IonicStorageModule} from "@ionic/storage";
+import { Storage, IonicStorageModule } from "@ionic/storage";
 
 //AuthProvider
 import { AuthProvider } from "../providers/auth/auth";
+//LightPostProvider
+import { LightPostProvider } from "../providers/light-post/light-post";
 
 //HttpClientModule
-import {HttpClientModule} from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 
 //JWTOptions
-import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
-import { LightPostProvider } from '../providers/light-post/light-post';
+import { JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
+import { MyProvider } from '../providers/my/my';
+
+import { DailyRoutesProvider } from '../providers/daily-routes/daily-routes';
+import { RulesPage } from '../pages/rules/rules';
+import { InformationProvider } from '../providers/information/information';
+import { InformationTabsComponent } from '../components/information-tabs/information-tabs';
+import { SavedInformationPage } from '../pages/saved-information/saved-information';
+import { MyProfileProvider } from '../providers/my-profile/my-profile';
+
+
 
 //Whitelisted URL's for authentication header
-export function jwtOptionsFactory(storage:Storage){
-  return{
-    tokenGetter: ()=>storage.get('jwt_token'),
+export function jwtOptionsFactory(storage: Storage) {
+  return {
+    tokenGetter: () => storage.get('jwt_token'),
     whitelistedDomains: ['localhost:8080']
   }
 }
@@ -68,10 +78,7 @@ export function jwtOptionsFactory(storage:Storage){
     HomePage,
     QuestionViewPage,
     MapPage,
-    NewGamePage,
     LoginPage,
-    AddFriendsPage,
-    PlayFriendsPage,
     CreateAccountPage,
     EmailSignInPage,
     NotificationsPage,
@@ -79,8 +86,12 @@ export function jwtOptionsFactory(storage:Storage){
     AchievmentPage,
     DailyRoutesPage,
     ProgressBarComponent,
-    ChooseGamePage,
     SignupPage,
+    RulesPage,
+    SignupPage,
+    InformationPage,
+    InformationTabsComponent,
+    SavedInformationPage
   ],
   imports: [
     BrowserModule,
@@ -93,8 +104,8 @@ export function jwtOptionsFactory(storage:Storage){
         deps: [Storage]
       }
     }),
-  IonicStorageModule.forRoot(),
-  CustomFormsModule,
+    IonicStorageModule.forRoot(),
+    CustomFormsModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -102,30 +113,40 @@ export function jwtOptionsFactory(storage:Storage){
     HomePage,
     QuestionViewPage,
     MapPage,
-    NewGamePage,
+
     LoginPage,
-    AddFriendsPage,
-    PlayFriendsPage,
+
+    LoginPage,
     CreateAccountPage,
-    EmailSignInPage, 
+    EmailSignInPage,
     NotificationsPage,
     EmailSignInPage,
     MyProfilePage,
     AchievmentPage,
     DailyRoutesPage,
-    ChooseGamePage,
     SignupPage,
+    RulesPage,
+    InformationPage,
+    InformationTabsComponent,
+    SavedInformationPage
   ],
+
   providers: [
     StatusBar,
     SplashScreen,
     LocalNotifications,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     Facebook,
     Geolocation,
+    PhonegapLocalNotification,
     AuthProvider,
     SocialSharing,
-    LightPostProvider
+    LightPostProvider,
+    MyProvider,
+    DailyRoutesProvider,
+    LightPostProvider,
+    InformationProvider,
+    MyProfileProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,6 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import {SERVER_URL} from "../../config";
+import 'rxjs/add/operator/do'
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/catch'
+import {Observable} from "rxjs/Observable";
 /*
   Generated class for the LightPostProvider provider.
 
@@ -9,9 +13,23 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class LightPostProvider {
+  private  url: string = SERVER_URL + "/public/resources/lightposts/";
 
-  constructor(public http: HttpClient) {
+  constructor(private http: HttpClient) {
     console.log('Hello LightPostProvider Provider');
+  }
+
+  getLightPosts(){
+    return this.http.get(this.url).do(this.logResponse).catch(this.catchError);
+  }
+
+  private catchError(error: HttpResponse<Error>){
+    console.log(error);
+    return Observable.throw(error.body.message || "Server Error fetching Light Posts!")
+  }
+
+  private logResponse(res: HttpResponse<any>){
+    console.log(res);
   }
 
 }

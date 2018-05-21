@@ -1,15 +1,9 @@
 
 <ion-header large>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button menuToggle color="yellow">
       <ion-icon name="menu"></ion-icon>
     </button>
-  
-      <ion-buttons end>
-          <button ion-button icon-only (click)="logout()">
-            <ion-icon name="exit"></ion-icon>
-          </button>
-        </ion-buttons>
 
     <ion-title>Stockholm<br>LightPursuit</ion-title>
   </ion-navbar>
@@ -41,9 +35,9 @@
         <ion-col col-6>
           <button ion-button round large item-start color="yellow2" full=true (click)="DailyRoutesController()">Daily Route</button>
         </ion-col>
-        <ion-col>
+    <!--    <ion-col>
           <button ion-button round large item-start color="primary" full=true (click)="ShareController()">Facebook share test</button>
-        </ion-col>
+        </ion-col> -->
       </ion-row>
     </ion-grid>
 

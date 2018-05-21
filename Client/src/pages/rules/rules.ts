@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { QuestionViewPage } from '../question-view/question-view';
+import {HomePage  } from "../home/home";
 
 /**
- * Generated class for the ChooseGamePage page.
+ * Generated class for the RulesPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,21 +11,20 @@ import { QuestionViewPage } from '../question-view/question-view';
 
 @IonicPage()
 @Component({
-  selector: 'page-choose-game',
-  templateUrl: 'choose-game.html',
+  selector: 'page-rules',
+  templateUrl: 'rules.html',
 })
-export class ChooseGamePage {
+export class RulesPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChooseGamePage');
+    console.log('ionViewDidLoad RulesPage');
   }
 
-  InformationController(){
-
+  Continue() {
+    this.navCtrl.setRoot(HomePage);
   }
-
 
 }

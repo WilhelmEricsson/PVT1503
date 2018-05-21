@@ -2,17 +2,24 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
 import { HomePage } from '../pages/home/home';
-import { QuestionViewPage } from '../pages/question-view/question-view';
 import { LoginPage } from '../pages/login/login';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { LocalNotifications } from '@ionic-native/local-notifications';
-import { ChooseGamePage } from '../pages/choose-game/choose-game';
 import { Facebook } from '@ionic-native/facebook';
 import {AuthProvider} from "../providers/auth/auth";
 import {InformationPage} from '../pages/information/information'
+import { DailyRoutesProvider } from '../providers/daily-routes/daily-routes';
+import { CustomMarker } from '../providers/CustomMarker';
+import { MyProvider } from "../providers/my/my";
+import { RulesPage } from '../pages/rules/rules';
+import { LightPostProvider } from '../providers/light-post/light-post';
+import {InformationProvider} from "../providers/information/information";
+import { InformationTabsComponent } from '../components/information-tabs/information-tabs';
+import { Storage } from '@ionic/storage';
+
+
 
 
 @Component({
@@ -25,25 +32,30 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController) {
-    this.initializeApp();
-    this.platform.ready().then(() => {
-      this.localNotification.on("click").subscribe(noti => {
-        this.fb.getLoginStatus().then(res => {
-          if (res.status === "connected") {
-            this.nav.push(ChooseGamePage);
-          }
-        })
-      });
-    });
 
+  constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController, private lightPostProvider: LightPostProvider, private informationProvider: InformationProvider, private storage: Storage) {
+    this.initializeApp();
+    if(this.platform.is('cordova')){
+      this.platform.ready().then(() => {
+        this.localNotification.on("click").subscribe(noti => {
+          this.fb.getLoginStatus().then(res => {
+            if (res.status === "connected") {
+              this.nav.push(InformationPage);
+            }
+          })
+        });
+      });
+   }
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'Question View', component: QuestionViewPage },
+      { title: 'Information view', component: InformationTabsComponent },
       { title: 'Notifications', component: NotificationsPage },
       { title: 'My profile', component: MyProfilePage },
+      { title: 'Rules', component: RulesPage },
+
+
     ];
 
     //Subscribe to authentication token
@@ -67,38 +79,83 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-  }
-
-  logOut(){
-    this.fb.getLoginStatus().then( data=>{
-      if(data.status =='connected'){
-        this.fb.logout()
-        this.nav.setRoot(LoginPage);
+    this.getLightposts();
+    this.storage.get("dailyRoute").then((list) => {
+      if (list!=null) {
+        console.log(list);
+        console.log("^Storage found")
+        this.dailyRoutesProvider.setCurrentLocalStorage(list);
+      } else {
+        console.log("storage not found, creating key")
+        var temp: CustomMarker[] = [];
+        this.storage.set("dailyRoute", temp);
       }
     });
   }
 
+  logOut(){
+    if(this.platform.is('cordova')){
 
+      this.fb.getLoginStatus().then( data=>{
+      if(data.status =='connected'){
+        this.fb.logout()
+        this.nav.setRoot(LoginPage);
+      }
+      else{
+          this.authProvider.logout();
+          this.nav.setRoot(LoginPage);
+      }
+    });
+    }else{
+      this.authProvider.logout();
+      this.nav.setRoot(LoginPage);
+    }
+  }
 
+  //hämtar alla stolpar från servern
+  getLightposts() {
+    this.lightPostProvider.getLightPosts().subscribe(data => {
+      for (let l of data) {
+        var mark = new CustomMarker(l.id,l.location.geoLocationLat, l.location.geoLocationLang);
+        for (let m of this.dailyRoutesProvider.getCurrentStorage()) {
+          if (mark.id == m.id) {
+            mark.toggleVisited();
+            break;
+          }
+        }
+        this.dailyRoutesProvider.addMarker(mark);
+      }
+    });
+  }
 
   simulateBluetooth() {
-    this.localNotification.requestPermission();
-    this.localNotification.hasPermission().then(res => {
-      console.log(res);
-      if (res) {
-        this.localNotification.schedule({
-          id: 1,
-          title: "Test",
-          text: 'Test1',
+    var mark: CustomMarker = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
+    if (mark != null) {
+      this.informationProvider.currentLightPost = mark.id;
+      this.dailyRoutesProvider.addDailyMarker(mark);
+      this.MyProvider.tapEvent()
+      if(this.platform.is('cordova')){
+        this.localNotification.requestPermission();
+        this.localNotification.hasPermission().then(res => {
+          if (res) {
+            this.localNotification.schedule({
+              id: mark.id,
+              title: "Lightpost connected",
+              text: 'Click to get information',
+            });
+          }
         });
       } else {
-        let alert = this.alert.create({
-          title: "Notifications not allowed",
-          buttons: ['Dismiss']
-          });
-          alert.present();
+        console.log("Cordova not available, notification skipped");
       }
-    })
+      this.nav.push(InformationTabsComponent);
+    } else {
+      let alert = this.alert.create({
+        title: "All lightposts visited",
+        buttons: ['Dismiss']
+        });
+        alert.present();
+    }
   }
 
   openPage(page) {
@@ -107,6 +164,6 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  
- 
+
+
 }

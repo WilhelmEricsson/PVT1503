@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/information")
+@CrossOrigin
+@RequestMapping("/public/information")
 public class InformationController {
     @Autowired
     private InformationRepository informationRepository;
@@ -20,6 +21,7 @@ public class InformationController {
     //--------------------Methods----------------------------
 
     @PostMapping("/add")
+
     public @ResponseBody String addNewInformation ( @RequestParam String name
             , @RequestParam String information) {
 
@@ -34,6 +36,14 @@ public class InformationController {
     public @ResponseBody Iterable<Information> getAllInformation() {
         // This returns a JSON or XML with the users
         return informationRepository.findAll();
+    }
+    @GetMapping("/lightposts/{id}")
+    public @ResponseBody Iterable<Information> getInformationByLightPostId(@PathVariable("id") Long lightPostId) {
+        return informationRepository.findByLightPostId(lightPostId);
+    }
+    @GetMapping("/lightposts/test")
+    public @ResponseBody String getInformationByLightPostId() {
+        return "TEST,TEST,TEST";
     }
 
 

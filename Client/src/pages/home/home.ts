@@ -1,7 +1,8 @@
 import { Component, state } from '@angular/core';
-import { NavController, AlertController, Platform } from 'ionic-angular';
+import { NavController, AlertController, Platform, Alert} from 'ionic-angular';
+
+
 import { MapPage } from '../map/map';
-import { NewGamePage } from '../new-game/new-game';
 import { AchievmentPage } from '../achievment/achievment';
 import { DailyRoutesPage } from '../daily-routes/daily-routes';
 
@@ -11,6 +12,13 @@ import { AuthProvider } from "../../providers/auth/auth";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/observable";
 import { SocialSharing } from "@ionic-native/social-sharing";
+import { DailyRoutesProvider } from '../../providers/daily-routes/daily-routes';
+import { CustomMarker } from '../../providers/CustomMarker';
+
+import { LocalNotifications } from '@ionic-native/local-notifications'
+import { PhonegapLocalNotification } from "@ionic-native/phonegap-local-notification";
+import { Push, PushObject, PushOptions} from '@ionic-native/push'
+
 
 @Component({
   selector: 'page-home',
@@ -25,15 +33,15 @@ export class HomePage {
 
   connected: boolean = true;
 
-  /**test */
+  
   user: string;
   message: string;
 
   constructor(private socialSharing: SocialSharing, public navCtrl: NavController, public alertCtrl: AlertController, private platform: Platform,
     private readonly authProvider: AuthProvider,
     jwtHelper: JwtHelperService,
-    private readonly httpClient: HttpClient) {
-    /**test */
+    private  httpClient: HttpClient, private dailyRoutesProvider: DailyRoutesProvider) {
+    
     this.authProvider.authUser.subscribe(jwt => {
       if (jwt) {
         const decoded = jwtHelper.decodeToken(jwt);
@@ -43,7 +51,6 @@ export class HomePage {
         this.user = null;
       }
     });
-    /**test */
   }
 
   ionViewDidLoad() {
@@ -90,28 +97,31 @@ export class HomePage {
     this.navCtrl.push(DailyRoutesPage)
   }
 
-  NewGameController() {
-    this.navCtrl.push(NewGamePage)
-  }
+ 
 
   MapController() {
     this.navCtrl.push(MapPage);
   }
+  showNotification(){
+    var testNot = new Notification("My title", {
+      tag: 'message1',
+      body: "My body"
+    });
+    testNot.onclick = function(){
+      console.log('test');
+    };
+  }
 
+   /* this.localNotification.schedule({
+      id: 1,
+      title: "Test",
+      text: 'Test1',
+      trigger: {at: new Date(new Date().getTime() + 3000)},
+      data: { mydata: 'Test3'}
+    });*/
   ShareController() {
     this.socialSharing.share("test2", null, "https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg", null);
   }
-  /**test */
-  ionViewWillEnter() {
-    this.httpClient.get(`${SERVER_URL}/secret`, { responseType: 'text' }).subscribe(
-      text => this.message = text,
-      err => console.log(err)
-    );
-  }
-
-  logout() {
-    this.authProvider.logout();
-  }
-  /**test */
+  
 
 }

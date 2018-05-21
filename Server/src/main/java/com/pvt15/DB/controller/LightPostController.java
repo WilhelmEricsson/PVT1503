@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/public/resources/lightposts/")
+@CrossOrigin
 public class LightPostController {
 
     @Autowired
+
     private LightPostService lightPostService;
 
     //--------------------Constructor-------------------------
@@ -50,6 +52,7 @@ public class LightPostController {
 
         return "Light Post Saved";
     }
+
 
 
 }

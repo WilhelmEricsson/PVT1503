@@ -14,6 +14,11 @@
 
 
 <ion-content padding>
-    <progress-bar [progress]="loadProgress"></progress-bar><p>Test</p>
+    <ion-card (MyProvider.tap)="MyProvider.tapEvent($event)">
+        <ion-item>
+          <p>Tap to show coupon!:</p> 
+          {{MyProvider.tap}} out of 10!
+        </ion-item>
+      </ion-card>
 
 </ion-content>

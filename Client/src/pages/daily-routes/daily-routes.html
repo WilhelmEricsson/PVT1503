@@ -5,14 +5,22 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>DailyRoutesPage</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content class="no-scroll">
+  <div #map id="map"></div>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button full=true color="darK" (click)="clearMarkers()">Clear</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button full=true color="darK" (click)="shareMarkers()">Share</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
