@@ -1,1 +1,1 @@
-export const SERVER_URL = "https://pvt.dsv.su.se/Group03";
+export const SERVER_URL = "http://localhost:8080";

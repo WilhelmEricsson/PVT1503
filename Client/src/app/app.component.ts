@@ -125,7 +125,7 @@ export class MyApp {
     var mark: CustomMarker = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
     console.log(mark);
     if (mark != null) {
-      this.informationProvider.currentLightPost = mark.id;
+      this.informationProvider.setCurrentLightPost(mark.id);
       this.dailyRoutesProvider.addDailyMarker(mark);
       this.MyProvider.tapEvent()
       if(this.platform.is('cordova')){
@@ -142,6 +142,7 @@ export class MyApp {
       } else {
         console.log("Cordova not available, notification skipped");
       }
+      
       this.nav.push(InformationTabsComponent);
     } else {
       let alert = this.alert.create({
