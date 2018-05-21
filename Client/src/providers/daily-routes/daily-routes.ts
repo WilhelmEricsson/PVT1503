@@ -12,6 +12,7 @@ import { AlertController } from 'ionic-angular';
 */
 var allMarkers: CustomMarker[] = [];
 var currentLocalStorage: CustomMarker[] = [];
+var tested: number[];
 
 @Injectable()
 export class DailyRoutesProvider {
@@ -20,7 +21,6 @@ export class DailyRoutesProvider {
   }
 
   addDailyMarker(mark: CustomMarker) {
-    mark.toggleVisited();
     this.storage.get("dailyRoute").then((list) => {
       list.push(mark);
       this.storage.set("dailyRoute", list);
@@ -33,13 +33,6 @@ export class DailyRoutesProvider {
       list = [];
       this.storage.set("dailyRoute", list);
     });
-    for (let m of currentLocalStorage) {
-      if (m instanceof CustomMarker) {
-        console.log(m.id + " cleared")
-        var mark = m as CustomMarker;
-        mark.toggleVisited();
-      }
-    }
     currentLocalStorage = [];
   }
 
@@ -60,24 +53,45 @@ export class DailyRoutesProvider {
     return allMarkers;
   }
 
+  markerAlreadyVisited(mark: CustomMarker) : boolean {
+    if (currentLocalStorage.length == 0) {
+      return false;
+    }
+    for (let m of currentLocalStorage) {
+      if (m.id == mark.id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  idAlreadyTested(id: number) : boolean {
+    if (tested.length == 0) {
+      return false;
+    }
+    for (let n of tested) {
+      if (n==id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   chooseRandomMarker() {
-    let allTested: number[] = [];
+    tested = [];
+    var alreadyTested: boolean;
     let rnd: number;
     do {
       rnd = Math.floor(Math.random() * allMarkers.length);
-      var alreadyTested = false;
-      for (let n of allTested) {
-        if (n==rnd) {
-          alreadyTested = true;
-        }
-      }
+      alreadyTested = this.idAlreadyTested(rnd);
       if (!alreadyTested) {
         var temp = <CustomMarker> allMarkers[rnd];
-        if (!temp.visited) {
+        if (!this.markerAlreadyVisited(temp)) {
           return temp;
         } 
+        tested.push(rnd);
       }
-      allTested.push(rnd);
-    } while (allTested.length <= allMarkers.length)
+    } while (tested.length != allMarkers.length)
+    return null;
   }
 }
