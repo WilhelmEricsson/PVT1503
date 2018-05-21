@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AlertController } from "ionic-angular";
 
+import { NavController } from "ionic-angular";
+
 
 /*
   Generated class for the MyProvider provider.
@@ -15,21 +17,37 @@ export class MyProvider {
   constructor(public alertCtrl: AlertController) {
 
   }
-  tapEvent() {
-    
-    this.tap++
-
-    if(this.tap == 10){
-        this.tap =0;
-      
-        //Alert kan vara kvar
+  showCoupon(){
+    if(this.tap == 2){
       let alert = this.alertCtrl.create({
         title: 'Coupon!',
         subTitle: 'You got a coupon at Kungafamiljen. Show this code to the guard: X4SDF',
         buttons: ['OK']
       });
       alert.present();
+
+    }
+
+  }
+
+  tapEvent() {
     
+    this.tap++
+
+    if(this.tap == 2){ 
+      let alert = this.alertCtrl.create({
+        title: 'Coupon!',
+        subTitle: 'You got a coupon at Kungafamiljen. Show this code to the guard: X4SDF',
+        buttons: ['OK']
+      });
+      alert.present();
+
+
+
+    
+    }
+    if(this.tap > 2){
+      this.tap = 0;
     }
   }
 
