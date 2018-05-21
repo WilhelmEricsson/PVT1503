@@ -1,24 +1,18 @@
-import { Component, state } from '@angular/core';
-import { NavController, AlertController, Platform, Alert} from 'ionic-angular';
-
-
+import { Component} from '@angular/core';
+import { NavController, AlertController, Platform, ModalController} from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { AchievmentPage } from '../achievment/achievment';
 import { DailyRoutesPage } from '../daily-routes/daily-routes';
-
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { SERVER_URL } from "../../config";
 import { AuthProvider } from "../../providers/auth/auth";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/observable";
 import { SocialSharing } from "@ionic-native/social-sharing";
 import { DailyRoutesProvider } from '../../providers/daily-routes/daily-routes';
-import { CustomMarker } from '../../providers/CustomMarker';
 
-import { LocalNotifications } from '@ionic-native/local-notifications'
-import { PhonegapLocalNotification } from "@ionic-native/phonegap-local-notification";
-import { Push, PushObject, PushOptions} from '@ionic-native/push'
-import {number} from "ng2-validation/dist/number";
+
+
+
 
 
 @Component({
@@ -49,7 +43,7 @@ export class HomePage {
   constructor(private socialSharing: SocialSharing, public navCtrl: NavController, public alertCtrl: AlertController, private platform: Platform,
     private readonly authProvider: AuthProvider,
     jwtHelper: JwtHelperService,
-    private  httpClient: HttpClient, private dailyRoutesProvider: DailyRoutesProvider) {
+    private  httpClient: HttpClient, private modalController :ModalController) {
 
     this.authProvider.authUser.subscribe(jwt => {
       if (jwt) {
@@ -64,6 +58,10 @@ export class HomePage {
 
   ionViewDidLoad() {
     this.getWeather();
+  }
+
+  presentWeatherForecast(){
+    console.log("TEST Weather Forecasts!");
   }
 
   getWeather() {
