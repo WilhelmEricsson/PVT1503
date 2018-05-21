@@ -4,7 +4,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
-import { NotificationsPage } from '../pages/notifications/notifications';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Facebook } from '@ionic-native/facebook';
@@ -51,7 +50,6 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Information view', component: InformationTabsComponent },
-      { title: 'Notifications', component: NotificationsPage },
       { title: 'My profile', component: MyProfilePage },
       { title: 'Rules', component: RulesPage },
 
