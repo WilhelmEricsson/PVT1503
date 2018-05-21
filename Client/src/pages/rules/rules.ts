@@ -18,13 +18,11 @@ export class RulesPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RulesPage');
-  }
-
-  Continue() {
+  Continue(){
     this.navCtrl.setRoot(HomePage);
   }
+  
+
+  
 
 }
