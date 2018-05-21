@@ -5,7 +5,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
 
-    <ion-title>Stockholm<br>LightPursuit</ion-title>
+    <ion-title align-title="center">Stockholm<br>LightPursuit</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -32,13 +32,14 @@
     </ion-row>
   
   </ion-grid>
+        
       </ion-row>
       <ion-row justify-content-center>
-        <ion-col col-6>
-          <button ion-button round large item-start color="yellow" full=true (click)="AchievmentController()">Achievements</button>
+        <ion-col col-6 class="flex-col">
+          <button ion-button round large item-start color="yellow" full=true (click)="AchievmentController()"><small>Achievements</small></button>
         </ion-col>
-        <ion-col col-6>
-          <button ion-button round large item-start color="yellow2" full=true (click)="DailyRoutesController()">Daily Route</button>
+        <ion-col col-6 class="flex-col">
+          <button ion-button round large item-start color="yellow2" full=true (click)="DailyRoutesController()"><small>Daily Route</small></button>
         </ion-col>
     <!--    <ion-col>
           <button ion-button round large item-start color="primary" full=true (click)="ShareController()">Facebook share test</button>
