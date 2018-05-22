@@ -17,10 +17,12 @@
         <ion-col>
           </ion-col>
 
-        <ion-col justify-content-center>
-            <div Class="fancybutton" (click)="presentWeatherForecast()" align = right ><img id ="weatherImg" height="42" width="42"></div>
-            <div align = "right"><font color= "yellow">{{temperature}}</font></div>
-            <div align = "right"><font color= "yellow">{{rainResult}}</font></div>
+        <ion-col justify-content-center >
+
+          <div Class="fancybutton" align = right ><img id ="weatherImg"  height="42" width="42" (click)="presentWeatherForecast()"></div>
+          <div align = "right" ><font id ="temperature" color= "yellow" (click)="presentWeatherForecast()"></font></div>
+          <div align = "right" ><font id ="weatherDescription" color= "yellow" (click)="presentWeatherForecast()"></font></div>
+
         </ion-col>
 <ion-grid>
     <ion-row>

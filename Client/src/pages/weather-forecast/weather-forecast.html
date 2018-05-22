@@ -16,6 +16,20 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content align-items-center>
+  <ion-grid>
+
+    <ion-row nowrap>
+
+        <ion-col>
+          <ion-item *ngFor="let weatherComponent of weatherComponents">
+            <img id ="weatherImg" src={{weatherComponent.weatherImageSrc}} height="42" width="42">
+            <p > {{weatherComponent.temperature}} </p>
+            <p > {{weatherComponent.weatherDescription}}  </p>
+          </ion-item>
+        </ion-col>
+
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavParams, ViewController } from 'ionic-angular';
+import {WeatherComponent} from "../../components/weather/weather";
+import {WeatherForecastProvider} from "../../providers/weather-forecast/weather-forecast";
 
 /**
  * Generated class for the WeatherForecastPage page.
@@ -14,13 +16,18 @@ import { IonicPage, NavParams, ViewController } from 'ionic-angular';
   templateUrl: 'weather-forecast.html',
 })
 export class WeatherForecastPage {
-
-  constructor(private navParams: NavParams, private viewController:ViewController) {
+  weatherComponents: Iterable<WeatherComponent> = [];
+  constructor(private navParams: NavParams, private viewController:ViewController, private weatherForecastProivder: WeatherForecastProvider) {
   }
 
   ionViewWillLoad() {
-
+    //this.weatherComponents = this.navParams.data;
   }
+
+  ionViewDidLoad(){
+    this.weatherComponents = this.weatherForecastProivder.getWeatherForecast();
+  }
+
 
   closeWeatherForecastModal(){
     this.viewController.dismiss();
