@@ -9,6 +9,9 @@ import { Facebook } from '@ionic-native/facebook';
  * Ionic pages and navigation.
  */
 
+ var username;
+ var email;
+
 @IonicPage()
 @Component({
   selector: 'page-my-profile',
@@ -18,25 +21,26 @@ export class MyProfilePage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private fb: Facebook, private platform: Platform) {
+    this.fb.getLoginStatus().then(res => {
+      if (res.status === "connected") {
+        this.getFacebookData();
+      }
+    }).catch(err => {
+      this.testGetDBName();
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyProfilePage');
-    if(this.platform.is('cordova')){
-      this.testGetFacebookData()
-    }else{
-
-    }
-
   }
 
-  testGetFacebookData() {
+  getFacebookData() {
     this.fb.getLoginStatus().then(res => {
       if (res.status === "connected") {
-        this.fb.api("/"+res.authResponse.userID+"/?fields=id,email,name,picture,gender",["public_profile"])
+        this.fb.api("/"+res.authResponse.userID+"/?fields=id,email,name",["public_profile"])
         .then(res => {
-          let test: HTMLTextAreaElement = (<HTMLTextAreaElement>document.getElementById("fbname"));
-          test.value = res.name;
+          username = res.name;
+          email = res.email;
         })
       }
     })
