@@ -112,9 +112,7 @@ export function jwtOptionsFactory(storage: Storage) {
     HomePage,
     QuestionViewPage,
     MapPage,
-
     LoginPage,
-
     LoginPage,
     CreateAccountPage,
     EmailSignInPage,
