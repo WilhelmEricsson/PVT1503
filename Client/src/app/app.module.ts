@@ -60,6 +60,7 @@ import { InformationTabsComponent } from '../components/information-tabs/informa
 import { SavedInformationPage } from '../pages/saved-information/saved-information';
 import { MyProfileProvider } from '../providers/my-profile/my-profile';
 import { AchievementsProvider } from '../providers/achievements/achievements';
+import { WeatherForecastProvider } from '../providers/weather-forecast/weather-forecast';
 
 
 
@@ -143,7 +144,8 @@ export function jwtOptionsFactory(storage: Storage) {
     LightPostProvider,
     InformationProvider,
     MyProfileProvider,
-    AchievementsProvider
+    AchievementsProvider,
+    WeatherForecastProvider
   ]
 })
 export class AppModule { }
