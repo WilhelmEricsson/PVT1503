@@ -45,6 +45,7 @@ export class MyApp {
               this.nav.push(InformationPage);
             }
           })
+          //*kolla ifall användaren loggat in med vanlig inlogg också*
         });
       });
    }
@@ -166,9 +167,8 @@ export class MyApp {
         });
       } else {
         console.log("Cordova not available, notification skipped");
+        this.nav.push(InformationTabsComponent);
       }
-      
-      this.nav.push(InformationTabsComponent);
     } else {
       let alert = this.alert.create({
         title: "All lightposts visited",
