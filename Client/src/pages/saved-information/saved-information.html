@@ -21,10 +21,11 @@
 <ion-content padding>
 
         <ion-list inset>
-                <ion-item *ngFor="let information of savedInformation">
-                    <h2>{{information.name}}</h2>
-                    <p>{{information.information}}</p>
-                  </ion-item>
+                <button ion-item *ngFor="let information of savedInformation" (click)="openModal(information)">
+                    {{information.name}}
+                </button>
+                
             </ion-list>
-
+        
+        <!-- <button ion-button (click)="openModal()">Open Modal</button> -->
 </ion-content>

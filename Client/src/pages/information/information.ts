@@ -12,6 +12,8 @@ export class InformationPage {
 
 
   information: any;
+  name: String;
+  content: String;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public informationProvider: InformationProvider) {
 
@@ -29,15 +31,26 @@ export class InformationPage {
     .then(data => {
       this.information = data;
       console.log(this.information);
+      for(let entry of this.information){
+        this.name = entry.name;
+        this.content = entry.information;
+      }
     });
+    
+    
   }
   getInformationByLightPostId(id: number) {
     this.informationProvider.getInformationByLightPostId(id)
       .then(data => {
         this.information = data;
-        
         console.log(this.information);
+
+        for(let entry of this.information){
+          this.name = entry.name;
+          this.content = entry.information;
+        }
       });
+      
   }
 
 
