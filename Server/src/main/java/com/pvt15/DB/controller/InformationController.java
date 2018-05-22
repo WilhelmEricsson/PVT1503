@@ -37,11 +37,11 @@ public class InformationController {
         // This returns a JSON or XML with the users
         return informationRepository.findAll();
     }
-    @GetMapping("/lightposts/{id}")
+    @GetMapping("/{id}")
     public @ResponseBody Iterable<Information> getInformationByLightPostId(@PathVariable("id") Long lightPostId) {
         return informationRepository.findByLightPostId(lightPostId);
     }
-    @GetMapping("/lightposts/test")
+    @GetMapping("/test")
     public @ResponseBody String getInformationByLightPostId() {
         return "TEST,TEST,TEST";
     }
