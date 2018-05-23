@@ -13,7 +13,7 @@ page-home {
     text-align: center;
     }
    
-    ion-content {
+   ion-content {
         background-image: url('../assets/imgs/DarkPurple.jpg');
         background-size: cover;
     }
@@ -35,6 +35,7 @@ page-home {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    padding-top: 80px;
   }
     
     //ion-content {

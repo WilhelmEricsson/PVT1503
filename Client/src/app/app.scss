@@ -1,9 +1,27 @@
 // http://ionicframework.com/docs/theming/
 ion-menu{
-    ion-content{
+        ion-content{
      background-color:rgb(68, 13, 68) !important;
     }
+
    }
+   ion-page{
+    background-image: url('../assets/imgs/DarkPurple.jpg');
+    background-size: cover;
+   }
+   .toolbar-background{
+    //background-image: url('../assets/imgs/DarkPurple.jpg');
+    background-color: rgb(68, 13, 68);
+  }
+  .toolbar-title.toolbar-title-md, 
+  .toolbar-title.toolbar-title-ios, 
+  .toolbar-title.toolbar-title-wp { color: yellow; }
+  $toolbar-ios-title-text-align: center;
+
+  .back-button {
+    color: yellow;
+  }
+
 
 // App Global Sass
 // --------------------------------------------------

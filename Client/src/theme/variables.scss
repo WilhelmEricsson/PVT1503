@@ -44,7 +44,8 @@ $colors: (
   orange:   rgb(255, 0, 0),
   blue:       #327eff,
   test: white,
-  purple1:  rgb(68, 13, 68)
+  purple1:  rgb(68, 13, 68),
+  lavender: #E5CCFF 
 );
 
 $tabs-tab-color-active: color($colors, secondary);
@@ -54,6 +55,7 @@ $list-border-color: color($colors, dark);
 $text-color: dark;
 $card-md-header-color: #fff;
 $card-ios-header-color: #fff;
+
 
 
 
