@@ -22,10 +22,18 @@
     <ion-row nowrap>
 
         <ion-col>
-          <ion-item *ngFor="let weatherComponent of weatherComponents">
-            <img id ="weatherImg" src={{weatherComponent.weatherImageSrc}} height="42" width="42">
-            <p > {{weatherComponent.temperature}} </p>
-            <p > {{weatherComponent.weatherDescription}}  </p>
+
+          <ion-item class="weather_item" *ngFor="let weatherComponent of weatherComponents">
+            <ion-row>
+              <ion-col>
+                <img id ="weatherImg" src={{weatherComponent.weatherImageSrc}} height="42" width="42">
+                <p class="weather_item_text"> {{weatherComponent.temperature}} </p>
+                <p class="weather_item_text"> {{weatherComponent.weatherDescription}}</p>
+              </ion-col>
+              <ion-col align-self-center>
+                <h1 class="weather_item_text_atHour" text-center> {{weatherComponent.atHour}} </h1>
+              </ion-col>
+            </ion-row>
           </ion-item>
         </ion-col>
 
