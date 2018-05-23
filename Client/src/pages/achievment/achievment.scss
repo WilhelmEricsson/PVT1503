@@ -1,3 +1,17 @@
 page-achievment {
-
+    ion-content {
+        background-image: url('../assets/imgs/DarkPurple.jpg');
+        background-size: cover;
+    }
+  
+        .toolbar-background{
+             background-color: rgb(68, 13, 68);
+          }
+          .toolbar-title.toolbar-title-md, 
+          .toolbar-title.toolbar-title-ios, 
+          .toolbar-title.toolbar-title-wp { color: yellow; }
+          $toolbar-ios-title-text-align: center;
+          .back-button {
+            color: yellow;
+          }
 }
