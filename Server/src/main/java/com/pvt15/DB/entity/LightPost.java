@@ -66,7 +66,12 @@ public class LightPost {
     public void setLocation(LightPostLocations location) {
         this.location = location;
     }
-
+    public void increaseNumOfUsersPresent(){
+        numOfUsersPresent++;
+    }
+    public void decreaseNumOfUsersPresent(){
+        numOfUsersPresent--;
+    }
     @Override
     public String toString(){
         return "Id: " + id + " Num Of People Present: " + numOfUsersPresent + " Lamp Cclor: " + colorOfLight + " Location " + location.toString();
