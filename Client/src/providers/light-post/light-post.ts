@@ -13,7 +13,7 @@ import {Observable} from "rxjs/Observable";
 */
 @Injectable()
 export class LightPostProvider {
-  private  url: string = SERVER_URL + "/public/resources/lightposts";
+  private  url: string = SERVER_URL + "/public/resources/lightposts/";
 
   constructor(private http: HttpClient) {
     console.log('Hello LightPostProvider Provider');
