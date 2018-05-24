@@ -25,20 +25,20 @@
 
   <ion-list>
 
-    <ion-item>
-     
-      <ion-label floating>Username</ion-label>
+    <ion-item class="MyProfileItem">
+
+      <ion-label floating color="yellow">Username</ion-label>
       <ion-input type="text" value="" [(ngModel)]="username"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label floating>Email</ion-label>
+    <ion-item class="MyProfileItem">
+      <ion-label floating color="yellow">Email</ion-label>
       <ion-input type="email" [(ngModel)]="email"></ion-input>
     </ion-item>
 
   </ion-list>
 
-  <button ion-button round color="yellow2" item-start full=true>Save changes</button>
+  <button ion-button round color="yellow" item-start full=true>Save changes</button>
 
 
 </ion-content>
