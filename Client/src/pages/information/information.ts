@@ -45,10 +45,6 @@ export class InformationPage {
         this.information = data;
         console.log(this.information);
 
-        for(let entry of this.information){
-          this.name = entry.name;
-          this.content = entry.information;
-        }
       });
       
   }

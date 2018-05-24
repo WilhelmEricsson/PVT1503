@@ -1,7 +1,7 @@
   <ion-header>
 
       <ion-navbar>
-        <button ion-button menuToggle>
+        <button ion-button menuToggle color="yellow">
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>{{name}}</ion-title>
@@ -10,15 +10,11 @@
     </ion-header>
     
     <ion-content>
-    <p>{{content}}</p>
-        
-        
-           <!-- <ion-list inset>
-               <ion-item *ngFor="let information of information">
-                    <h2>{{information.name}}</h2>
-                    <p>{{information.information}}</p>
-                  </ion-item>
-            </ion-list>
-        -->          
-      
+      <ion-slides pager >
+
+        <ion-slide *ngFor="let information of information">
+             <img id= "image" src = {{information.information}} >
+        </ion-slide>  
+
+      </ion-slides> 
     </ion-content>

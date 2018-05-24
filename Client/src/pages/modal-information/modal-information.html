@@ -17,8 +17,11 @@
 
 
 <ion-content padding>
-
-  <p>{{information.information}}</p>
+ <ion-slides>
+    <ion-slide *ngFor="let information of information">
+        <img id= "image" src = {{information.information}} >
+    </ion-slide>
+</ion-slides>
 
 
 </ion-content>

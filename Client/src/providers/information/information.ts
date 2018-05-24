@@ -58,9 +58,9 @@ export class InformationProvider {
   }
 
   addToArray(data){
-    for(let i of data){
-    allInformation.push(i);
-    }
+    
+    allInformation.push(data);
+    
     console.log(data)
   }
 

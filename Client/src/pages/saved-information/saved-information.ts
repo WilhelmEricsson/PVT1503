@@ -2,12 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, ModalController, Modal, ModalOptions} from 'ionic-angular';
 import { InformationProvider } from '../../providers/information/information';
 
-/**
- * Generated class for the SavedInformationPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -41,7 +36,7 @@ export class SavedInformationPage {
       enableBackdropDismiss: false
 
     }
-    const myModal: Modal = this.modal.create('ModalInformationPage', {data: information});
+    const myModal: Modal = this.modal.create('ModalInformationPage', {data: information, myModalOptions});
     
     myModal.present();
 

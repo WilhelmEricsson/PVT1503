@@ -1,3 +1,22 @@
 page-saved-information {
 
+    ion-content {
+        background-image: url('../assets/imgs/DarkPurple.jpg');
+        background-size: cover;
+    }
+
+    .informationItem{
+        background-color: rgb(68, 13, 68);
+        opacity: 0.7;
+        color: yellow;
+    }
+
+    .toolbar-background{
+        background-color: rgb(68, 13, 68);
+      }
+      .toolbar-title.toolbar-title-md, 
+      .toolbar-title.toolbar-title-ios, 
+      .toolbar-title.toolbar-title-wp { color: yellow; }
+      $toolbar-ios-title-text-align: center;
+
 }
