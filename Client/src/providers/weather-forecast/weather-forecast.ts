@@ -3,10 +3,6 @@ import { Injectable } from '@angular/core';
 import {WEATHER_DATA_URL} from "../../config";
 import {WeatherComponent} from "../../components/weather/weather";
 import 'rxjs/add/operator/do'
-import {delay} from "rxjs/operator/delay";
-import {Observable} from "rxjs/Observable";
-import {resolveDefinition} from "@angular/core/src/view/util";
-
 
 /*
   Generated class for the WeatherForecastProvider provider.
