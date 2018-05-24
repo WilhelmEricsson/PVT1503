@@ -1,3 +1,21 @@
 page-email-sign-in {
+  ion-content{
+    background-image: url('../assets/imgs/DarkPurple.jpg');
+    background-size: cover;
+  }
 
+  .signInItem{
+    background-color: #440d44;
+    opacity: 0.80;
+    color: yellow;
+  }
+
+  .error-message{
+    background-color: #440d44;
+    color: firebrick;
+    font-size: large;
+
+  }
 }
+
+

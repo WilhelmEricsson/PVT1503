@@ -9,7 +9,7 @@
     <form #form="ngForm" (ngSubmit)="signup(form.value)" novalidate>
       <ion-list>
         <ion-item class ="createAccItem">
-          <ion-label floating >Name</ion-label>
+          <ion-label floating color="yellow">Name</ion-label>
           <ion-input type="text" name="name" ngModel required #name="ngModel"
                      [class.invalid]="name.errors && name.dirty"></ion-input>
         </ion-item>
@@ -18,7 +18,7 @@
         </ion-item>
 
         <ion-item class ="createAccItem">
-          <ion-label floating >Email</ion-label>
+          <ion-label floating color="yellow">Email</ion-label>
           <ion-input type="email" name="email" ngModel required email #email="ngModel"
                      [class.invalid]="email.errors && email.dirty"></ion-input>
         </ion-item>
@@ -30,7 +30,7 @@
         </ion-item>
 
         <ion-item class ="createAccItem">
-          <ion-label floating >Username</ion-label>
+          <ion-label floating color="yellow">Username</ion-label>
           <ion-input type="text" name="username" ngModel required #username="ngModel"
                      [class.invalid]="username.errors && username.dirty"></ion-input>
         </ion-item>
@@ -42,7 +42,7 @@
         </ion-item>
 
         <ion-item class ="createAccItem">
-          <ion-label floating >Password</ion-label>
+          <ion-label floating color="yellow">Password</ion-label>
           <ion-input type="password" name="password" ngModel required #password="ngModel"
                      [class.invalid]="password.errors && password.dirty"></ion-input>
         </ion-item>
