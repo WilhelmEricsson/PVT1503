@@ -29,13 +29,12 @@ import { Coupon } from '../providers/Coupon';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
+  isConnectedToBluetooth:boolean;
   rootPage: any = LoginPage;
-
   pages: Array<{ title: string, component: any }>;
 
-
   constructor(private dailyRoutesProvider: DailyRoutesProvider, public MyProvider: MyProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private localNotification: LocalNotifications, private fb: Facebook, private authProvider: AuthProvider, private alert: AlertController, private lightPostProvider: LightPostProvider, private informationProvider: InformationProvider, private storage: Storage, private achievementsProvider: AchievementsProvider) {
+
     this.initializeApp();
     if(this.platform.is('cordova')){
       this.platform.ready().then(() => {
@@ -48,6 +47,7 @@ export class MyApp {
           //*kolla ifall användaren loggat in med vanlig inlogg också*
         });
       });
+
    }
 
     // used for an example of ngFor and navigation
@@ -81,9 +81,11 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+    this.isConnectedToBluetooth = false;
     this.getLightposts();
     this.getLocalStorageDailyRoute();
     this.getLocalStorageAchievements();
+
   }
 
   logOut(){
@@ -140,42 +142,54 @@ export class MyApp {
   getLightposts() {
     this.lightPostProvider.getLightPosts().subscribe(data => {
       for (let l of data) {
-        var mark = new CustomMarker(l.id,l.location.geoLocationLat, l.location.geoLocationLang);
+        var mark = new CustomMarker(l.id,l.location.geoLocationLat, l.location.geoLocationLang, l.numOfUsersPresent);
         this.dailyRoutesProvider.addMarker(mark);
       }
     });
   }
 
   simulateBluetooth() {
-    var mark: CustomMarker = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
-    console.log(mark);
-    if (mark != null) {
-      this.informationProvider.setCurrentLightPost(mark.id);
-      this.dailyRoutesProvider.addDailyMarker(mark);
-      this.achievementsProvider.handleAchievement();
-      //this.MyProvider.tapEvent()
-      if(this.platform.is('cordova')){
-        this.localNotification.requestPermission();
-        this.localNotification.hasPermission().then(res => {
-          if (res) {
-            this.localNotification.schedule({
-              id: mark.id,
-              title: "Lightpost connected",
-              text: 'Click to get information',
-            });
-          }
-        });
+    if(!this.isConnectedToBluetooth){
+      this.isConnectedToBluetooth = true;
+      var mark: CustomMarker = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
+      if (mark != null) {
+        this.lightPostProvider.increaseNumOfUsersPresent(mark.id);
+        this.informationProvider.setCurrentLightPost(mark.id);
+        this.dailyRoutesProvider.addDailyMarker(mark);
+        this.achievementsProvider.handleAchievement();
+        //this.MyProvider.tapEvent()
+        if(this.platform.is('cordova')){
+          this.localNotification.requestPermission();
+          this.localNotification.hasPermission().then(res => {
+            if (res) {
+              this.localNotification.schedule({
+                id: mark.id,
+                title: "Lightpost connected",
+                text: 'Click to get information',
+              });
+            }
+          });
+        } else {
+          console.log("Cordova not available, notification skipped");
+          this.nav.push(InformationTabsComponent);
+        }
       } else {
-        console.log("Cordova not available, notification skipped");
-        this.nav.push(InformationTabsComponent);
-      }
-    } else {
-      let alert = this.alert.create({
-        title: "All lightposts visited",
-        buttons: ['Dismiss']
+        let alert = this.alert.create({
+          title: "All lightposts visited",
+          buttons: ['Dismiss']
         });
         alert.present();
+      }
+    }else{
+      this.decreaseNumOfUsersPresent();
     }
+
+  }
+
+  private decreaseNumOfUsersPresent(){
+    this.lightPostProvider.decreaseNumOfUsersPresent(this.informationProvider.currentLightPost);
+    //this.informationProvider.setCurrentLightPost(-1);
+    this.isConnectedToBluetooth = false;
   }
 
   openPage(page) {
@@ -183,6 +197,7 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
 
 
 
