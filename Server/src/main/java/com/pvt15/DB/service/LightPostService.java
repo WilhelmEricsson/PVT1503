@@ -33,5 +33,11 @@ public class LightPostService {
         lightPostRepository.save(lightPost);
     }
 
+    public void increaseNumOfUsersPresent(Long lightPostId){
+        lightPostRepository.findById(lightPostId).get().increaseNumOfUsersPresent();
 
+    }
+    public void decreaseNumOfUsersPresent(Long lightPostId){
+        lightPostRepository.findById(lightPostId).get().decreaseNumOfUsersPresent();
+    }
 }

@@ -34,15 +34,14 @@ export class WeatherForecastProvider {
     "Thunderstorm", "Light sleet showers", "Moderate sleet showers", "Heavy sleet showers", "Light snow showers", "Moderate snow showers", "Heavy snow showers", "Light rain",
     "Moderate rain", "Heavy rain", "Thunder", "Light sleet", "Moderate sleet", "Heavy sleet", "Light snowfall", "Moderate snowfall", "Heavy snowfall"];
   weatherAtHour: string[] = ["Current", "In 1 Hour", "In 2 Hours", "In 3 Hours", "In 4 Hours"];
-  weatherIndex:number;
+
   private weatherForecast: WeatherComponent[] = [];
 
   constructor(private http: HttpClient) {
   }
 
   fetchForecastFromSource(){
-   console.log("TEST1 --> fetchForecastFromSource()" );
-   this.weatherForecast = []; // tanken är att den ska reset:a då addItem pushar på nya element vilket kan leda till att fel värden visas.
+   this.weatherForecast = [];
    return this.http.get(WEATHER_DATA_URL);
   }
 
@@ -64,10 +63,6 @@ export class WeatherForecastProvider {
   getWeatherForecast(): Iterable<WeatherComponent> {
     return this.weatherForecast;
   }
-  resetWeatherIndex(){
-    if(this.weatherIndex >= NUM_OF_PREDICTIONS_TO_FETCH){
-      this.weatherIndex = 0;
-    }
-  }
+
 
 }
