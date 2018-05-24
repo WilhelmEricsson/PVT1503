@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavParams, ViewController } from 'ionic-angular';
+import { InformationProvider } from '../../providers/information/information';
 
 /**
  * Generated class for the ModalInformationPage page.
@@ -18,7 +19,7 @@ export class ModalInformationPage {
 
   
 
-  constructor(private navParams: NavParams, private view: ViewController) {
+  constructor(private navParams: NavParams, private view: ViewController, private informationProvider: InformationProvider) {
     
     
 
@@ -36,6 +37,9 @@ export class ModalInformationPage {
   }
 
 
-  
+  handleShare() {
+    console.log(this.information.id);
+    this.informationProvider.handleShare(this.information.id);
+  }
 
 }

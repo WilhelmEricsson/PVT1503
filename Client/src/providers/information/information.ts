@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {SERVER_URL} from "../../config";
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { Facebook } from '@ionic-native/facebook';
 
 var allInformation: any[] = [];
 
@@ -10,7 +12,7 @@ export class InformationProvider {
   apiUrl = SERVER_URL;
   currentLightPost: number;
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private socialSharing: SocialSharing, private fb: Facebook) {
     console.log('Hello InformationProvider Provider');
   }
   getInformation() {
@@ -64,6 +66,18 @@ export class InformationProvider {
     console.log(data)
   }
 
+  handleShare(id) {
+    this.fb.getLoginStatus().then(res => {
+      if (res.status === "connected") {
+        switch(id) {
+          case 10: {
+            this.socialSharing.share(null, null, "https://i.imgur.com/6L2Lm4O.png", null);
+            break;
+          }
+        }
+      }
+    })
+  }
 
 
 }

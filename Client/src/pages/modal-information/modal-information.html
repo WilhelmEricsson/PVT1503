@@ -18,7 +18,20 @@
 
 <ion-content padding>
 
-  <p>{{information.information}}</p>
+ 
+
+  <ion-grid text-center>
+    <ion-row>
+      <ion-col>
+          {{information.information}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+          <button ion-button color="blue" full=true (click)="handleShare()">Share</button>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
 
 
 </ion-content>
