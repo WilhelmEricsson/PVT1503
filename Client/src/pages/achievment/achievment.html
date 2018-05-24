@@ -14,12 +14,12 @@
 
 
 <ion-content padding>
-    <ion-item *ngFor="let item of usersAchievements" (click)=handleAchievementClick(item)>
-        <p>{{item.status}}</p> 
-        {{item.progress}} out of 10!
-    </ion-item>
+  <ion-item color="lavender" *ngFor="let item of usersAchievements" (click)=handleAchievementClick(item)>
+    <p>{{item.status}}</p>
+    {{item.progress}} out of 10!
+  </ion-item>
 
-    <!--
+  <!--
 <ion-card (MyProvider.tap)="MyProvider.tapEvent($event)">
         <ion-item>
           <p>Tap to show coupon!:</p> 
@@ -28,10 +28,10 @@
       </ion-card>>
 
     -->
-    
-<!--
+
+  <!--
  <button ion-button block color="dark" (click)="MyProvider.showCoupon()">Test</button>
 -->
- 
+
 
 </ion-content>

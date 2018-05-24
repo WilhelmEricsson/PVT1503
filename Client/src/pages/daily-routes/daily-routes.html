@@ -13,13 +13,13 @@
 
 <ion-content class="no-scroll">
   <div #map id="map"></div>
-  <ion-grid>
+  <ion-grid style="background:  rgb(68, 13, 68)" >
     <ion-row>
-      <ion-col>
-        <button ion-button full=true color="darK" (click)="clearMarkers()">Clear</button>
+      <ion-col >
+        <button ion-button round large full=true color="yellow2" (click)="clearMarkers()"><small>Clear</small></button>
       </ion-col>
       <ion-col>
-        <button ion-button full=true color="darK" (click)="shareMarkers()">Share</button>
+        <button ion-button round large full=true color="yellow2" (click)="shareMarkers()"><small>Share</small></button>
       </ion-col>
     </ion-row>
   </ion-grid>

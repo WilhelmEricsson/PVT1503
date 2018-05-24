@@ -17,20 +17,24 @@ import {WeatherForecastProvider} from "../../providers/weather-forecast/weather-
 })
 export class WeatherForecastPage {
   weatherComponents: Iterable<WeatherComponent> = [];
-  constructor(private navParams: NavParams, private viewController:ViewController, private weatherForecastProivder: WeatherForecastProvider) {
+
+
+
+  constructor(private navParams: NavParams, private viewController:ViewController, private weatherForecastProvider: WeatherForecastProvider) {
+
   }
 
   ionViewWillLoad() {
-    //this.weatherComponents = this.navParams.data;
   }
 
   ionViewDidLoad(){
-    this.weatherComponents = this.weatherForecastProivder.getWeatherForecast();
+    this.weatherComponents = this.weatherForecastProvider.getWeatherForecast();
   }
 
 
   closeWeatherForecastModal(){
     this.viewController.dismiss();
   }
+
 
 }

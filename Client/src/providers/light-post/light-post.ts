@@ -13,7 +13,7 @@ import {Observable} from "rxjs/Observable";
 */
 @Injectable()
 export class LightPostProvider {
-  private  url: string = SERVER_URL + "/public/resources/lightposts/";
+  private  url: string = SERVER_URL + "/public/resources/lightposts";
 
   constructor(private http: HttpClient) {
     console.log('Hello LightPostProvider Provider');
@@ -30,6 +30,13 @@ export class LightPostProvider {
 
   private logResponse(res: HttpResponse<any>){
     console.log(res);
+  }
+
+  increaseNumOfUsersPresent(lightPostId:number){
+    this.http.post(this.url+"/increaseNumOfUsers/" + lightPostId, null);
+  }
+  decreaseNumOfUsersPresent(lightPostId:number){
+    this.http.post(this.url+"/decreaseNumOfUsers/" + lightPostId, null);
   }
 
 }

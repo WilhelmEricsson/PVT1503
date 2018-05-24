@@ -12,14 +12,22 @@ import { Component } from '@angular/core';
 })
 export class WeatherComponent {
 
+
   private _weatherImageSrc:string;
   private _temperature: number;
   private _weatherDescription:string;
+  private _atHour:string;
 
-  constructor(weatherImageSrc:string, temperature:number, weatherDescription:string){
+  constructor(weatherImageSrc:string, temperature:number, weatherDescription:string, atHour:string){
     this._weatherImageSrc = weatherImageSrc;
     this._temperature = temperature;
     this._weatherDescription = weatherDescription;
+    this._atHour = this.extractTimeHourMin(atHour);
+  }
+
+  extractTimeHourMin(timestamp: string){
+    return timestamp.substr(11,5);
+
   }
 
   get weatherImageSrc(): string {
@@ -44,5 +52,13 @@ export class WeatherComponent {
 
   set weatherDescription(value: string) {
     this._weatherDescription = value;
+  }
+
+  get atHour(): string {
+    return this._atHour;
+  }
+
+  set atHour(value: string) {
+    this._atHour = value;
   }
 }

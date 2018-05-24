@@ -49,6 +49,15 @@ export class InformationPage {
       
   }
 
-
+  handleShare() {
+    var id: number;
+    for (let l of this.information) {
+      if (this.name === l.name) {
+        id = l.id;
+      }
+    }
+    console.log(id);
+    this.informationProvider.handleShare(id);
+  }
 
 }

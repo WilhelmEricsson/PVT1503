@@ -33,16 +33,15 @@ export class WeatherForecastProvider {
   private weatherDescriptions: string[] = ["Clear sky","Nearly clear sky", "Variable cloudiness","Halfclear sky", "Cloudy sky","Overcast","Fog", "Light rain showers", "Moderate rain showers", "Heavy rain showers",
     "Thunderstorm", "Light sleet showers", "Moderate sleet showers", "Heavy sleet showers", "Light snow showers", "Moderate snow showers", "Heavy snow showers", "Light rain",
     "Moderate rain", "Heavy rain", "Thunder", "Light sleet", "Moderate sleet", "Heavy sleet", "Light snowfall", "Moderate snowfall", "Heavy snowfall"];
+  weatherAtHour: string[] = ["Current", "In 1 Hour", "In 2 Hours", "In 3 Hours", "In 4 Hours"];
 
   private weatherForecast: WeatherComponent[] = [];
-
 
   constructor(private http: HttpClient) {
   }
 
   fetchForecastFromSource(){
-   console.log("TEST1 --> fetchForecastFromSource()" );
-   this.weatherForecast = []; // tanken är att den ska reset:a då addItem pushar på nya element vilket kan leda till att fel värden visas.
+   this.weatherForecast = [];
    return this.http.get(WEATHER_DATA_URL);
   }
 
@@ -57,12 +56,13 @@ export class WeatherForecastProvider {
     var weatherSymbol = weather.parameters[WEATHERSYMBOL_PARAM].values[0];
     var weatherDesc = this.weatherDescriptions[weatherSymbol-1];
     var weatherImageSrc = "assets/imgs/weather/weather" + this.weatherIconArray[weatherSymbol-1] + ".png";
-    var weatherComponent = new WeatherComponent(weatherImageSrc,temperature,weatherDesc);
+    var weatherComponent = new WeatherComponent(weatherImageSrc,temperature,weatherDesc, weather.validTime);
     this.weatherForecast.push(weatherComponent);
   }
 
   getWeatherForecast(): Iterable<WeatherComponent> {
     return this.weatherForecast;
   }
+
 
 }
