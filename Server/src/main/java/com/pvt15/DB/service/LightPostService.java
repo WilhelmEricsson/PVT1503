@@ -4,6 +4,7 @@ import com.pvt15.DB.entity.LightPost;
 import com.pvt15.DB.entity.LightPostLocations;
 import com.pvt15.DB.repository.LightPostLocationRepository;
 import com.pvt15.DB.repository.LightPostRepository;
+import javafx.scene.effect.Light;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,10 +35,14 @@ public class LightPostService {
     }
 
     public void increaseNumOfUsersPresent(Long lightPostId){
-        lightPostRepository.findById(lightPostId).get().increaseNumOfUsersPresent();
+        LightPost tempPost = lightPostRepository.findById(lightPostId).get();
+        tempPost.increaseNumOfUsersPresent();
+        lightPostRepository.save(tempPost);
 
     }
     public void decreaseNumOfUsersPresent(Long lightPostId){
-        lightPostRepository.findById(lightPostId).get().decreaseNumOfUsersPresent();
+        LightPost tempPost = lightPostRepository.findById(lightPostId).get();
+        tempPost.decreaseNumOfUsersPresent();
+        lightPostRepository.save(tempPost);
     }
 }
