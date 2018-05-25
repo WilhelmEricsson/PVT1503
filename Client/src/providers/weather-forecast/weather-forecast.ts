@@ -3,10 +3,6 @@ import { Injectable } from '@angular/core';
 import {WEATHER_DATA_URL} from "../../config";
 import {WeatherComponent} from "../../components/weather/weather";
 import 'rxjs/add/operator/do'
-import {delay} from "rxjs/operator/delay";
-import {Observable} from "rxjs/Observable";
-import {resolveDefinition} from "@angular/core/src/view/util";
-
 
 /*
   Generated class for the WeatherForecastProvider provider.
@@ -15,9 +11,8 @@ import {resolveDefinition} from "@angular/core/src/view/util";
   and Angular DI.
 */
 
-const TEMPERATURE_PARAM = 11;
+const TEMPERATURE_PARAM = 1;
 const WEATHERSYMBOL_PARAM = 18;
-const RAIN_SOMETHING_PARAM = 2;
 const NUM_OF_PREDICTIONS_TO_FETCH = 5;
 
 @Injectable()
@@ -53,6 +48,7 @@ export class WeatherForecastProvider {
   addItemToForecast(forecastItem){
     let weather = forecastItem;
     var temperature = weather.parameters[TEMPERATURE_PARAM].values[0];
+    console.log("Temp-test " + temperature);
     var weatherSymbol = weather.parameters[WEATHERSYMBOL_PARAM].values[0];
     var weatherDesc = this.weatherDescriptions[weatherSymbol-1];
     var weatherImageSrc = "assets/imgs/weather/weather" + this.weatherIconArray[weatherSymbol-1] + ".png";
