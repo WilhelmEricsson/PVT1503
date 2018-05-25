@@ -4,7 +4,6 @@ import com.pvt15.DB.entity.LightPost;
 import com.pvt15.DB.entity.LightPostLocations;
 import com.pvt15.DB.repository.LightPostLocationRepository;
 import com.pvt15.DB.repository.LightPostRepository;
-import javafx.scene.effect.Light;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
