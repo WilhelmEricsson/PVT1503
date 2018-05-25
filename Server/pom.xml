@@ -124,7 +124,7 @@
 	</pluginRepositories>
 	<distributionManagement>
 	 <repository>
-		<id>pvt15.repo</id>
+		<id>PVT15.repo</id>
 		<name>PVT15 repo</name>
 		<url>git://wier0584@git.dsv.su.se/git/wier0584/PVT15.git</url>
 	 </repository>
