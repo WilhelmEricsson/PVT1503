@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { DailyRoutesProvider } from '../../providers/daily-routes/daily-routes';
 import { CustomMarker } from '../../providers/CustomMarker';
 import { Storage } from '@ionic/storage';
+import { Facebook } from '@ionic-native/facebook';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 /**
  * Generated class for the DailyRoutesPage page.
@@ -22,8 +24,11 @@ declare var google;
 export class DailyRoutesPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
+  url: string = "https://www.google.com/maps/dir/";
+  markersCoordinates: string = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private dailyRoutesProvider: DailyRoutesProvider, private alert: AlertController, private storage: Storage) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private dailyRoutesProvider: DailyRoutesProvider, private alert: AlertController, private storage: Storage, private socialSharing: SocialSharing) {
   }
 
   ionViewDidLoad() {
@@ -73,8 +78,11 @@ export class DailyRoutesPage {
             icon: "assets/imgs/lyktstolpar/lila2.png"
           });
         }
+        this.markersCoordinates += mark.lat.toString() + "," +  mark.lng.toString() + "/";
+        console.log(this.markersCoordinates);
         counter++;
       }
+      this.url = this.url + this.markersCoordinates;
     });
     for (let m of this.dailyRoutesProvider.getCurrentStorage()) {
       var mark = m as CustomMarker;
@@ -89,7 +97,6 @@ export class DailyRoutesPage {
       strokeWeight: 2
     });
     path.setMap(this.map);
-    
   }  
   
 
@@ -101,7 +108,8 @@ export class DailyRoutesPage {
   }
 
   shareMarkers() {
-    
+    console.log(this.url);
+    this.socialSharing.share("","","",this.url);
   }
 
 }
