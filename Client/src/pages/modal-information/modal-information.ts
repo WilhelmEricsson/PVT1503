@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavParams, ViewController } from 'ionic-angular';
 import { InformationProvider } from '../../providers/information/information';
-
+import { Slides } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -9,7 +9,11 @@ import { InformationProvider } from '../../providers/information/information';
   templateUrl: 'modal-information.html',
 })
 export class ModalInformationPage {
+  @ViewChild(Slides) slides: Slides;
+
   information: any
+  name: string;
+  
 
   
 
@@ -32,8 +36,19 @@ export class ModalInformationPage {
 
 
   handleShare() {
-    console.log(this.information.id);
-    this.informationProvider.handleShare(this.information.id);
+    let currentIndex = this.slides.getActiveIndex();
+    var id;
+    if (this.information.length == 2) {
+      if (currentIndex == 0) {
+        id = this.information[0].id;
+      } else {
+        id = this.information[1].id;
+      }
+    } else {
+      id = this.information[0].id;
+    }
+    console.log(id);
+    //this.informationProvider.handleShare(id);
   }
 
 }

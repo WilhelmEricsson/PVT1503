@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { InformationProvider } from '../../providers/information/information';
-
+import { Slides } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -9,7 +9,7 @@ import { InformationProvider } from '../../providers/information/information';
   templateUrl: 'information.html',
 })
 export class InformationPage {
-
+  @ViewChild(Slides) slides: Slides;
 
   information: any;
   name: String;
@@ -50,14 +50,19 @@ export class InformationPage {
   }
 
   handleShare() {
-    var id: number;
-    for (let l of this.information) {
-      if (this.name === l.name) {
-        id = l.id;
+    let currentIndex = this.slides.getActiveIndex();
+    var id;
+    if (this.information.length == 2) {
+      if (currentIndex == 0) {
+        id = this.information[0].id;
+      } else {
+        id = this.information[1].id;
       }
+    } else {
+      id = this.information[0].id;
     }
     console.log(id);
-    this.informationProvider.handleShare(id);
+    //this.informationProvider.handleShare(id);
   }
 
 }
