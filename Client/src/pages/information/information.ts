@@ -62,7 +62,7 @@ export class InformationPage {
       id = this.information[0].id;
     }
     console.log(id);
-    //this.informationProvider.handleShare(id);
+    this.informationProvider.handleShare(id);
   }
 
 }

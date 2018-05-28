@@ -62,77 +62,75 @@ export class InformationProvider {
   addToArray(data){
     
     allInformation.push(data);
-    
+
     console.log(data)
   }
 
   handleShare(id) {
-    this.fb.getLoginStatus().then(res => {
-      if (res.status === "connected") {
+    var link;
         switch(id) {
           case 3: {
-            //george and dragon 1
+            link = "https://imgur.com/UPfQgyO";
             break;
           }
           case 4: {
-            //george and dragon 2
+            link = "https://imgur.com/rKOrs0P";
             break;
           }
           case 7: {
-            //lilla nytokrget 1
+            link = "https://imgur.com/UBJdAMz";
             break;
           }
           case 8: {
-            //lilla nytokrget 2
+            link = "https://imgur.com/OXjXK2H";
             break;
           }
           case 11: {
-            //stortorget 1
+            link = "https://imgur.com/4HQRbzE";
             break;
           }
           case 12: {
-            //stortorget 2
+            link = "https://imgur.com/pEV2Kv5";
             break;
           }
           case 15: {
-            //riddarholmen 1
+            link = "https://imgur.com/DOoOJc7";
             break;
           }
           case 16: {
-            //riddarholmen 2
+            link = "https://imgur.com/Zj23PqF";
             break;
           }
           case 19: {
-            //mårten trotzheim
+            link = "https://imgur.com/UrwBS3x";
             break;
           }
           case 22: {
-            //iron boy
+            link = "https://imgur.com/3hmyGLW";
             break;
           }
           case 25: {
-            //nobel museet
+            link = "https://imgur.com/vGjDmGJ";
             break;
           }
           case 28: {
-            //gråmkugränd
+            link = "https://imgur.com/obqfHVZ";
             break;
           }
           case 31: {
-            //apoteket korpen 1
+            link = "https://imgur.com/9fuLEsn";
             break;
           }
           case 32: {
-            //apoteket korpen 1
+            link ="https://imgur.com/qsJL7K2";
             break;
           }
           case 35: {
-            //statue of evert taube
+            link = "https://imgur.com/PLtlGzT";
             break;
           }
         }
-      }
-    })
+      this.socialSharing.share("","",link,"");
   }
 
 
