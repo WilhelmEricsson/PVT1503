@@ -55,7 +55,7 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'Information view', component: InformationTabsComponent },
       { title: 'My profile', component: MyProfilePage },
-      { title: 'About&Information', component: RulesPage },
+      { title: 'About', component: RulesPage },
 
 
     ];
