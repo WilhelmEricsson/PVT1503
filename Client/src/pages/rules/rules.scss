@@ -4,4 +4,23 @@ page-rules {
         text-align: center;
     }
 
+    ion-slides {
+        background-image: url('../assets/imgs/DarkPurple.jpg');
+        background-size: cover;
+        height: 100%;
+    }
+
+    .swiper-pagination-bullet {
+        background: white;
+        opacity: 0.5;
+      }
+    
+      .swiper-pagination-bullet-active {
+        opacity: 1;
+        background:yellow;
+      }
+
+    .lamp {
+        height: 150px;
+    }
 }
