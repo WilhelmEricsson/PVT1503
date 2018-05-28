@@ -5,7 +5,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
-import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
