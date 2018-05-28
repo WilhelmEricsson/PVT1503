@@ -19,6 +19,15 @@ ion-content {
   .toolbar-title.toolbar-title-wp { color: yellow; }
   $toolbar-ios-title-text-align: center;
 
+  .swiper-pagination-bullet {
+    background: white;
+    opacity: 0.5;
+  }
+
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+    background:yellow;
+  }
   
 }
 
