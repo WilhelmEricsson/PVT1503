@@ -10,6 +10,16 @@ page-rules {
         height: 100%;
     }
 
+    .swiper-pagination-bullet {
+        background: white;
+        opacity: 0.5;
+      }
+    
+      .swiper-pagination-bullet-active {
+        opacity: 1;
+        background:yellow;
+      }
+
     .lamp {
         height: 150px;
     }

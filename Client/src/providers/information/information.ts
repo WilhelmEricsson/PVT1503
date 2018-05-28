@@ -70,8 +70,64 @@ export class InformationProvider {
     this.fb.getLoginStatus().then(res => {
       if (res.status === "connected") {
         switch(id) {
-          case 10: {
-            this.socialSharing.share(null, null, "https://i.imgur.com/6L2Lm4O.png", null);
+          case 3: {
+            //george and dragon 1
+            break;
+          }
+          case 4: {
+            //george and dragon 2
+            break;
+          }
+          case 7: {
+            //lilla nytokrget 1
+            break;
+          }
+          case 8: {
+            //lilla nytokrget 2
+            break;
+          }
+          case 11: {
+            //stortorget 1
+            break;
+          }
+          case 12: {
+            //stortorget 2
+            break;
+          }
+          case 15: {
+            //riddarholmen 1
+            break;
+          }
+          case 16: {
+            //riddarholmen 2
+            break;
+          }
+          case 19: {
+            //mårten trotzheim
+            break;
+          }
+          case 22: {
+            //iron boy
+            break;
+          }
+          case 25: {
+            //nobel museet
+            break;
+          }
+          case 28: {
+            //gråmkugränd
+            break;
+          }
+          case 31: {
+            //apoteket korpen 1
+            break;
+          }
+          case 32: {
+            //apoteket korpen 1
+            break;
+          }
+          case 35: {
+            //statue of evert taube
             break;
           }
         }
