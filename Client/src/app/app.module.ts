@@ -59,6 +59,8 @@ import { InformationProvider } from '../providers/information/information';
 import { InformationTabsComponent } from '../components/information-tabs/information-tabs';
 import { SavedInformationPage } from '../pages/saved-information/saved-information';
 import { MyProfileProvider } from '../providers/my-profile/my-profile';
+import { AchievementsProvider } from '../providers/achievements/achievements';
+import { WeatherForecastProvider } from '../providers/weather-forecast/weather-forecast';
 
 
 
@@ -111,9 +113,7 @@ export function jwtOptionsFactory(storage: Storage) {
     HomePage,
     QuestionViewPage,
     MapPage,
-
     LoginPage,
-
     LoginPage,
     CreateAccountPage,
     EmailSignInPage,
@@ -143,7 +143,9 @@ export function jwtOptionsFactory(storage: Storage) {
     DailyRoutesProvider,
     LightPostProvider,
     InformationProvider,
-    MyProfileProvider
+    MyProfileProvider,
+    AchievementsProvider,
+    WeatherForecastProvider
   ]
 })
 export class AppModule { }

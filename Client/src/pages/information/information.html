@@ -1,23 +1,46 @@
   <ion-header>
 
       <ion-navbar>
-        <button ion-button menuToggle>
+        <button ion-button menuToggle color="yellow">
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Information</ion-title>
+        <ion-title>{{name}}</ion-title>
       </ion-navbar>
     
     </ion-header>
     
     <ion-content>
+
+        <ion-grid text-center>
+
+                 
+            
+            <ion-row>
+              <ion-col>
+                    <ion-slides pager >
+
+                            <ion-slide *ngFor="let information of information">
+                                 <img id= "image" src = {{information.information}} >
+                            </ion-slide>  
+                    
+                          </ion-slides>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                  <button ion-button color="blue" full=true (click)="handleShare()">Share</button>
+                </ion-col>
+            </ion-row>
+          </ion-grid>
+
     
         
-            <ion-list inset>
-                <ion-item *ngFor="let information of information">
+           <!-- <ion-list inset>
+               <ion-item *ngFor="let information of information">
                     <h2>{{information.name}}</h2>
                     <p>{{information.information}}</p>
                   </ion-item>
             </ion-list>
-          
+        -->          
       
     </ion-content>

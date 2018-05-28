@@ -1,3 +1,12 @@
 page-my-profile {
+    ion-content {
+        background-image: url('../assets/imgs/DarkPurple.jpg');
+        background-size: cover;
+    }
 
+  .MyProfileItem{
+    background-color: #440d44;
+    opacity: 0.8;
+    color: yellow;
+  }
 }

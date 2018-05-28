@@ -41,10 +41,12 @@ public class InformationController {
     public @ResponseBody Iterable<Information> getInformationByLightPostId(@PathVariable("id") Long lightPostId) {
         return informationRepository.findByLightPostId(lightPostId);
     }
-    @GetMapping("/lightposts/test")
+    @GetMapping("/test")
     public @ResponseBody String getInformationByLightPostId() {
         return "TEST,TEST,TEST";
     }
+
+
 
 
 

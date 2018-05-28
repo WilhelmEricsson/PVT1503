@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, ModalController, Modal, ModalOptions} from 'ionic-angular';
 import { InformationProvider } from '../../providers/information/information';
 
-/**
- * Generated class for the SavedInformationPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -18,7 +13,7 @@ export class SavedInformationPage {
 
   savedInformation: any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public informationProvider: InformationProvider) {
+  constructor(public informationProvider: InformationProvider, private modal: ModalController) {
    this.getInformationArray();
   }
 
@@ -33,6 +28,21 @@ export class SavedInformationPage {
         this.savedInformation.push(e);
       }
       console.log(test);
+  }
+
+  openModal(information){
+
+    const myModalOptions: ModalOptions = {
+      enableBackdropDismiss: false
+
+    }
+    const myModal: Modal = this.modal.create('ModalInformationPage', {data: information, myModalOptions});
+    
+    myModal.present();
+
+    
+
+
   }
 
 }

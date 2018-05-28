@@ -52,7 +52,15 @@ public class LightPostController {
 
         return "Light Post Saved";
     }
+    @RequestMapping(path = "/increaseNumOfUsers/{lightPostId}", method = RequestMethod.POST)
+    public void increaseNumOfUsersPresent(@PathVariable Long lightPostId){
+        lightPostService.increaseNumOfUsersPresent(lightPostId);
 
+    }
+    @RequestMapping(path = "/decreaseNumOfUsers/{lightPostId}", method = RequestMethod.POST)
+    public void decreaseNumOfUsersPresent(@PathVariable Long lightPostId){
+        lightPostService.decreaseNumOfUsersPresent(lightPostId);
+    }
 
 
 }

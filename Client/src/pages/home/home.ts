@@ -1,23 +1,16 @@
-import { Component, state } from '@angular/core';
-import { NavController, AlertController, Platform, Alert} from 'ionic-angular';
-
-
+import { Component} from '@angular/core';
+import { NavController, AlertController, Platform, ModalController} from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { AchievmentPage } from '../achievment/achievment';
 import { DailyRoutesPage } from '../daily-routes/daily-routes';
-
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { SERVER_URL } from "../../config";
 import { AuthProvider } from "../../providers/auth/auth";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs/observable";
 import { SocialSharing } from "@ionic-native/social-sharing";
-import { DailyRoutesProvider } from '../../providers/daily-routes/daily-routes';
-import { CustomMarker } from '../../providers/CustomMarker';
+import {WeatherForecastPage} from "../weather-forecast/weather-forecast";
+import {WeatherComponent} from "../../components/weather/weather";
+import {WeatherForecastProvider} from "../../providers/weather-forecast/weather-forecast";
 
-import { LocalNotifications } from '@ionic-native/local-notifications'
-import { PhonegapLocalNotification } from "@ionic-native/phonegap-local-notification";
-import { Push, PushObject, PushOptions} from '@ionic-native/push'
 
 
 @Component({
@@ -25,12 +18,7 @@ import { Push, PushObject, PushOptions} from '@ionic-native/push'
   templateUrl: 'home.html'
 })
 export class HomePage {
-  weatherIconArray: number[] = [1,1,1,1,2,2,2,3,3,3,4,5,5,5,5,5,5,3,3,3,4,5,5,5,5,5,5];
-    rainResult: any = [];
-  temperature: any = [];
-  icon: any = [];
-  data: Observable<any>;
-
+  currentWeather: WeatherComponent;
   connected: boolean = true;
 
 
@@ -40,7 +28,7 @@ export class HomePage {
   constructor(private socialSharing: SocialSharing, public navCtrl: NavController, public alertCtrl: AlertController, private platform: Platform,
     private readonly authProvider: AuthProvider,
     jwtHelper: JwtHelperService,
-    private  httpClient: HttpClient, private dailyRoutesProvider: DailyRoutesProvider) {
+    private  httpClient: HttpClient, private modalController :ModalController, private weatherForecastProvider:WeatherForecastProvider) {
 
     this.authProvider.authUser.subscribe(jwt => {
       if (jwt) {
@@ -51,37 +39,40 @@ export class HomePage {
         this.user = null;
       }
     });
+
   }
 
-  ionViewDidLoad() {
-    this.getWeather();
+
+  ionViewDidEnter(){
+    this.getCurrentWeather();
+
   }
 
-  getWeather() {
-    var url = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.178/lat/59.211/data.json';
-    this.data = this.httpClient.get(url);
-    this.data.subscribe(data=> {
-      this.temperature = JSON.stringify(data.timeSeries[1].parameters[11].values[0],null, 2);
-      var i;
-      var rain = 0;
-      var rainArray = [];
-      for (i=0 ; i<5 ; i++) {
-        rainArray [i] = JSON.stringify(data.timeSeries[i+1].parameters[2].values[0],null, 2);
-        if (rainArray [i] != "0") {
-          rain = 1;
+  presentWeatherForecast(){
+    const weatherForecastModal = this.modalController.create("WeatherForecastPage");
+    weatherForecastModal.present();
+
+
+  }
+
+
+  getCurrentWeather() {
+    this.weatherForecastProvider.fetchForecastFromSource().subscribe(data=> {
+        let weather: any = data;
+        for (var i = 0  ; i < 5; i++) {
+          this.weatherForecastProvider.addItemToForecast(weather.timeSeries[i+1]);
         }
-      }
-
-      if (rain==1) {
-        this.rainResult = 'Risk for rain';
-      } else this.rainResult = 'Clear skies';
-
-      this.icon = JSON.stringify(data.timeSeries[1].parameters[18].values[0],null, 2);
-      console.log("assets/imgs/weather/weather" + this.weatherIconArray[this.icon])
-      var iconImage = document.getElementById("weatherImg") as HTMLImageElement;
-          iconImage.src="assets/imgs/weather/weather" + this.weatherIconArray[this.icon] + ".png";
-
-    })
+        this.currentWeather = this.weatherForecastProvider.getCurrentWeather();
+        this.setWeatherDisplay();
+      })
+  }
+  private setWeatherDisplay(){
+    let temp = document.getElementById("temperature") as HTMLFontElement;
+    let desc = document.getElementById("weatherDescription") as HTMLFontElement;
+    let img = document.getElementById("weatherImg") as HTMLImageElement;
+    temp.textContent  = "" + this.currentWeather.temperature;
+    desc.textContent = this.currentWeather.weatherDescription;
+    img.src = this.currentWeather.weatherImageSrc;
   }
 
   AchievmentController() {
@@ -107,16 +98,7 @@ export class HomePage {
     };
   }
 
-   /* this.localNotification.schedule({
-      id: 1,
-      title: "Test",
-      text: 'Test1',
-      trigger: {at: new Date(new Date().getTime() + 3000)},
-      data: { mydata: 'Test3'}
-    });*/
-  ShareController() {
-    this.socialSharing.share("test2", null, "https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg", null);
-  }
+  
 
 
 }

@@ -124,9 +124,9 @@
 	</pluginRepositories>
 	<distributionManagement>
 	 <repository>
-		<id>pvt03.repo</id>
-		<name>PVT03 repo</name>
-		<url>https://github.com/WilhelmEricsson/PVT1503.git</url>
+		<id>PVT15.repo</id>
+		<name>PVT15 repo</name>
+		<url>git://wier0584@git.dsv.su.se/git/PVT15.git</url>
 	 </repository>
 	</distributionManagement>
 

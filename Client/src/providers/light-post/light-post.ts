@@ -32,4 +32,11 @@ export class LightPostProvider {
     console.log(res);
   }
 
+  increaseNumOfUsersPresent(lightPostId:number){
+    this.http.post(this.url+"/increaseNumOfUsers/" + lightPostId, null);
+  }
+  decreaseNumOfUsersPresent(lightPostId:number){
+    this.http.post(this.url+"/decreaseNumOfUsers/" + lightPostId, null);
+  }
+
 }

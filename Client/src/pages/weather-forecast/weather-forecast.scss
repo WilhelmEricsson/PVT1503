@@ -1,0 +1,35 @@
+page-weather-forecast {
+  .no-scroll .scroll-content{
+    overflow-y: hidden;
+  }
+
+  ion-content {
+    background-image: url('../assets/imgs/DarkPurple.jpg');
+    background-size: cover;
+
+  }
+
+  .weather_item{
+    background-color: #440d44;
+    opacity: 0.7;
+  }
+
+  .weather_item_text{
+    color: yellow;
+    font-size: medium;
+  }
+
+  .weather_item_text_atHour{
+    color: yellow;
+  }
+  .toolbar-background{
+    background-color: rgb(68, 13, 68);
+  }
+
+  .toolbar-title.toolbar-title-md,
+  .toolbar-title.toolbar-title-ios,
+  .toolbar-title.toolbar-title-wp { color: yellow; }
+  $toolbar-ios-title-text-align: center;
+
+}
+
