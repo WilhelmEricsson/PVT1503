@@ -53,7 +53,7 @@ export class MapPage {
       var mapOptions;
       this.geolocation.getCurrentPosition({}).then((position) => {
         mapOptions = {
-          center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+          center: new google.maps.LatLng(59.3293,18.0686),
           zoom: 15,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }

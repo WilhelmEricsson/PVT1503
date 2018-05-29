@@ -48,7 +48,7 @@ export class ModalInformationPage {
       id = this.information[0].id;
     }
     console.log(id);
-    //this.informationProvider.handleShare(id);
+    this.informationProvider.handleShare(id);
   }
 
 }

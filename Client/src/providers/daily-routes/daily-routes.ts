@@ -11,6 +11,7 @@ import { AlertController } from 'ionic-angular';
   and Angular DI.
 */
 var allMarkers: CustomMarker[] = [];
+var exampleDailyRoute: CustomMarker[] = [];
 var currentLocalStorage: CustomMarker[] = [];
 var tested: number[];
 
@@ -44,7 +45,6 @@ export class DailyRoutesProvider {
     return currentLocalStorage;
   }
 
-  //All markers
   addMarker(mark: CustomMarker) {
     allMarkers.push(mark);
   }
@@ -93,5 +93,32 @@ export class DailyRoutesProvider {
       }
     } while (tested.length != allMarkers.length)
     return null;
+  }
+
+  populateExampleDailyRoute() {
+    var temp: CustomMarker;
+    
+    temp = <CustomMarker> allMarkers[9];
+    exampleDailyRoute.push(temp);
+
+    temp = <CustomMarker> allMarkers[1];
+    exampleDailyRoute.push(temp);
+
+    temp = <CustomMarker> allMarkers[8];
+    exampleDailyRoute.push(temp);
+
+    temp = <CustomMarker> allMarkers[6];
+    exampleDailyRoute.push(temp);
+
+    temp = <CustomMarker> allMarkers[5];
+    exampleDailyRoute.push(temp);
+  }
+
+  getExampleDailyRoute() {
+    return exampleDailyRoute;
+  }
+
+  getNextMarker() {
+    return exampleDailyRoute.pop()
   }
 }

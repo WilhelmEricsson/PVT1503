@@ -85,7 +85,6 @@ export class MyApp {
     this.getLightposts();
     this.getLocalStorageDailyRoute();
     this.getLocalStorageAchievements();
-
   }
 
   logOut(){
@@ -145,6 +144,9 @@ export class MyApp {
         var mark = new CustomMarker(l.id,l.location.geoLocationLat, l.location.geoLocationLang, l.numOfUsersPresent);
         this.dailyRoutesProvider.addMarker(mark);
       }
+      if (this.dailyRoutesProvider.getExampleDailyRoute().length == 0) {
+        this.dailyRoutesProvider.populateExampleDailyRoute();
+      }
     });
   }
 
@@ -152,12 +154,14 @@ export class MyApp {
     if(!this.isConnectedToBluetooth){
       this.isConnectedToBluetooth = true;
       var mark: CustomMarker = <CustomMarker> this.dailyRoutesProvider.chooseRandomMarker();
+      //var mark: CustomMarker = <CustomMarker> this.dailyRoutesProvider.getNextMarker()
       if (mark != null) {
         this.lightPostProvider.increaseNumOfUsersPresent(mark.id);
         this.informationProvider.setCurrentLightPost(mark.id);
         this.dailyRoutesProvider.addDailyMarker(mark);
         this.achievementsProvider.handleAchievement();
         //this.MyProvider.tapEvent()
+        /*
         if(this.platform.is('cordova')){
           this.localNotification.requestPermission();
           this.localNotification.hasPermission().then(res => {
@@ -170,9 +174,10 @@ export class MyApp {
             }
           });
         } else {
+          */
           console.log("Cordova not available, notification skipped");
           this.nav.push(InformationTabsComponent);
-        }
+        //}
       } else {
         let alert = this.alert.create({
           title: "All lightposts visited",
