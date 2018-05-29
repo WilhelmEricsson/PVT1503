@@ -161,6 +161,7 @@ export class MyApp {
         this.dailyRoutesProvider.addDailyMarker(mark);
         this.achievementsProvider.handleAchievement();
         //this.MyProvider.tapEvent()
+        /*
         if(this.platform.is('cordova')){
           this.localNotification.requestPermission();
           this.localNotification.hasPermission().then(res => {
@@ -173,9 +174,10 @@ export class MyApp {
             }
           });
         } else {
+          */
           console.log("Cordova not available, notification skipped");
           this.nav.push(InformationTabsComponent);
-        }
+        //}
       } else {
         let alert = this.alert.create({
           title: "All lightposts visited",
