@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoadingController, ToastController} from 'ionic-angular';
 import {AuthProvider} from "../../providers/auth/auth";
 import {finalize} from 'rxjs/operators';
+import {MyProfileProvider} from "../../providers/my-profile/my-profile";
 
 /**
  * Generated class for the EmailSignInPage page.
@@ -20,7 +21,7 @@ export class EmailSignInPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private readonly loadingCtrl: LoadingController,
     private readonly authProvider: AuthProvider,
-    private readonly toastCtrl: ToastController) {
+    private readonly toastCtrl: ToastController, private myProfileProvider:MyProfileProvider) {
   }
 
   login(value: any) {
@@ -35,7 +36,9 @@ export class EmailSignInPage {
       .login(value)
       .pipe(finalize(() => loading.dismiss()))
       .subscribe(
-        () => {},
+        () => {
+          this.myProfileProvider.setUser(value.username);
+        },
         err => this.handleError(err));
   }
 
@@ -57,7 +60,6 @@ export class EmailSignInPage {
     toast.present();
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad EmailSignInPage');
   }
 
 }
