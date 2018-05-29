@@ -44,7 +44,7 @@ export class DailyRoutesPage {
   loadMap() {
     var mapOptions = {
       center: new google.maps.LatLng(59.3293,18.0686),
-      zoom: 10,
+      zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
