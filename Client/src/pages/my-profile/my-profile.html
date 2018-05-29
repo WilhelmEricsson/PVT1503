@@ -24,21 +24,68 @@
 
 
   <ion-list>
-
     <ion-item class="MyProfileItem">
-
-      <ion-label floating color="yellow">Username</ion-label>
-      <ion-input type="text" value="" [(ngModel)]="username"></ion-input>
+        <ion-label color="yellow">Username<br>{{user.name}}</ion-label>
     </ion-item>
-
     <ion-item class="MyProfileItem">
-      <ion-label floating color="yellow">Email</ion-label>
-      <ion-input type="email" [(ngModel)]="email"></ion-input>
+        <ion-label color="yellow">Email<br>{{user.email}}</ion-label>
     </ion-item>
 
   </ion-list>
 
-  <button ion-button round color="yellow" item-start full=true>Save changes</button>
+  <form #passwordUpdateForm="ngForm" (ngSubmit)="updatePassword(passwordUpdateForm.value)" novalidate>
+    <ion-list>
+      <ion-item class ="updateAccItem">
+        <ion-label floating color="yellow">Password</ion-label>
+        <ion-input id="passwordID" type="password" name="password" ngModel required [(ngModel)] = "password"
+                   [class.invalid]="!passwordLengthTest(password)"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!passwordLengthTest(password) && (password.length > 1)" text-wrap>
+        The password must be at least 6 characters long!
+      </ion-item>
 
+      <ion-item class ="updateAccItem">
+        <ion-label floating color="yellow">Repeat Password</ion-label>
+        <ion-input id="passwordRepeat" type="password" name="passwordRepeat" ngModel required [(ngModel)] ="passwordRepeat"
+                   [class.invalid]="!isEqualToPreviousPasswordEntry() && !passwordLengthTest(passwordRepeat)"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!isEqualToPreviousPasswordEntry()">
+        Password Does Not Match
+      </ion-item>
+
+      <div>
+        <button ion-button class ="updateAccButton" color="primary" block type="submit" [disabled]="!isEqualToPreviousPasswordEntry() || !passwordLengthTest(password) || !passwordLengthTest(passwordRepeat)">Change Password</button>
+      </div>
+
+    </ion-list>
+  </form>
+
+                      <!--       '''''' EMAIL FORM ''''''              -->
+
+  <form #updateEmailForm="ngForm" (ngSubmit)="updateEmail(updateEmailForm.value)" novalidate>
+    <ion-list>
+      <ion-item class ="updateAccItem">
+        <ion-label floating color="yellow">Email</ion-label>
+        <ion-input type="email" name="email" ngModel required email [(ngModel)] ="email" #emailM="ngModel"
+                   [class.invalid]="emailM.errors && emailM.dirty"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="emailM.errors?.email && emailM.touched && (email.length > 0)">
+        Email is not valid
+      </ion-item>
+
+      <ion-item class ="updateAccItem">
+        <ion-label floating color="yellow">Repeat Email</ion-label>
+        <ion-input type="email" name="emailRepeat" ngModel required email [(ngModel)] ="emailRepeat" #emailRepeatM="ngModel"
+                   [class.invalid]="emailRepeatM.errors && emailRepeatM.dirty"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!isEqualToPreviousEmailEntry() && (emailRepeat.length > 0)">
+        Emails does not match!
+      </ion-item>
+
+      <div>
+        <button ion-button class ="updateAccButton" color="primary" block type="submit" [disabled]="!updateEmailForm.valid">Change Email</button>
+      </div>
+    </ion-list>
+  </form>
 
 </ion-content>

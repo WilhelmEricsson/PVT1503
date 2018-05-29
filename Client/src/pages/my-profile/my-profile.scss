@@ -9,4 +9,23 @@ page-my-profile {
     opacity: 0.8;
     color: yellow;
   }
+
+  .updateAccItem{
+       background-color: #440d44;
+       opacity: 0.80;
+       color: yellow;
+     }
+  .updateAccButton{
+    background-color: #440d44;
+    color: yellow;
+    box-shadow: 0 0 0 2px #4d4d4d;
+  }
+
+  .error-message{
+    background-color: #440d44;
+    color: firebrick;
+    font-size: large;
+
+  }
+
 }
