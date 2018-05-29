@@ -79,7 +79,6 @@ export class DailyRoutesPage {
           });
         }
         this.markersCoordinates += mark.lat.toString() + "," +  mark.lng.toString() + "/";
-        console.log(this.markersCoordinates);
         counter++;
       }
       this.url = this.url + this.markersCoordinates;
