@@ -40,8 +40,15 @@ export class MyProfileProvider {
   changePassword(userName:string, newPassword:string){
     return this.http.post(SERVER_URL +"/user/"+ this.userName +"/update/password",{userName, newPassword} , {headers: this.header});
   }
-  changeEmail(user:User){
-    return this.http.post(SERVER_URL +"/user/"+ this.userName +"/update/email", {user},{headers: this.header});
+  async changeEmail(user:User){
+    await this.storage.get('jwt_token').then(data=>{
+        let token = data;
+        this.header = new HttpHeaders({"Authorization": "Bearer " + token});
+      }
+    ).catch(reason => {
+      console.log("ERROR" + reason);
+    });
+    return this.http.post(SERVER_URL +"/user/"+ user.name +"/update/email",{"userName":user.name, "newEmail":user.email},{headers: this.header});
   }
 
 

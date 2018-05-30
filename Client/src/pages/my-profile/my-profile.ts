@@ -22,13 +22,6 @@ const PASSWORD_MIN_LENGTH = 6;
 })
 export class MyProfilePage {
   user:User;
- // passwordFormGroup: FormGroup;
- // emailFormGroup: FormGroup;
-//  password: AbstractControl;
- // passwordRepeat: AbstractControl;
- // email: AbstractControl;
-  //emailRepeat: AbstractControl;
-
   password:string = "";
   passwordRepeat:string = "";
   email:string = "";
@@ -74,10 +67,18 @@ export class MyProfilePage {
     });
   }
 
-
+  updateEmail(form:any){
+    this.user.email = this.email;
+    this.myProfileProvider.changeEmail(this.user).then(res =>{
+      res.subscribe(data =>{
+        var temp:any = data;
+        this.user = new User(temp.username, temp.email);
+      })
+    });
+   }
 
   updatePassword(form:any){
-    console.log("TEST PASSWORD: " + form + " pass --> " + this.password) ;
+
   }
 
 
@@ -102,9 +103,6 @@ export class MyProfilePage {
     }
     return true;
   }
-
-
-
 
 
 
