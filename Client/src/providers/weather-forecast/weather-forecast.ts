@@ -11,7 +11,7 @@ import 'rxjs/add/operator/do'
   and Angular DI.
 */
 
-const TEMPERATURE_PARAM = 11;
+const TEMPERATURE_PARAM = 1;
 const WEATHERSYMBOL_PARAM = 18;
 const NUM_OF_PREDICTIONS_TO_FETCH = 5;
 
