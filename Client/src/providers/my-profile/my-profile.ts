@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {SERVER_URL} from "../../config";
 import {Storage} from "@ionic/storage";
 import {User} from "./User";
+import {Observable} from "rxjs/Observable";
 
 
 /*
@@ -17,17 +18,6 @@ export class MyProfileProvider {
   header:HttpHeaders
   constructor(public http: HttpClient, private storage:Storage) {
 
-   this.storage.get('jwt_token').then(data=>{
-       let token = data;
-       this.header = new HttpHeaders({"Authorization": "Bearer " + token});
-    }
-
-
-   ).catch(reason => {
-     console.log("ERROR" + reason);
-   });
-
-
   }
 
   setUser(userName:string){
@@ -36,7 +26,14 @@ export class MyProfileProvider {
   getUserName(){
     return this.userName;
   }
-  getUserInformation(){
+  async getUserInformation(){
+    await this.storage.get('jwt_token').then(data=>{
+       let token = data;
+       this.header = new HttpHeaders({"Authorization": "Bearer " + token});
+      }
+    ).catch(reason => {
+      console.log("ERROR" + reason);
+    });
     return this.http.get(SERVER_URL +"/user/"+ this.userName +"/details", {headers: this.header});
   }
 

@@ -64,11 +64,14 @@ export class MyProfilePage {
   }
 
   getDBName(){
-    this.myProfileProvider.getUserInformation().subscribe(data =>{
-      var temp:any = data;
-      this.user = new User(temp.username, temp.email);
+    this.myProfileProvider.getUserInformation().then(res =>{
+      res.subscribe(data =>{
+        var temp:any = data;
+        this.user = new User(temp.username, temp.email);
 
-    })
+      })
+
+    });
   }
 
 
@@ -90,7 +93,6 @@ export class MyProfilePage {
       return false;
     }
     return true;
-
   }
 
   isEqualToPreviousEmailEntry():boolean{
@@ -98,16 +100,9 @@ export class MyProfilePage {
     if (this.email != this.emailRepeat && this.emailRepeat.length > 0){
         return false;
     }
-
     return true;
   }
 
-  isValidEmail():boolean{
-    let test:boolean = false;
-
-
-    return false;
-  }
 
 
 
